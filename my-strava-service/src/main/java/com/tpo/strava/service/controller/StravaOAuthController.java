@@ -1,7 +1,7 @@
-package com.tpo.strava.auth;
+package com.tpo.strava.service.controller;
 
-import com.tpo.strava.domain.Athlete;
-import com.tpo.strava.domain.TokenResponse;
+import com.tpo.strava.service.domain.Athlete;
+import com.tpo.strava.service.domain.TokenResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,8 +62,7 @@ public class StravaOAuthController {
         RestTemplate restTemplate = new RestTemplate();
         TokenResponse tokenResponse = restTemplate.postForObject(STRAVA_TOKEN_URL, params, TokenResponse.class);
         Athlete athlete = tokenResponse.getAthlete();
-        logger.info(athlete.toString());
+        logger.info("Access token:" + tokenResponse.getAccessToken());
         return athlete;
     }
 }
-dsa

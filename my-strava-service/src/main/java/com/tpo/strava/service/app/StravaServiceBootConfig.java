@@ -1,5 +1,6 @@
-package com.tpo.config;
+package com.tpo.strava.service.app;
 
+import com.tpo.strava.service.config.ControllerConfig;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -10,5 +11,5 @@ import org.springframework.context.annotation.Import;
 @Configuration
 @EnableAutoConfiguration
 @Import(ControllerConfig.class)
-public class MyStravaConfig {
+public class StravaServiceBootConfig {
 }

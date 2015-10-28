@@ -1,6 +1,7 @@
-package com.tpo.strava.domain;
+package com.tpo.strava.service.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 /**
@@ -9,6 +10,8 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TokenResponse {
     private Athlete athlete;
+    @JsonProperty("access_token")
+    private String accessToken;
 
     public Athlete getAthlete() {
         return athlete;
@@ -18,6 +21,13 @@ public class TokenResponse {
         this.athlete = athlete;
     }
 
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
 
     @Override
     public String toString() {

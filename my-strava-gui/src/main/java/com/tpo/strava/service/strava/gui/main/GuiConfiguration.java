@@ -1,6 +1,6 @@
 package com.tpo.strava.service.strava.gui.main;
 
-import com.tpo.strava.service.ServiceConfiguration;
+import com.tpo.strava.service.config.ServiceConfiguration;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 

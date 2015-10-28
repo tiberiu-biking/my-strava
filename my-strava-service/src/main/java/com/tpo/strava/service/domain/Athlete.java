@@ -1,4 +1,4 @@
-package com.tpo.strava.domain;
+package com.tpo.strava.service.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.builder.ToStringBuilder;

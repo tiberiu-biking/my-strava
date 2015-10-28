@@ -1,6 +1,6 @@
-package com.tpo.config;
+package com.tpo.strava.service.config;
 
-import com.tpo.strava.auth.StravaOAuthController;
+import com.tpo.strava.service.controller.StravaOAuthController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +19,9 @@ public class ControllerConfig {
 
     @Bean
     public StravaOAuthController stravaOAuthController() {
-        return new StravaOAuthController(environment.getRequiredProperty("strava.oauth.client.secret"));
+        String clientSecret = environment.getRequiredProperty("strava.oauth.client.secret");
+        String clientId = environment.getRequiredProperty("strava.oauth.client.id");
+        return new StravaOAuthController(clientSecret, clientId);
     }
+
 }

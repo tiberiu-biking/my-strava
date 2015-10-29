@@ -10,7 +10,7 @@ import at.downdrown.vaadinaddons.highchartsapi.model.data.base.StringDoubleData;
 import at.downdrown.vaadinaddons.highchartsapi.model.series.ColumnChartSeries;
 import com.tpo.strava.service.activity.ActivityService;
 import com.tpo.strava.service.athlete.AthleteService;
-import com.tpo.strava.service.domain.activity.Activity;
+import com.tpo.strava.service.domain.ActivitiesSummary;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
@@ -51,10 +51,11 @@ public class MyVaadinUI extends UI {
         columnConfiguration.setLegendEnabled(true);
 
         List<HighChartsData> caloriesColumnValues = new ArrayList<>();
-        List<Activity> activities = activityService.getActivities();
-        for (Activity activity : activities)
-            caloriesColumnValues.add(new StringDoubleData(activity.getStart_date(), activity.getCalories()));
+        List<ActivitiesSummary> activities = activityService.getActivitiesSummary();
 
+        for (ActivitiesSummary activity : activities) {
+            caloriesColumnValues.add(new StringDoubleData(activity.getPeriod(), activity.getCalories()));
+        }
 
         ColumnChartSeries caloriesColumn = new ColumnChartSeries("Calories", caloriesColumnValues);
         columnConfiguration.getSeriesList().add(caloriesColumn);

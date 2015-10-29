@@ -1,5 +1,6 @@
 package com.tpo.strava.service.activity;
 
+import com.tpo.strava.service.domain.ActivitiesSummary;
 import com.tpo.strava.service.domain.activity.Activity;
 
 import java.util.List;
@@ -10,4 +11,6 @@ import java.util.List;
 public interface ActivityService {
 
     List<Activity> getActivities();
+
+    List<ActivitiesSummary> getActivitiesSummary();
 }

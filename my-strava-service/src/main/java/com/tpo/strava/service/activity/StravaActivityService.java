@@ -1,9 +1,11 @@
 package com.tpo.strava.service.activity;
 
 import com.tpo.strava.service.client.StravaRestClient;
+import com.tpo.strava.service.domain.ActivitiesSummary;
 import com.tpo.strava.service.domain.activity.Activity;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,5 +38,42 @@ public class StravaActivityService implements ActivityService {
         }
 
         return activities;
+    }
+
+    @Override
+    public List<ActivitiesSummary> getActivitiesSummary() {
+        List<Activity> activities = getActivities();
+        DateTime firstStartDate = new DateTime(activities.get(0).getStart_date());
+
+        List<ActivitiesSummary> activitiesSummaries = generateEmptySummaries(firstStartDate.year().get());
+
+        for (Activity activity : activities) {
+            DateTime startDate = new DateTime(activity.getStart_date());
+
+            for (ActivitiesSummary summary : activitiesSummaries) {
+                if ((summary.getMonth() == startDate.monthOfYear().get()) &&
+                        (summary.getYear() == startDate.year().get())) {
+                    summary.setCalories(summary.getCalories() + activity.getCalories().longValue());
+                }
+            }
+        }
+        return activitiesSummaries;
+    }
+
+    private List<ActivitiesSummary> generateEmptySummaries(int startYear) {
+        ArrayList<ActivitiesSummary> resultList = new ArrayList<>();
+
+        int currentYear = DateTime.now().year().get();
+        int currentMonth = DateTime.now().monthOfYear().get();
+
+        for (int year = startYear; year <= currentYear; year++)
+            for (int month = 0; month <= currentMonth; month++) {
+                ActivitiesSummary newSummary = new ActivitiesSummary();
+                newSummary.setCalories(0L);
+                newSummary.setMonth(month);
+                newSummary.setYear(year);
+                resultList.add(newSummary);
+            }
+        return resultList;
     }
 }

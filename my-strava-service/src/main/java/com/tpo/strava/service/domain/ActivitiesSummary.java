@@ -6,8 +6,14 @@ package com.tpo.strava.service.domain;
 public class ActivitiesSummary {
 
     private Long calories;
+    private Float distance;
     private Integer month;
     private Integer year;
+
+    public ActivitiesSummary() {
+        distance = 0F;
+        calories = 0L;
+    }
 
     public String getPeriod() {
         return month + "/" + year;
@@ -49,5 +55,13 @@ public class ActivitiesSummary {
     @Override
     public int hashCode() {
         return com.google.common.base.Objects.hashCode(month, year);
+    }
+
+    public Float getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Float distance) {
+        this.distance = distance;
     }
 }

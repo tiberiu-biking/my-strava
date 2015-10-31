@@ -10,7 +10,7 @@ import java.util.List;
  */
 public interface ActivityService {
 
-    List<Activity> getActivities();
+    List<Activity> getActivities(String authToken);
 
-    List<ActivitiesSummary> getActivitiesSummary();
+    List<ActivitiesSummary> getActivitiesSummary(String authToken);
 }

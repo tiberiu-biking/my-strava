@@ -51,7 +51,7 @@ public class StravaOAuthController {
     }
 
     @RequestMapping("/strava/oauth/token")
-    public Athlete exchangeToken(@RequestParam(value = "code") String authCode) {
+    public ModelAndView exchangeToken(@RequestParam(value = "code") String authCode) {
         logger.info("Received auth code: " + authCode);
 
         Map<String, String> params = new HashMap<>();
@@ -63,6 +63,6 @@ public class StravaOAuthController {
         TokenResponse tokenResponse = restTemplate.postForObject(STRAVA_TOKEN_URL, params, TokenResponse.class);
         Athlete athlete = tokenResponse.getAthlete();
         logger.info("Access token:" + tokenResponse.getAccessToken());
-        return athlete;
+        return new ModelAndView(new RedirectView("http://localhost:8080/?authToken=" + tokenResponse.getAccessToken()));
     }
 }

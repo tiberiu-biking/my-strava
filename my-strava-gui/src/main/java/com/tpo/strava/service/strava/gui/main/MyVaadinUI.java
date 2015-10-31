@@ -1,25 +1,18 @@
 package com.tpo.strava.service.strava.gui.main;
 
-import at.downdrown.vaadinaddons.highchartsapi.HighChart;
-import at.downdrown.vaadinaddons.highchartsapi.HighChartFactory;
-import at.downdrown.vaadinaddons.highchartsapi.exceptions.HighChartsException;
-import at.downdrown.vaadinaddons.highchartsapi.model.ChartConfiguration;
-import at.downdrown.vaadinaddons.highchartsapi.model.ChartType;
-import at.downdrown.vaadinaddons.highchartsapi.model.data.HighChartsData;
-import at.downdrown.vaadinaddons.highchartsapi.model.data.base.StringDoubleData;
-import at.downdrown.vaadinaddons.highchartsapi.model.series.ColumnChartSeries;
 import com.tpo.strava.service.activity.ActivityService;
 import com.tpo.strava.service.athlete.AthleteService;
 import com.tpo.strava.service.domain.ActivitiesSummary;
+import com.tpo.strava.service.strava.gui.chart.CaloriesChartView;
+import com.tpo.strava.service.strava.gui.chart.DistanceChartView;
+import com.tpo.strava.service.strava.gui.user.UserUI;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalSplitPanel;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,35 +31,18 @@ public class MyVaadinUI extends UI {
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         VerticalSplitPanel mainPanel = new VerticalSplitPanel();
-        mainPanel.setFirstComponent(new Label(athleteService.getAthlete().getFirstname()));
-        mainPanel.setSecondComponent(createChart());
-        mainPanel.setSplitPosition(10);
+        mainPanel.setFirstComponent(new UserUI());
+
+        String authToken = vaadinRequest.getParameter("authToken");
+        if (authToken != null) {
+            List<ActivitiesSummary> activities = activityService.getActivitiesSummary(authToken);
+
+            VerticalSplitPanel chartPanel = new VerticalSplitPanel();
+            chartPanel.setFirstComponent(new CaloriesChartView("Calories", activities));
+            chartPanel.setSecondComponent(new DistanceChartView("Distances", activities));
+            mainPanel.setSecondComponent(chartPanel);
+            mainPanel.setSplitPosition(10);
+        }
         setContent(mainPanel);
-    }
-
-    private HighChart createChart() {
-        ChartConfiguration columnConfiguration = new ChartConfiguration();
-        columnConfiguration.setTitle("Calories chart");
-        columnConfiguration.setChartType(ChartType.COLUMN);
-        columnConfiguration.setLegendEnabled(true);
-
-        List<HighChartsData> caloriesColumnValues = new ArrayList<>();
-        List<ActivitiesSummary> activities = activityService.getActivitiesSummary();
-
-        for (ActivitiesSummary activity : activities) {
-            caloriesColumnValues.add(new StringDoubleData(activity.getPeriod(), activity.getCalories()));
-        }
-
-        ColumnChartSeries caloriesColumn = new ColumnChartSeries("Calories", caloriesColumnValues);
-        columnConfiguration.getSeriesList().add(caloriesColumn);
-
-        HighChart columnChart = null;
-        try {
-            columnChart = HighChartFactory.renderChart(columnConfiguration);
-            columnChart.setSizeFull();
-        } catch (HighChartsException e) {
-            e.printStackTrace();
-        }
-        return columnChart;
     }
 }

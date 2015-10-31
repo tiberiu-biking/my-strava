@@ -6,11 +6,13 @@ import com.tpo.strava.service.athlete.AthleteService;
 import com.tpo.strava.service.athlete.StravaAthleteService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 
 /**
  * Created by Tiberiu on 23/10/15.
  */
 @Configuration
+@Import(ControllerConfig.class)
 public class ServiceConfiguration {
 
     @Bean

@@ -8,7 +8,6 @@ import com.vaadin.spring.annotation.UIScope;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +21,8 @@ public class StravaActivityService implements ActivityService {
 
     private static final Logger logger = LoggerFactory.getLogger(StravaActivityService.class);
 
-    @Value("${strava.oauth.token}")
-    private String authToken;
-
     @Override
-    public List<Activity> getActivities() {
+    public List<Activity> getActivities(String authToken) {
         logger.info("Getting activities using authorization code: " + authToken);
         StravaRestClient stravaRestClient = new StravaRestClient(authToken);
         List<Activity> summaryActivityList = stravaRestClient.getActivities();
@@ -41,8 +37,8 @@ public class StravaActivityService implements ActivityService {
     }
 
     @Override
-    public List<ActivitiesSummary> getActivitiesSummary() {
-        List<Activity> activities = getActivities();
+    public List<ActivitiesSummary> getActivitiesSummary(String authToken) {
+        List<Activity> activities = getActivities(authToken);
         DateTime firstStartDate = new DateTime(activities.get(0).getStart_date());
 
         List<ActivitiesSummary> activitiesSummaries = generateEmptySummaries(firstStartDate.year().get());
@@ -54,6 +50,7 @@ public class StravaActivityService implements ActivityService {
                 if ((summary.getMonth() == startDate.monthOfYear().get()) &&
                         (summary.getYear() == startDate.year().get())) {
                     summary.setCalories(summary.getCalories() + activity.getCalories().longValue());
+                    summary.setDistance(summary.getDistance() + (activity.getDistance() / 1000));
                 }
             }
         }
@@ -69,7 +66,6 @@ public class StravaActivityService implements ActivityService {
         for (int year = startYear; year <= currentYear; year++)
             for (int month = 0; month <= currentMonth; month++) {
                 ActivitiesSummary newSummary = new ActivitiesSummary();
-                newSummary.setCalories(0L);
                 newSummary.setMonth(month);
                 newSummary.setYear(year);
                 resultList.add(newSummary);

@@ -7,5 +7,5 @@ import com.tpo.strava.service.domain.Athlete;
  */
 public interface AthleteService {
 
-    Athlete getAthlete();
+    Athlete getAthlete(String authCode);
 }

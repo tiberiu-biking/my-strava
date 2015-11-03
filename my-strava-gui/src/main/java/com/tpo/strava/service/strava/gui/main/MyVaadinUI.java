@@ -5,7 +5,8 @@ import com.tpo.strava.service.athlete.AthleteService;
 import com.tpo.strava.service.domain.ActivitiesSummary;
 import com.tpo.strava.service.strava.gui.chart.CaloriesChartView;
 import com.tpo.strava.service.strava.gui.chart.DistanceChartView;
-import com.tpo.strava.service.strava.gui.user.UserUI;
+import com.tpo.strava.service.strava.gui.user.ConnectPanel;
+import com.tpo.strava.service.strava.gui.user.UserPanel;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
@@ -30,19 +31,22 @@ public class MyVaadinUI extends UI {
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
-        VerticalSplitPanel mainPanel = new VerticalSplitPanel();
-        mainPanel.setFirstComponent(new UserUI());
-
         String authToken = vaadinRequest.getParameter("authToken");
+
+        VerticalSplitPanel mainPanel = new VerticalSplitPanel();
+
         if (authToken != null) {
+            mainPanel.setFirstComponent(new UserPanel(athleteService, authToken));
             List<ActivitiesSummary> activities = activityService.getActivitiesSummary(authToken);
 
             VerticalSplitPanel chartPanel = new VerticalSplitPanel();
             chartPanel.setFirstComponent(new CaloriesChartView("Calories", activities));
             chartPanel.setSecondComponent(new DistanceChartView("Distances", activities));
             mainPanel.setSecondComponent(chartPanel);
-            mainPanel.setSplitPosition(10);
+            mainPanel.setSplitPosition(4);
+            setContent(mainPanel);
+        } else {
+            setContent(new ConnectPanel());
         }
-        setContent(mainPanel);
     }
 }

@@ -42,7 +42,7 @@ public class StravaOAuthController {
         String uri = UriComponentsBuilder
                 .fromHttpUrl(STRAVA_AUTH_URL)
                 .queryParam("client_id", clientId)
-                .queryParam("redirect_uri", "http://localhost:8080/strava/oauth/token")
+                .queryParam("redirect_uri", "http://my-strava.eu-gb.mybluemix.net/strava/oauth/token")
                 .queryParam("response_type", RESPONSE_TYPE_CODE)
                 .toUriString();
 
@@ -63,6 +63,6 @@ public class StravaOAuthController {
         TokenResponse tokenResponse = restTemplate.postForObject(STRAVA_TOKEN_URL, params, TokenResponse.class);
         Athlete athlete = tokenResponse.getAthlete();
         logger.info("Access token:" + tokenResponse.getAccessToken());
-        return new ModelAndView(new RedirectView("http://localhost:8080/?authToken=" + tokenResponse.getAccessToken()));
+        return new ModelAndView(new RedirectView("http://my-strava.eu-gb.mybluemix.net/?authToken=" + tokenResponse.getAccessToken()));
     }
 }

@@ -5,7 +5,7 @@ import com.tpo.strava.service.athlete.AthleteService;
 import com.tpo.strava.service.domain.ActivitiesSummary;
 import com.tpo.strava.service.strava.gui.chart.CaloriesChartView;
 import com.tpo.strava.service.strava.gui.chart.DistanceChartView;
-import com.tpo.strava.service.strava.gui.user.ConnectPanel;
+import com.tpo.strava.service.strava.gui.user.ConnectView;
 import com.tpo.strava.service.strava.gui.user.UserPanel;
 import com.vaadin.annotations.Theme;
 import com.vaadin.server.VaadinRequest;
@@ -46,7 +46,7 @@ public class MyVaadinUI extends UI {
             mainPanel.setSplitPosition(4);
             setContent(mainPanel);
         } else {
-            setContent(new ConnectPanel());
+            setContent(new ConnectView());
         }
     }
 }

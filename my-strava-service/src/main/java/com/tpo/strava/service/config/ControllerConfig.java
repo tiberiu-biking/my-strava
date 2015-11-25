@@ -1,6 +1,7 @@
 package com.tpo.strava.service.config;
 
 import com.tpo.strava.service.controller.StravaOAuthController;
+import com.tpo.strava.service.core.CloudController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -26,4 +27,8 @@ public class ControllerConfig {
         return new StravaOAuthController(clientSecret, clientId);
     }
 
+    @Bean
+    public CloudController cloudController() {
+        return new CloudController();
+    }
 }

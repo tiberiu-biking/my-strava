@@ -1,11 +1,12 @@
 package com.tpo.strava.service.strava.gui.user;
 
+import com.vaadin.navigator.View;
+import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.FileResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Link;
-import com.vaadin.ui.Panel;
 import org.springframework.core.io.ClassPathResource;
 
 import java.io.IOException;
@@ -13,11 +14,9 @@ import java.io.IOException;
 /**
  * Created by Tiberiu on 29/10/15.
  */
-public class ConnectPanel extends Panel {
+public class ConnectView extends HorizontalLayout implements View {
 
-    public ConnectPanel() {
-        HorizontalLayout content = new HorizontalLayout();
-        content.setDefaultComponentAlignment(Alignment.BOTTOM_RIGHT);
+    public ConnectView() {
         ClassPathResource sourceFile = new ClassPathResource("connect-with-strava.png");
         FileResource icon = null;
         try {
@@ -25,9 +24,17 @@ public class ConnectPanel extends Panel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Link connectLink = new Link("", new ExternalResource("http://localhost:8080/strava/oauth/authorize"));
+        Link connectLink = new Link("", new ExternalResource("http://my-strava.eu-gb.mybluemix.net/strava/oauth/authorize"));
         connectLink.setIcon(icon);
-        content.addComponent(connectLink);
-        setContent(content);
+        addComponent(connectLink);
+        setComponentAlignment(connectLink, Alignment.MIDDLE_RIGHT);
+        connectLink.setWidth(null);
+        connectLink.setWidthUndefined();
+        setExpandRatio(connectLink, 1.0f);
+        setWidth("100%");
+    }
+
+    @Override
+    public void enter(ViewChangeListener.ViewChangeEvent viewChangeEvent) {
     }
 }

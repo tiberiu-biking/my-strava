@@ -2,11 +2,12 @@ package com.tpo.strava.service.config;
 
 import com.tpo.strava.service.controller.StravaOAuthController;
 import com.tpo.strava.service.core.CloudController;
+import com.tpo.strava.service.properties.AppProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.env.Environment;
+import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
@@ -15,16 +16,15 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @Configuration
 @EnableWebMvc
 @EnableAutoConfiguration
+@Import(CoreConfiguration.class)
 public class ControllerConfig {
 
     @Autowired
-    private Environment environment;
+    private AppProperties appProperties;
 
     @Bean
     public StravaOAuthController stravaOAuthController() {
-        String clientSecret = environment.getRequiredProperty("strava.oauth.client.secret");
-        String clientId = environment.getRequiredProperty("strava.oauth.client.id");
-        return new StravaOAuthController(clientSecret, clientId);
+        return new StravaOAuthController(appProperties.getOauthClientSecret(), appProperties.getOatuhClientId());
     }
 
     @Bean

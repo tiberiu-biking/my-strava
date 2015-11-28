@@ -24,4 +24,5 @@ public class ServiceConfiguration {
     public AthleteService athleteService() {
         return new StravaAthleteService();
     }
+
 }

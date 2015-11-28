@@ -16,7 +16,7 @@ import java.io.IOException;
  */
 public class ConnectView extends HorizontalLayout implements View {
 
-    public ConnectView() {
+    public ConnectView(String authUrl) {
         ClassPathResource sourceFile = new ClassPathResource("connect-with-strava.png");
         FileResource icon = null;
         try {
@@ -24,7 +24,7 @@ public class ConnectView extends HorizontalLayout implements View {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Link connectLink = new Link("", new ExternalResource("http://my-strava.eu-gb.mybluemix.net/strava/oauth/authorize"));
+        Link connectLink = new Link("", new ExternalResource(authUrl));
         connectLink.setIcon(icon);
         addComponent(connectLink);
         setComponentAlignment(connectLink, Alignment.MIDDLE_RIGHT);

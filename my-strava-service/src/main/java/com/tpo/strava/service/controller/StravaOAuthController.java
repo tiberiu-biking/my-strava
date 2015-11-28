@@ -4,6 +4,7 @@ import com.tpo.strava.service.domain.Athlete;
 import com.tpo.strava.service.domain.TokenResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +33,12 @@ public class StravaOAuthController {
     private String clientSecret;
     private String clientId;
 
+    @Value("${strava.oauth.token.url}")
+    private String redirectUri;
+
+    @Value("${strava.token.url}")
+    private String authTokenUrl;
+
     public StravaOAuthController(String clientSecret, String clientId) {
         this.clientSecret = clientSecret;
         this.clientId = clientId;
@@ -42,7 +49,7 @@ public class StravaOAuthController {
         String uri = UriComponentsBuilder
                 .fromHttpUrl(STRAVA_AUTH_URL)
                 .queryParam("client_id", clientId)
-                .queryParam("redirect_uri", "http://my-strava.eu-gb.mybluemix.net/strava/oauth/token")
+                .queryParam("redirect_uri", redirectUri)
                 .queryParam("response_type", RESPONSE_TYPE_CODE)
                 .toUriString();
 
@@ -63,6 +70,6 @@ public class StravaOAuthController {
         TokenResponse tokenResponse = restTemplate.postForObject(STRAVA_TOKEN_URL, params, TokenResponse.class);
         Athlete athlete = tokenResponse.getAthlete();
         logger.info("Access token:" + tokenResponse.getAccessToken());
-        return new ModelAndView(new RedirectView("http://my-strava.eu-gb.mybluemix.net/?authToken=" + tokenResponse.getAccessToken()));
+        return new ModelAndView(new RedirectView(authTokenUrl + tokenResponse.getAccessToken()));
     }
 }

@@ -3,6 +3,7 @@ package com.tpo.strava.service.strava.gui.main;
 import com.tpo.strava.service.activity.ActivityService;
 import com.tpo.strava.service.athlete.AthleteService;
 import com.tpo.strava.service.domain.ActivitiesSummary;
+import com.tpo.strava.service.properties.AppProperties;
 import com.tpo.strava.service.strava.gui.chart.CaloriesChartView;
 import com.tpo.strava.service.strava.gui.chart.DistanceChartView;
 import com.tpo.strava.service.strava.gui.user.ConnectView;
@@ -29,6 +30,9 @@ public class MyVaadinUI extends UI {
     @Autowired
     private AthleteService athleteService;
 
+    @Autowired
+    private AppProperties appProperties;
+
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         String authToken = vaadinRequest.getParameter("authToken");
@@ -46,7 +50,7 @@ public class MyVaadinUI extends UI {
             mainPanel.setSplitPosition(4);
             setContent(mainPanel);
         } else {
-            setContent(new ConnectView());
+            setContent(new ConnectView(appProperties.getOauthUrl()));
         }
     }
 }

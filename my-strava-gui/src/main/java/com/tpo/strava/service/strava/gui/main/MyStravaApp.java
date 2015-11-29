@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MyStravaGuiApplication {
+public class MyStravaApp {
 
     public static void main(String[] args) {
-        SpringApplication.run(MyStravaGuiApplication.class, args);
+        SpringApplication.run(MyStravaApp.class, args);
     }
 }

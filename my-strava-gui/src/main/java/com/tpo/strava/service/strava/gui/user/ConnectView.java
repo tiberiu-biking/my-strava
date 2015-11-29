@@ -16,10 +16,13 @@ import java.io.IOException;
  */
 public class ConnectView extends HorizontalLayout implements View, RequestHandler {
 
+    private final String homeUrl;
+
     private AthleteService athleteService;
 
     public ConnectView(String authUrl, AthleteService athleteService) {
         this.athleteService = athleteService;
+        homeUrl = Page.getCurrent().getLocation().toString();
         Link connectLink = new Link("", new ExternalResource(authUrl));
         connectLink.setIcon(new ThemeResource("img/connect-with-strava.png"));
         addComponent(connectLink);
@@ -40,11 +43,10 @@ public class ConnectView extends HorizontalLayout implements View, RequestHandle
         String authToken = request.getParameter("authToken");
 
         Athlete athlete = athleteService.getAthlete(authToken);
+        athlete.setToken(authToken);
         session.setAttribute(Athlete.class.getName(), athlete);
-//        DashboardEventBus.post(new DashboardEvent.UserLoginRequestedEvent());
         VaadinSession.getCurrent().removeRequestHandler(this);
-        ((VaadinServletResponse) response).getHttpServletResponse().
-                sendRedirect("http://localhost:8080");
+        ((VaadinServletResponse) response).getHttpServletResponse().sendRedirect(homeUrl);
 
         return true;
     }

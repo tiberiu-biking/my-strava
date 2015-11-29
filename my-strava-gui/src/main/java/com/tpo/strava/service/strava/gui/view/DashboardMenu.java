@@ -12,7 +12,6 @@ import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.themes.ValoTheme;
 
@@ -61,7 +60,7 @@ public final class DashboardMenu extends CustomComponent {
     }
 
     private Component buildTitle() {
-        Label logo = new Label("QuickTickets <strong>Dashboard</strong>",
+        Label logo = new Label("My <strong>Strava</strong>",
                 ContentMode.HTML);
         logo.setSizeUndefined();
         HorizontalLayout logoWrapper = new HorizontalLayout(logo);
@@ -71,8 +70,7 @@ public final class DashboardMenu extends CustomComponent {
     }
 
     private Athlete getCurrentUser() {
-        return (Athlete) VaadinSession.getCurrent().getAttribute(
-                Athlete.class.getName());
+        return (Athlete) VaadinSession.getCurrent().getAttribute(Athlete.class.getName());
     }
 
     private Component buildUserMenu() {
@@ -82,6 +80,13 @@ public final class DashboardMenu extends CustomComponent {
         settingsItem = settings.addItem("", new ThemeResource(
                 "img/profile-pic-300px.jpg"), null);
         updateUserName(null);
+        settingsItem.addItem("Online Profile", new MenuBar.Command() {
+            @Override
+            public void menuSelected(final MenuItem selectedItem) {
+                Notification.show("Hi!");
+            }
+        });
+        /*
         settingsItem.addItem("Edit Profile", new Command() {
             @Override
             public void menuSelected(final MenuItem selectedItem) {
@@ -101,6 +106,7 @@ public final class DashboardMenu extends CustomComponent {
 //                DashboardEventBus.post(new UserLoggedOutEvent());
             }
         });
+        */
         return settings;
     }
 

@@ -1,11 +1,9 @@
 package com.tpo.strava.service.strava.gui.main;
 
-import com.google.common.eventbus.Subscribe;
 import com.tpo.strava.service.activity.ActivityService;
 import com.tpo.strava.service.athlete.AthleteService;
 import com.tpo.strava.service.domain.Athlete;
 import com.tpo.strava.service.properties.AppProperties;
-import com.tpo.strava.service.strava.gui.event.DashboardEvent;
 import com.tpo.strava.service.strava.gui.event.DashboardEventBus;
 import com.tpo.strava.service.strava.gui.user.ConnectView;
 import com.tpo.strava.service.strava.gui.view.MainView;
@@ -39,6 +37,10 @@ public class MyVaadinUI extends UI {
 
     public static DashboardEventBus getDashboardEventbus() {
         return ((MyVaadinUI) getCurrent()).dashboardEventbus;
+    }
+
+    public static ActivityService getActivityService() {
+        return ((MyVaadinUI) getCurrent()).activityService;
     }
 
     @Override
@@ -75,11 +77,6 @@ public class MyVaadinUI extends UI {
         } else {
             setContent(new ConnectView(appProperties.getOauthUrl(), athleteService));
         }
-    }
-
-    @Subscribe
-    public void userLoggedIn(final DashboardEvent.UserLoginRequestedEvent event) {
-        refreshContent();
     }
 
 }

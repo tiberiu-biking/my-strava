@@ -39,6 +39,8 @@ public class Athlete {
     private List<Gear> bikes;
     private List<Gear> shoes;
 
+    private String token;
+
     public Athlete(int id) {
         this.id = id;
     }
@@ -264,5 +266,13 @@ public class Athlete {
                 .append("city", city)
                 .append("sex", sex)
                 .toString();
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

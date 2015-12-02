@@ -10188,14 +10188,14 @@ div.v-layout.v-horizontal.v-widget {
 
 .dashboard .valo-menu-title {
     line-height: 1.2;
-    background-color: #197de1;
-    background-image: -webkit-linear-gradient(top, #1b87e3 2%, #166ed5 98%);
-    background-image: linear-gradient(to bottom, #1b87e3 2%, #166ed5 98%);
+    background-color: #fc4c02;
+    background-image: -webkit-linear-gradient(top, #fc4c02 2%, #fd7035 98%);
+    background-image: linear-gradient(to bottom, #fc4c02 2%, #fd7035 98%);
     color: white;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
     padding: 12px 19px;
     font-size: 14px;
-    border-bottom: 1px solid #1362b1;
+    border-bottom: 1px solid #fd7035;
     -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.05);
     text-align: center;
@@ -10203,7 +10203,7 @@ div.v-layout.v-horizontal.v-widget {
 
 .dashboard .valo-menu-title .v-menubar.v-menubar {
     background: transparent;
-    border-color: #1362b1;
+    border-color: white;
     color: inherit;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -10212,8 +10212,8 @@ div.v-layout.v-horizontal.v-widget {
 
 .dashboard .valo-menu-title .v-menubar-menuitem {
     background: transparent;
-    -webkit-box-shadow: inset 0 1px 0 #4d98e6, inset 0 -1px 0 #166bca;
-    box-shadow: inset 0 1px 0 #4d98e6, inset 0 -1px 0 #166bca;
+    -webkit-box-shadow: inset 0 1px 0 #fd7035, inset 0 -1px 0 #fc4c02;
+    box-shadow: inset 0 1px 0 #fd7035, inset 0 -1px 0 #fc4c02;
     text-shadow: inherit;
     font-size: 16px;
     border-color: inherit;
@@ -10252,7 +10252,7 @@ div.v-layout.v-horizontal.v-widget {
     border: none;
     margin-right: 1px;
     border-radius: 4px;
-    color: #197de1;
+    color: #fc4c02;
     padding: 0 12px;
     -webkit-transition: color 140ms;
     -moz-transition: color 140ms;
@@ -10268,7 +10268,7 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .dashboard .v-menubar-user-menu .v-menubar-menuitem:hover {
-    color: #4396ea;
+    color: #fc4c02;
 }
 
 .dashboard .v-menubar-user-menu .v-menubar-menuitem:active {
@@ -10277,7 +10277,7 @@ div.v-layout.v-horizontal.v-widget {
 
 .dashboard .v-menubar-user-menu .v-menubar-menuitem-checked, .dashboard .v-menubar-user-menu .v-menubar-menuitem-checked:first-child {
     border: 1px solid #c5c5c5;
-    color: #197de1;
+    color: #fc4c02;
 }
 
 .dashboard .v-menubar-user-menu .v-menubar-menuitem-checked .v-menubar-menuitem-caption, .dashboard .v-menubar-user-menu .v-menubar-menuitem-checked:first-child .v-menubar-menuitem-caption {

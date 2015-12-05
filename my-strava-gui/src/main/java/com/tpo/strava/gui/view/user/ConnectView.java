@@ -1,4 +1,4 @@
-package com.tpo.strava.service.strava.gui.user;
+package com.tpo.strava.gui.view.user;
 
 import com.tpo.strava.service.athlete.AthleteService;
 import com.tpo.strava.service.domain.Athlete;
@@ -41,7 +41,6 @@ public class ConnectView extends HorizontalLayout implements View, RequestHandle
     @Override
     public boolean handleRequest(VaadinSession session, VaadinRequest request, VaadinResponse response) throws IOException {
         String authToken = request.getParameter("authToken");
-
         Athlete athlete = athleteService.getAthlete(authToken);
         athlete.setToken(authToken);
         session.setAttribute(Athlete.class.getName(), athlete);

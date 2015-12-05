@@ -1,7 +1,7 @@
-package com.tpo.strava.service.strava.gui.event;
+package com.tpo.strava.gui.event;
 
 
-import com.tpo.strava.service.strava.gui.DashboardViewType;
+import com.tpo.strava.gui.navigator.DashboardViewType;
 
 public abstract class DashboardEvent {
 

@@ -1,12 +1,12 @@
-package com.tpo.strava.service.strava.gui.main;
+package com.tpo.strava.gui.main;
 
+import com.tpo.strava.gui.event.DashboardEventBus;
+import com.tpo.strava.gui.view.MainView;
+import com.tpo.strava.gui.view.user.ConnectView;
 import com.tpo.strava.service.activity.ActivityService;
 import com.tpo.strava.service.athlete.AthleteService;
 import com.tpo.strava.service.domain.Athlete;
 import com.tpo.strava.service.properties.AppProperties;
-import com.tpo.strava.service.strava.gui.event.DashboardEventBus;
-import com.tpo.strava.service.strava.gui.user.ConnectView;
-import com.tpo.strava.service.strava.gui.view.MainView;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.server.VaadinRequest;
@@ -48,29 +48,16 @@ public class MyVaadinUI extends UI {
         addStyleName(ValoTheme.UI_WITH_MENU);
         DashboardEventBus.register(this);
         refreshContent();
-
-
-//
-//        VerticalSplitPanel mainPanel = new VerticalSplitPanel();
-//
-//        if (authToken != null) {
-//            mainPanel.setFirstComponent(new UserPanel(athleteService, authToken));
-//            List<ActivitiesSummary> activities = activityService.getActivitiesSummary(authToken);
-//
-//            VerticalSplitPanel chartPanel = new VerticalSplitPanel();
-//            chartPanel.setFirstComponent(new CaloriesChartView("Calories", activities));
-//            chartPanel.setSecondComponent(new DistanceChartView("Distances", activities));
-//            mainPanel.setSecondComponent(chartPanel);
-//            mainPanel.setSplitPosition(4);
-//            mainPanel.addComponent(new DashboardView());
-//            setContent(mainPanel);
-//        } else {
-//            setContent(new ConnectView(appProperties.getOauthUrl()));
-//        }
     }
 
     private void refreshContent() {
-        Athlete athlete = (Athlete) VaadinSession.getCurrent().getAttribute(Athlete.class.getName());
+//        Athlete athlete = (Athlete) VaadinSession.getCurrent().getAttribute(Athlete.class.getName());
+        Athlete athlete = athleteService.getAthlete("43ea77c7c2f1642304eda2283fd496c2a056fb7f");
+//        Athlete athlete = new Athlete();
+        athlete.setToken("43ea77c7c2f1642304eda2283fd496c2a056fb7f");
+
+        VaadinSession.getCurrent().setAttribute(Athlete.class.getName(), athlete);
+
         if (athlete != null) {
             setContent(new MainView());
             getNavigator().navigateTo(getNavigator().getState());

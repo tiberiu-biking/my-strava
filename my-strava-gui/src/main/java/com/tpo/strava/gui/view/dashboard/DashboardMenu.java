@@ -1,10 +1,10 @@
-package com.tpo.strava.service.strava.gui.view;
+package com.tpo.strava.gui.view.dashboard;
 
 import com.google.common.eventbus.Subscribe;
+import com.tpo.strava.gui.event.DashboardEvent;
+import com.tpo.strava.gui.event.DashboardEventBus;
+import com.tpo.strava.gui.navigator.DashboardViewType;
 import com.tpo.strava.service.domain.Athlete;
-import com.tpo.strava.service.strava.gui.DashboardViewType;
-import com.tpo.strava.service.strava.gui.event.DashboardEvent;
-import com.tpo.strava.service.strava.gui.event.DashboardEventBus;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinSession;
@@ -34,11 +34,7 @@ public final class DashboardMenu extends CustomComponent {
         setPrimaryStyleName("valo-menu");
         setId(ID);
         setSizeUndefined();
-
-        // There's only one DashboardMenu per UI so this doesn't need to be
-        // unregistered from the UI-scoped DashboardEventBus.
         DashboardEventBus.register(this);
-
         setCompositionRoot(buildContent());
     }
 
@@ -99,14 +95,14 @@ public final class DashboardMenu extends CustomComponent {
 //                ProfilePreferencesWindow.open(user, true);
             }
         });
+ */
         settingsItem.addSeparator();
-        settingsItem.addItem("Sign Out", new Command() {
+        settingsItem.addItem("Sign Out", new MenuBar.Command() {
             @Override
             public void menuSelected(final MenuItem selectedItem) {
 //                DashboardEventBus.post(new UserLoggedOutEvent());
             }
         });
-        */
         return settings;
     }
 
@@ -135,47 +131,17 @@ public final class DashboardMenu extends CustomComponent {
         for (final DashboardViewType view : DashboardViewType.values()) {
             Component menuItemComponent = new ValoMenuItemButton(view);
 
-//            if (view == DashboardViewType.REPORTS) {
-//                // Add drop target to reports button
-//                DragAndDropWrapper reports = new DragAndDropWrapper(
-//                        menuItemComponent);
-//                reports.setSizeUndefined();
-//                reports.setDragStartMode(DragStartMode.NONE);
-//                reports.setDropHandler(new DropHandler() {
-//
-//                    @Override
-//                    public void drop(final DragAndDropEvent event) {
-//                        UI.getCurrent()
-//                                .getNavigator()
-//                                .navigateTo(
-//                                        DashboardViewType.REPORTS.getViewName());
-//                        Table table = (Table) event.getTransferable()
-//                                .getSourceComponent();
-//                        DashboardEventBus.post(new TransactionReportEvent(
-//                                (Collection<Transaction>) table.getValue()));
-//                    }
-//
-//                    @Override
-//                    public AcceptCriterion getAcceptCriterion() {
-//                        return AcceptItem.ALL;
-//                    }
-//
-//                });
-//                menuItemComponent = reports;
-//            }
 
             if (view == DashboardViewType.DASHBOARD) {
                 notificationsBadge = new Label();
                 notificationsBadge.setId(NOTIFICATIONS_BADGE_ID);
                 menuItemComponent = buildBadgeWrapper(menuItemComponent,
                         notificationsBadge);
+            } else if (view == DashboardViewType.CALORIES) {
+                reportsBadge = new Label();
+                reportsBadge.setId(REPORTS_BADGE_ID);
+                menuItemComponent = buildBadgeWrapper(menuItemComponent, reportsBadge);
             }
-//            if (view == DashboardViewType.REPORTS) {
-//                reportsBadge = new Label();
-//                reportsBadge.setId(REPORTS_BADGE_ID);
-//                menuItemComponent = buildBadgeWrapper(menuItemComponent,
-//                        reportsBadge);
-//            }
 
             menuItemsLayout.addComponent(menuItemComponent);
         }
@@ -203,7 +169,6 @@ public final class DashboardMenu extends CustomComponent {
 
     @Subscribe
     public void postViewChange(final DashboardEvent.PostViewChangeEvent event) {
-        // After a successful view change the menu can be hidden in mobile view.
         getCompositionRoot().removeStyleName(STYLE_VISIBLE);
     }
 

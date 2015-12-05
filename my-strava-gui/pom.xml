@@ -8,6 +8,7 @@
         <artifactId>my-strava-parent</artifactId>
         <groupId>com.tpo.strava</groupId>
         <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>my-strava-gui</artifactId>
@@ -18,7 +19,8 @@
     </properties>
 
     <dependencies>
-        <dependency>
+
+    <dependency>
             <groupId>com.tpo.strava</groupId>
             <artifactId>my-strava-service</artifactId>
             <version>${parent.version}</version>

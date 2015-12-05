@@ -1,4 +1,4 @@
-package com.tpo.strava.service.strava.gui.main;
+package com.tpo.strava.gui.main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

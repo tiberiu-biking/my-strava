@@ -1,7 +1,8 @@
-package com.tpo.strava.service.strava.gui.chart;
+package com.tpo.strava.gui.view.chart;
 
 import at.downdrown.vaadinaddons.highchartsapi.model.data.HighChartsData;
 import at.downdrown.vaadinaddons.highchartsapi.model.data.base.StringDoubleData;
+import com.tpo.strava.gui.chart.StravaChart;
 import com.tpo.strava.service.domain.ActivitiesSummary;
 
 /**

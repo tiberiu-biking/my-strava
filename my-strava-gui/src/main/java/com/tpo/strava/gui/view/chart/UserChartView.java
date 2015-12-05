@@ -1,8 +1,8 @@
-package com.tpo.strava.service.strava.gui.chart;
+package com.tpo.strava.gui.view.chart;
 
+import com.tpo.strava.gui.main.MyVaadinUI;
 import com.tpo.strava.service.domain.ActivitiesSummary;
 import com.tpo.strava.service.domain.Athlete;
-import com.tpo.strava.service.strava.gui.main.MyVaadinUI;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.server.VaadinSession;

@@ -1,9 +1,9 @@
-package com.tpo.strava.service.strava.gui.event;
+package com.tpo.strava.gui.event;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.SubscriberExceptionContext;
 import com.google.common.eventbus.SubscriberExceptionHandler;
-import com.tpo.strava.service.strava.gui.main.MyVaadinUI;
+import com.tpo.strava.gui.main.MyVaadinUI;
 
 public class DashboardEventBus implements SubscriberExceptionHandler {
 

@@ -1,6 +1,7 @@
-package com.tpo.strava.service.strava.gui.view;
+package com.tpo.strava.gui.view;
 
-import com.tpo.strava.service.strava.gui.DashboardNavigator;
+import com.tpo.strava.gui.navigator.DashboardNavigator;
+import com.tpo.strava.gui.view.dashboard.DashboardMenu;
 import com.vaadin.ui.ComponentContainer;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.HorizontalLayout;

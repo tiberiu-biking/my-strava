@@ -1,4 +1,4 @@
-package com.tpo.strava.service.strava.gui.chart;
+package com.tpo.strava.gui.chart;
 
 import at.downdrown.vaadinaddons.highchartsapi.HighChart;
 import at.downdrown.vaadinaddons.highchartsapi.HighChartFactory;
@@ -36,17 +36,15 @@ public abstract class StravaChart extends VerticalLayout {
 
     private HighChart createChart() {
         ChartConfiguration columnConfiguration = new ChartConfiguration();
-        columnConfiguration.setTitle(columnName + " Chart");
+        columnConfiguration.setTitle(columnName);
         columnConfiguration.setChartType(ChartType.COLUMN);
-//        columnConfiguration.setLegendEnabled(true);
-//        columnConfiguration.setChartMargin(new Margin(1,40000, 12, 0));
+        columnConfiguration.setLegendEnabled(true);
         columnConfiguration.setCreditsEnabled(true);
 
         Axis xAxis = new Axis(Axis.AxisType.xAxis);
         xAxis.setAxisValueType(Axis.AxisValueType.DATETIME);
 
         List<String> xCategories = new ArrayList<>();
-
         for (ActivitiesSummary activity : activities) {
             DateTime dateTime = activity.getDateTime();
             xCategories.add(dateTime.monthOfYear().getAsShortText() + " " + dateTime.year().getAsString());

@@ -5,8 +5,8 @@ import com.tpo.strava.gui.event.DashboardEvent;
 import com.tpo.strava.gui.event.DashboardEventBus;
 import com.tpo.strava.gui.navigator.DashboardViewType;
 import com.tpo.strava.service.domain.Athlete;
+import com.vaadin.server.ExternalResource;
 import com.vaadin.server.FontAwesome;
-import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.*;
@@ -15,11 +15,6 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.themes.ValoTheme;
 
-/**
- * A responsive menu component providing user information and the controls for
- * primary navigation between the views.
- */
-@SuppressWarnings({"serial", "unchecked"})
 public final class DashboardMenu extends CustomComponent {
 
     public static final String ID = "dashboard-menu";
@@ -72,9 +67,8 @@ public final class DashboardMenu extends CustomComponent {
     private Component buildUserMenu() {
         final MenuBar settings = new MenuBar();
         settings.addStyleName("user-menu");
-        final Athlete user = getCurrentUser();
-        settingsItem = settings.addItem("", new ThemeResource(
-                "img/profile-pic-300px.jpg"), null);
+        final Athlete athlete = getCurrentUser();
+        settingsItem = settings.addItem("", new ExternalResource(athlete.getProfile_medium()), null);
         updateUserName(null);
         settingsItem.addItem("Online Profile", new MenuBar.Command() {
             @Override
@@ -82,6 +76,14 @@ public final class DashboardMenu extends CustomComponent {
                 Notification.show("Hi!");
             }
         });
+
+        MenuItem test = settingsItem.addItem("Online Profile", new MenuBar.Command() {
+            @Override
+            public void menuSelected(final MenuItem selectedItem) {
+                Notification.show("Hi!");
+            }
+        });
+
         /*
         settingsItem.addItem("Edit Profile", new Command() {
             @Override

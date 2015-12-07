@@ -1,4 +1,4 @@
-package com.tpo.strava.gui.chart;
+package com.tpo.strava.gui.component.chart;
 
 import at.downdrown.vaadinaddons.highchartsapi.HighChart;
 import at.downdrown.vaadinaddons.highchartsapi.HighChartFactory;
@@ -10,6 +10,7 @@ import at.downdrown.vaadinaddons.highchartsapi.model.data.HighChartsData;
 import at.downdrown.vaadinaddons.highchartsapi.model.plotoptions.ColumnChartPlotOptions;
 import at.downdrown.vaadinaddons.highchartsapi.model.series.ColumnChartSeries;
 import com.tpo.strava.service.domain.ActivitiesSummary;
+import com.vaadin.shared.ui.colorpicker.Color;
 import com.vaadin.ui.VerticalLayout;
 import org.joda.time.DateTime;
 
@@ -44,6 +45,7 @@ public abstract class StravaChart extends VerticalLayout {
         Axis xAxis = new Axis(Axis.AxisType.xAxis);
         xAxis.setAxisValueType(Axis.AxisValueType.DATETIME);
 
+
         List<String> xCategories = new ArrayList<>();
         for (ActivitiesSummary activity : activities) {
             DateTime dateTime = activity.getDateTime();
@@ -58,6 +60,11 @@ public abstract class StravaChart extends VerticalLayout {
         columnConfiguration.setPlotOptions(plotOptions);
         ColumnChartSeries column = new ColumnChartSeries(this.columnName, buildColumnValues());
         columnConfiguration.getSeriesList().add(column);
+
+        List<Color> colors = new ArrayList<>();
+        colors.add(new Color(0, 127, 182));
+//        colors.add(new Color(253, 112, 53));
+        columnConfiguration.setColors(colors);
 
         HighChart columnChart = null;
         try {

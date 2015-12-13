@@ -1,5 +1,7 @@
 package com.tpo.strava.service.domain;
 
+import org.joda.time.DateTime;
+
 /**
  * Created by Tiberiu on 28/10/15.
  */
@@ -9,6 +11,7 @@ public class ActivitiesSummary {
     private Float distance;
     private Integer month;
     private Integer year;
+    private DateTime dateTime;
 
     public ActivitiesSummary() {
         distance = 0F;
@@ -63,5 +66,13 @@ public class ActivitiesSummary {
 
     public void setDistance(Float distance) {
         this.distance = distance;
+    }
+
+    public DateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(DateTime dateTime) {
+        this.dateTime = dateTime;
     }
 }

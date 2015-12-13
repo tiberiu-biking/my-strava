@@ -1,6 +1,6 @@
 package com.tpo.strava.service.config;
 
-import com.tpo.strava.service.controller.StravaOAuthController;
+import com.tpo.strava.service.auth.StravaOAuthController;
 import com.tpo.strava.service.core.CloudController;
 import com.tpo.strava.service.properties.AppProperties;
 import org.springframework.beans.factory.annotation.Autowired;

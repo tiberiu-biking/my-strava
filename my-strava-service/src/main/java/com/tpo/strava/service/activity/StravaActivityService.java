@@ -64,10 +64,11 @@ public class StravaActivityService implements ActivityService {
         int currentMonth = DateTime.now().monthOfYear().get();
 
         for (int year = startYear; year <= currentYear; year++)
-            for (int month = 0; month <= currentMonth; month++) {
+            for (int month = 1; month <= currentMonth; month++) {
                 ActivitiesSummary newSummary = new ActivitiesSummary();
                 newSummary.setMonth(month);
                 newSummary.setYear(year);
+                newSummary.setDateTime(new DateTime(year, month, 1, 0, 0, 0));
                 resultList.add(newSummary);
             }
         return resultList;

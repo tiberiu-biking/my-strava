@@ -8,6 +8,8 @@ import com.vaadin.spring.annotation.UIScope;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,11 +19,13 @@ import java.util.List;
  */
 @SpringComponent
 @UIScope
+@CacheConfig(cacheNames = "activities")
 public class StravaActivityService implements ActivityService {
 
     private static final Logger logger = LoggerFactory.getLogger(StravaActivityService.class);
 
     @Override
+    @Cacheable
     public List<Activity> getActivities(String authToken) {
         logger.info("Getting activities using authorization code: " + authToken);
         StravaRestClient stravaRestClient = new StravaRestClient(authToken);
@@ -37,6 +41,7 @@ public class StravaActivityService implements ActivityService {
     }
 
     @Override
+    @Cacheable
     public List<ActivitiesSummary> getActivitiesSummary(String authToken) {
         List<Activity> activities = getActivities(authToken);
         DateTime firstStartDate = new DateTime(activities.get(0).getStart_date());

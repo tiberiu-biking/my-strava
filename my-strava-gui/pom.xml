@@ -22,7 +22,7 @@
 
     <dependency>
             <groupId>com.tpo.strava</groupId>
-            <artifactId>my-strava-service</artifactId>
+            <artifactId>my-strava-web</artifactId>
             <version>${parent.version}</version>
         </dependency>
 

@@ -18,23 +18,15 @@
     <name>my-strava-parent</name>
 
     <modules>
+        <module>my-strava-persistence</module>
         <module>my-strava-service</module>
+        <module>my-strava-web</module>
         <module>my-strava-gui</module>
-        <!--<module>my-strava-persistence</module>-->
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.7</java.version>
     </properties>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

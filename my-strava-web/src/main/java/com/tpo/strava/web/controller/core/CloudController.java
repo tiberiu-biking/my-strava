@@ -1,4 +1,4 @@
-package com.tpo.strava.service.core;
+package com.tpo.strava.web.controller.core;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

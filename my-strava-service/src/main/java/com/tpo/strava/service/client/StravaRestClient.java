@@ -22,6 +22,7 @@ public class StravaRestClient {
 
     private static final String ACCESS_TOKEN = "access_token";
     private static final String PAGE = "page";
+    private static final String AFTER = "after";
 
     private static final Logger logger = LoggerFactory.getLogger(StravaRestClient.class);
 
@@ -43,12 +44,25 @@ public class StravaRestClient {
                     .queryParam(ACCESS_TOKEN, accessToken)
                     .queryParam(PAGE, page)
                     .toUriString();
-            logger.debug("Activities summary uri: " + uriString);
+            logger.info("Activities summary uri  {}", uriString);
             Activity[] summaryActivityList = restTemplate.getForObject(uriString, Activity[].class);
             isPagesLeft = !ArrayUtils.isEmpty(summaryActivityList);
             activities.addAll(Arrays.asList(summaryActivityList));
             page++;
         }
+        return activities;
+    }
+
+    public List<Activity> findActivities(long after) {
+        List<Activity> activities = new ArrayList<>();
+        String uriString = UriComponentsBuilder
+                .fromUriString(ATHLETE_ACTIVITIES_URL)
+                .queryParam(ACCESS_TOKEN, accessToken)
+                .queryParam(AFTER, after)
+                .toUriString();
+        logger.info("Finding activities after {} using uri {}", after, uriString);
+        Activity[] summaryActivityList = restTemplate.getForObject(uriString, Activity[].class);
+        activities.addAll(Arrays.asList(summaryActivityList));
         return activities;
     }
 
@@ -58,7 +72,7 @@ public class StravaRestClient {
                 .queryParam(ACCESS_TOKEN, accessToken)
                 .pathSegment(activityId)
                 .toUriString();
-        logger.debug("Activity details uri: " + uriString);
+        logger.info("ActivityEntity details uri {}", uriString);
         return restTemplate.getForObject(uriString, Activity.class);
     }
 
@@ -67,7 +81,7 @@ public class StravaRestClient {
                 .fromUriString(ATHLETE_URL)
                 .queryParam(ACCESS_TOKEN, accessToken)
                 .toUriString();
-        logger.debug("Activity details uri: " + uriString);
+        logger.debug("ActivityEntity details uri {}", uriString);
         return restTemplate.getForObject(uriString, Athlete.class);
     }
 

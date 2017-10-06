@@ -8,9 +8,9 @@ import java.util.List;
 /**
  * Created by Tiberiu on 25/10/15.
  */
-public interface ActivityService {
+public interface RemoteActivityService {
 
-    List<Activity> getActivities(String authToken);
+    List<Activity> findActivities(long after);
 
-    List<ActivitiesSummary> getActivitiesSummary(String authToken);
+    List<ActivitiesSummary> getSummary();
 }

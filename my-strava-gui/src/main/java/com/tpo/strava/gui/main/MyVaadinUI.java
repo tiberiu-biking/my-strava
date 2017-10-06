@@ -3,7 +3,7 @@ package com.tpo.strava.gui.main;
 import com.tpo.strava.gui.event.DashboardEventBus;
 import com.tpo.strava.gui.view.MainView;
 import com.tpo.strava.gui.view.user.ConnectView;
-import com.tpo.strava.service.activity.ActivityService;
+import com.tpo.strava.service.activity.StravaRemoteActivityService;
 import com.tpo.strava.service.athlete.AthleteService;
 import com.tpo.strava.service.domain.Athlete;
 import com.tpo.strava.service.properties.AppProperties;
@@ -27,7 +27,7 @@ public class MyVaadinUI extends UI {
     private final DashboardEventBus dashboardEventbus = new DashboardEventBus();
 
     @Autowired
-    private ActivityService activityService;
+    private StravaRemoteActivityService stravaActivityService;
 
     @Autowired
     private AthleteService athleteService;
@@ -39,8 +39,8 @@ public class MyVaadinUI extends UI {
         return ((MyVaadinUI) getCurrent()).dashboardEventbus;
     }
 
-    public static ActivityService getActivityService() {
-        return ((MyVaadinUI) getCurrent()).activityService;
+    public static StravaRemoteActivityService getActivityService() {
+        return ((MyVaadinUI) getCurrent()).stravaActivityService;
     }
 
     @Override
@@ -52,9 +52,9 @@ public class MyVaadinUI extends UI {
 
     private void refreshContent() {
 //        Athlete athlete = (Athlete) VaadinSession.getCurrent().getAttribute(Athlete.class.getName());
-        Athlete athlete = athleteService.getAthlete("43ea77c7c2f1642304eda2283fd496c2a056fb7f");
+        Athlete athlete = athleteService.getAthlete(appProperties.getOauthToken());
 //        Athlete athlete = new Athlete();
-        athlete.setToken("43ea77c7c2f1642304eda2283fd496c2a056fb7f");
+        athlete.setToken(appProperties.getOauthToken());
 
         VaadinSession.getCurrent().setAttribute(Athlete.class.getName(), athlete);
 

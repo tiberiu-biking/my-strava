@@ -25,7 +25,7 @@ public class UserChartView extends VerticalLayout implements View {
     }
 
     protected List<ActivitiesSummary> getActivities() {
-        return MyVaadinUI.getActivityService().getActivitiesSummary(getUserTooken());
+        return MyVaadinUI.getActivityService().getSummary();
     }
 
     @Override

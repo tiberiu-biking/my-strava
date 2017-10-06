@@ -105,7 +105,7 @@ public final class DashboardView extends Panel implements View {
 
     private List<ActivitiesSummary> getActivities() {
         Athlete athlete = (Athlete) VaadinSession.getCurrent().getAttribute(Athlete.class.getName());
-        return MyVaadinUI.getActivityService().getActivitiesSummary(athlete.getToken());
+        return MyVaadinUI.getActivityService().getSummary();
     }
 
     private float getTotalKm() {

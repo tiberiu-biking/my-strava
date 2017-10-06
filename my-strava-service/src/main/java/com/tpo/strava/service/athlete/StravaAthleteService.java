@@ -6,12 +6,14 @@ import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  * Created by Tiberiu on 25/10/15.
  */
 @SpringComponent
 @UIScope
+@Service
 public class StravaAthleteService implements AthleteService {
 
     private static final Logger logger = LoggerFactory.getLogger(StravaAthleteService.class);

@@ -1,15 +1,18 @@
 package com.tpo.strava.service.activity;
 
+import com.tpo.strava.persistence.service.repository.repository.ActivityDatabaseRepository;
+import com.tpo.strava.persistence.service.repository.repository.ActivityRepository;
 import com.tpo.strava.service.client.StravaRestClient;
 import com.tpo.strava.service.domain.ActivitiesSummary;
 import com.tpo.strava.service.domain.activity.Activity;
+import com.tpo.strava.service.properties.AppProperties;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.Cacheable;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,17 +22,24 @@ import java.util.List;
  */
 @SpringComponent
 @UIScope
-@CacheConfig(cacheNames = "activities")
-public class StravaActivityService implements ActivityService {
+//@CacheConfig(cacheNames = "activities")
+@Service
+public class StravaRemoteActivityService implements RemoteActivityService {
 
-    private static final Logger logger = LoggerFactory.getLogger(StravaActivityService.class);
+    private static final Logger logger = LoggerFactory.getLogger(StravaRemoteActivityService.class);
+    private String authToken;
+    private ActivityRepository activityRepository;
+
+    @Autowired
+    public StravaRemoteActivityService(AppProperties appProperties, ActivityDatabaseRepository activityDatabaseRepository) {
+        this.authToken = appProperties.getOauthToken();
+        this.activityRepository = activityDatabaseRepository;
+    }
 
     @Override
-    @Cacheable
-    public List<Activity> getActivities(String authToken) {
-        logger.info("Getting activities using authorization code: " + authToken);
+    public List<Activity> findActivities(long after) {
         StravaRestClient stravaRestClient = new StravaRestClient(authToken);
-        List<Activity> summaryActivityList = stravaRestClient.getActivities();
+        List<Activity> summaryActivityList = stravaRestClient.findActivities(after);
 
         List<Activity> activities = new ArrayList<>();
         for (Activity summaryActivity : summaryActivityList) {
@@ -41,9 +51,8 @@ public class StravaActivityService implements ActivityService {
     }
 
     @Override
-    @Cacheable
-    public List<ActivitiesSummary> getActivitiesSummary(String authToken) {
-        List<Activity> activities = getActivities(authToken);
+    public List<ActivitiesSummary> getSummary() {
+        List<Activity> activities = activityRepository.getAll();
         DateTime firstStartDate = new DateTime(activities.get(0).getStart_date());
 
         List<ActivitiesSummary> activitiesSummaries = generateEmptySummaries(firstStartDate.year().get());

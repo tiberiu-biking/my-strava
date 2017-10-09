@@ -18,11 +18,12 @@
     <name>my-strava-parent</name>
 
     <modules>
+        <module>my-strava-domain</module>
+        <module>providers</module>
         <module>my-strava-persistence</module>
         <module>my-strava-service</module>
         <module>my-strava-web</module>
         <module>my-strava-gui</module>
-        <module>my-strava-domain</module>
     </modules>
 
     <properties>

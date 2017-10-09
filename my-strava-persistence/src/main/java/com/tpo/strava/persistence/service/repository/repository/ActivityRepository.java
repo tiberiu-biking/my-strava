@@ -1,8 +1,9 @@
 package com.tpo.strava.persistence.service.repository.repository;
 
-import com.tpo.strava.service.domain.activity.Activity;
+import com.tpo.fitness.domain.activity.Activity;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Tiberiu
@@ -16,5 +17,6 @@ public interface ActivityRepository {
 
     Activity findFirstByOrderByInsertDateDesc();
 
-    long getLastStartDate();
+    Optional<Long> getLastStartDate();
+
 }

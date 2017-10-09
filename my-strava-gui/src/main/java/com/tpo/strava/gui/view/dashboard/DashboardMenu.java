@@ -1,10 +1,10 @@
 package com.tpo.strava.gui.view.dashboard;
 
 import com.google.common.eventbus.Subscribe;
+import com.tpo.fitness.domain.Athlete;
 import com.tpo.strava.gui.event.DashboardEvent;
 import com.tpo.strava.gui.event.DashboardEventBus;
 import com.tpo.strava.gui.navigator.DashboardViewType;
-import com.tpo.strava.service.domain.Athlete;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinSession;
@@ -68,7 +68,7 @@ public final class DashboardMenu extends CustomComponent {
         final MenuBar settings = new MenuBar();
         settings.addStyleName("user-menu");
         final Athlete athlete = getCurrentUser();
-        settingsItem = settings.addItem("", new ExternalResource(athlete.getProfile_medium()), null);
+        settingsItem = settings.addItem("", new ExternalResource(athlete.getProfileMediumPicture()), null);
         updateUserName(null);
         settingsItem.addItem("Online Profile", new MenuBar.Command() {
             @Override
@@ -192,7 +192,7 @@ public final class DashboardMenu extends CustomComponent {
     @Subscribe
     public void updateUserName(final DashboardEvent.ProfileUpdatedEvent event) {
         Athlete user = getCurrentUser();
-        settingsItem.setText(user.getFirstname() + " " + user.getLastname());
+        settingsItem.setText(user.getFirstName() + " " + user.getLastName());
     }
 
     public final class ValoMenuItemButton extends Button {

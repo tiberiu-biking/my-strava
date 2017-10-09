@@ -1,10 +1,10 @@
 package com.tpo.strava.gui.view.dashboard;
 
-import com.tpo.strava.gui.component.SparkCard;
+import com.tpo.fitness.domain.ActivitiesSummary;
+import com.tpo.fitness.domain.Athlete;
+import com.tpo.strava.gui.component.card.SparkCard;
 import com.tpo.strava.gui.event.DashboardEventBus;
 import com.tpo.strava.gui.main.MyVaadinUI;
-import com.tpo.strava.service.domain.ActivitiesSummary;
-import com.tpo.strava.service.domain.Athlete;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Responsive;

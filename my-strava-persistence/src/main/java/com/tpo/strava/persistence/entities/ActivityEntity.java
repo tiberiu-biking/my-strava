@@ -24,6 +24,9 @@ public class ActivityEntity {
     @Column
     private long insertDate;
 
+    @Column
+    private String startDate;
+
     public Long getId() {
         return id;
     }
@@ -62,5 +65,13 @@ public class ActivityEntity {
 
     public void setDistance(Float distance) {
         this.distance = distance;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 }

@@ -39,9 +39,10 @@ public class StravaSynchronizer implements Synchronizer {
         logger.info("Starting sync...");
 
         Optional<Long> lastStartDate = activityDatabaseRepository.getLastStartDate();
-        List<Activity> activities = lastStartDate
-                .map(after -> stravaActivityRestClient.findActivities(after))
-                .orElse(stravaActivityRestClient.getAllActivities());
+        List<Activity> activities;
+        activities = lastStartDate
+                .map(aLong -> stravaActivityRestClient.findActivities(aLong))
+                .orElseGet(() -> stravaActivityRestClient.getAllActivities());
 
         logger.info("Found {} new activities", activities.size());
         activities.forEach(this::persistActivity);

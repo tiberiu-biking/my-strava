@@ -3,15 +3,15 @@ package com.tpo.strava.gui.navigator;
 import com.tpo.strava.gui.view.chart.CaloriesChartView;
 import com.tpo.strava.gui.view.chart.DistanceChartView;
 import com.tpo.strava.gui.view.dashboard.DashboardView;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.server.Resource;
 
 public enum DashboardViewType {
 
-    DASHBOARD("dashboard", DashboardView.class, FontAwesome.HOME, true),
-    CALORIES("calories", CaloriesChartView.class, FontAwesome.BAR_CHART_O, true),
-    DISTANCES("distances", DistanceChartView.class, FontAwesome.BAR_CHART_O, true);
+    DASHBOARD("dashboard", DashboardView.class, VaadinIcons.HOME, true),
+    CALORIES("calories", CaloriesChartView.class, VaadinIcons.BAR_CHART, true),
+    DISTANCES("distances", DistanceChartView.class, VaadinIcons.BAR_CHART, true);
 
     private final String viewName;
     private final Class<? extends View> viewClass;

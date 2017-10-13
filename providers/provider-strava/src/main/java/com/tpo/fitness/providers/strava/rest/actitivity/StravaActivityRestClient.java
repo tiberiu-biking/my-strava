@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,7 +56,7 @@ public class StravaActivityRestClient implements ActivityRestClient {
         StravaActivity[] summaryActivityList = restTemplate.getForObject(uriString, StravaActivity[].class);
         activities.addAll(Arrays.asList(summaryActivityList));
 
-        logger.info("Found {} activities after {}", activities.size(), Instant.ofEpochMilli(after).toString());
+        logger.info("Found {} activities after {}", activities.size(), new Date(after * 1000));
 
         return getDetailedActivities(activities);
     }

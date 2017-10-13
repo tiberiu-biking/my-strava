@@ -5,10 +5,10 @@ import com.tpo.fitness.domain.Athlete;
 import com.tpo.strava.gui.event.DashboardEvent;
 import com.tpo.strava.gui.event.DashboardEventBus;
 import com.tpo.strava.gui.navigator.DashboardViewType;
+import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.ExternalResource;
-import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinSession;
-import com.vaadin.shared.ui.label.ContentMode;
+import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -21,6 +21,7 @@ public final class DashboardMenu extends CustomComponent {
     public static final String REPORTS_BADGE_ID = "dashboard-menu-reports-badge";
     public static final String NOTIFICATIONS_BADGE_ID = "dashboard-menu-notifications-badge";
     private static final String STYLE_VISIBLE = "valo-menu-visible";
+
     private Label notificationsBadge;
     private Label reportsBadge;
     private MenuItem settingsItem;
@@ -51,8 +52,7 @@ public final class DashboardMenu extends CustomComponent {
     }
 
     private Component buildTitle() {
-        Label logo = new Label("My <strong>Strava</strong>",
-                ContentMode.HTML);
+        Label logo = new Label("My <strong>Strava</strong>", ContentMode.HTML);
         logo.setSizeUndefined();
         HorizontalLayout logoWrapper = new HorizontalLayout(logo);
         logoWrapper.setComponentAlignment(logo, Alignment.MIDDLE_CENTER);
@@ -119,7 +119,7 @@ public final class DashboardMenu extends CustomComponent {
                 }
             }
         });
-        valoMenuToggleButton.setIcon(FontAwesome.LIST);
+        valoMenuToggleButton.setIcon(VaadinIcons.LIST);
         valoMenuToggleButton.addStyleName("valo-menu-toggle");
         valoMenuToggleButton.addStyleName(ValoTheme.BUTTON_BORDERLESS);
         valoMenuToggleButton.addStyleName(ValoTheme.BUTTON_SMALL);

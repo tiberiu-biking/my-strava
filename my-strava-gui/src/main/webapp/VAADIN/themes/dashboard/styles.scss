@@ -1,7 +1,23 @@
 // Import all the mixins for this theme
+@import "addons.scss";
 @import "dashboard";
 
 .dashboard {
   // Output the actual theme selectors
+  @include addons;
   @include dashboard;
+}
+
+// fitness
+.dashboard .valo-menu-title {
+  background: #FC4C02;
+  border-bottom-color: white;
+}
+
+//.dashboard .valo-menu-item:focus, .dashboard .valo-menu-item:hover{
+//  color: white;
+//}
+
+.dashboard .valo-menu-item:focus, .dashboard .valo-menu-item.selected {
+  color: #FC4C02;
 }

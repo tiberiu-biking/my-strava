@@ -23,7 +23,13 @@ public class StravaActivityTranslator {
         activity.setName(stravaActivity.getName());
         activity.setStartDate(stravaActivity.getStart_date());
         activity.setCalories(stravaActivity.getCalories());
-        activity.setDistance(stravaActivity.getDistance());
+
+        activity.setDistance(stravaActivity.getDistance() / 100);
+        activity.setElevation(stravaActivity.getTotal_elevation_gain());
+        activity.setCalories(stravaActivity.getCalories());
+        activity.setCommute(stravaActivity.isCommute());
+        activity.setDuration(stravaActivity.getMovingTime() / 60);
+        activity.setType(stravaActivity.getType());
         return activity;
     }
 }

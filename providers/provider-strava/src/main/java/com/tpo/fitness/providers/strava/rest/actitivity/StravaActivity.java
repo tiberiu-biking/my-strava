@@ -12,8 +12,11 @@ public class StravaActivity {
     private Athlete athlete;
     private String name;
     private Float distance;
-    private int moving_time;
-    private int elapsed_time;
+    @JsonProperty("moving_time")
+    private Integer movingTime;
+    @JsonProperty("elapsed_time")
+    private Integer elapsedTime;
+    @JsonProperty("total_elevation_gain")
     private Float total_elevation_gain;
     private String type;
     private String start_date;
@@ -53,18 +56,6 @@ public class StravaActivity {
 //    private List<SegmentEffort> best_efforts;
 
 
-    public StravaActivity() {
-    }
-
-    public StravaActivity(String id) {
-        this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return name;
-    }
-
     public String getId() {
         return id;
     }
@@ -87,6 +78,14 @@ public class StravaActivity {
 
     public void setExternal_id(String external_id) {
         this.external_id = external_id;
+    }
+
+    public int getUpload_id() {
+        return upload_id;
+    }
+
+    public void setUpload_id(int upload_id) {
+        this.upload_id = upload_id;
     }
 
     public Athlete getAthlete() {
@@ -113,20 +112,20 @@ public class StravaActivity {
         this.distance = distance;
     }
 
-    public int getMoving_time() {
-        return moving_time;
+    public Integer getMovingTime() {
+        return movingTime;
     }
 
-    public void setMoving_time(int moving_time) {
-        this.moving_time = moving_time;
+    public void setMovingTime(Integer movingTime) {
+        this.movingTime = movingTime;
     }
 
-    public int getElapsed_time() {
-        return elapsed_time;
+    public Integer getElapsedTime() {
+        return elapsedTime;
     }
 
-    public void setElapsed_time(int elapsed_time) {
-        this.elapsed_time = elapsed_time;
+    public void setElapsedTime(Integer elapsedTime) {
+        this.elapsedTime = elapsedTime;
     }
 
     public Float getTotal_elevation_gain() {
@@ -153,34 +152,6 @@ public class StravaActivity {
         this.start_date = start_date;
     }
 
-    public boolean isTrainer() {
-        return trainer;
-    }
-
-    public boolean isCommute() {
-        return commute;
-    }
-
-    public boolean isManual() {
-        return manual;
-    }
-
-    public boolean isPrivate() {
-        return isPrivate;
-    }
-
-    public void setPrivate(boolean aPrivate) {
-        this.isPrivate = aPrivate;
-    }
-
-    public boolean isFlagged() {
-        return flagged;
-    }
-
-    public boolean isHas_kudoed() {
-        return has_kudoed;
-    }
-
     public String getStart_date_local() {
         return start_date_local;
     }
@@ -189,11 +160,11 @@ public class StravaActivity {
         this.start_date_local = start_date_local;
     }
 
-    public String getTime_zone() {
+    public String getTimezone() {
         return timezone;
     }
 
-    public void setTime_zone(String timezone) {
+    public void setTimezone(String timezone) {
         this.timezone = timezone;
     }
 
@@ -265,19 +236,11 @@ public class StravaActivity {
         return photo_count;
     }
 
-//    public Polyline getMap() {
-//        return map;
-//    }
-//
-//    public void setMap(Polyline map) {
-//        this.map = map;
-//    }
-
     public void setPhoto_count(int photo_count) {
         this.photo_count = photo_count;
     }
 
-    public boolean getTrainer() {
+    public boolean isTrainer() {
         return trainer;
     }
 
@@ -285,7 +248,7 @@ public class StravaActivity {
         this.trainer = trainer;
     }
 
-    public boolean getCommute() {
+    public boolean isCommute() {
         return commute;
     }
 
@@ -293,7 +256,7 @@ public class StravaActivity {
         this.commute = commute;
     }
 
-    public boolean getManual() {
+    public boolean isManual() {
         return manual;
     }
 
@@ -301,11 +264,15 @@ public class StravaActivity {
         this.manual = manual;
     }
 
-    public boolean getPRIVATE() {
+    public boolean isPrivate() {
         return isPrivate;
     }
 
-    public boolean getFlagged() {
+    public void setPrivate(boolean aPrivate) {
+        isPrivate = aPrivate;
+    }
+
+    public boolean isFlagged() {
         return flagged;
     }
 
@@ -401,51 +368,11 @@ public class StravaActivity {
         this.truncated = truncated;
     }
 
-    public boolean getHas_kudoed() {
+    public boolean isHas_kudoed() {
         return has_kudoed;
     }
 
     public void setHas_kudoed(boolean has_kudoed) {
         this.has_kudoed = has_kudoed;
-    }
-
-//    public List<SegmentEffort> getSegment_efforts() {
-//        return segment_efforts;
-//    }
-//
-//    public void setSegment_efforts(List<SegmentEffort> segment_efforts) {
-//        this.segment_efforts = segment_efforts;
-//    }
-//
-//    public List<SplitsMetric> getSplits_metric() {
-//        return splits_metric;
-//    }
-//
-//    public void setSplits_metric(List<SplitsMetric> splits_metric) {
-//        this.splits_metric = splits_metric;
-//    }
-//
-//    public List<SplitsStandard> getSplits_standard() {
-//        return splits_standard;
-//    }
-//
-//    public void setSplits_standard(List<SplitsStandard> splits_standard) {
-//        this.splits_standard = splits_standard;
-//    }
-//
-//    public List<SegmentEffort> getBest_efforts() {
-//        return best_efforts;
-//    }
-//
-//    public void setBest_efforts(List<SegmentEffort> best_efforts) {
-//        this.best_efforts = best_efforts;
-//    }
-
-    public int getUpload_id() {
-        return upload_id;
-    }
-
-    public void setUpload_id(int upload_id) {
-        this.upload_id = upload_id;
     }
 }

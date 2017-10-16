@@ -8,16 +8,16 @@
   @include dashboard;
 }
 
-// fitness
+// my css
 .dashboard .valo-menu-title {
   background: #FC4C02;
   border-bottom-color: white;
 }
 
-//.dashboard .valo-menu-item:focus, .dashboard .valo-menu-item:hover{
-//  color: white;
-//}
-
 .dashboard .valo-menu-item:focus, .dashboard .valo-menu-item.selected {
   color: #FC4C02;
+}
+
+.dashboard .v-menubar-user-menu .v-menubar-menuitem:hover {
+  color: white;
 }

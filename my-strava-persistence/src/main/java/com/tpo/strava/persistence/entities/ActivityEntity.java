@@ -22,10 +22,22 @@ public class ActivityEntity {
     private Float distance;
 
     @Column
-    private long insertDate;
+    private Long insertDate;
 
     @Column
     private String startDate;
+
+    @Column
+    private String name;
+
+    @Column
+    private String type;
+
+    @Column
+    private Float elevation;
+
+    @Column
+    private Integer duration;
 
     public Long getId() {
         return id;
@@ -55,7 +67,7 @@ public class ActivityEntity {
         return insertDate;
     }
 
-    public void setInsertDate(long insertDate) {
+    public void setInsertDate(Long insertDate) {
         this.insertDate = insertDate;
     }
 
@@ -73,5 +85,37 @@ public class ActivityEntity {
 
     public void setStartDate(String startDate) {
         this.startDate = startDate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Float getElevation() {
+        return elevation;
+    }
+
+    public void setElevation(Float elevation) {
+        this.elevation = elevation;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
     }
 }

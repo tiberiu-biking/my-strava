@@ -8,10 +8,10 @@ import com.tpo.strava.gui.component.chart.StravaChart;
 /**
  * Created by Tiberiu on 29/10/15.
  */
-public class DistanceChartView extends UserChartView {
+public class DistanceChartView extends ActivitiesView {
 
     public DistanceChartView() {
-        StravaChart chart = new StravaChart("Distances", getActivities()) {
+        StravaChart chart = new StravaChart("Distances", getActivitiesSummary()) {
             @Override
             protected HighChartsData getColumnValue(ActivitiesSummary activity) {
                 return new StringIntData(activity.getPeriod(), activity.getDistance().intValue());

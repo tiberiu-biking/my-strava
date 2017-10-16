@@ -8,11 +8,11 @@ import com.tpo.strava.gui.component.chart.StravaChart;
 /**
  * Created by Tiberiu on 29/10/15.
  */
-public class CaloriesChartView extends UserChartView {
+public class CaloriesChartView extends ActivitiesView {
 
     public CaloriesChartView() {
 
-        StravaChart chart = new StravaChart("Calories", getActivities()) {
+        StravaChart chart = new StravaChart("Calories", getActivitiesSummary()) {
             @Override
             protected HighChartsData getColumnValue(ActivitiesSummary activity) {
                 return new StringDoubleData(activity.getPeriod(), activity.getCalories());

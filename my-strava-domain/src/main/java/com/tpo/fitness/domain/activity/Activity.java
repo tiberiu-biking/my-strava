@@ -6,21 +6,13 @@ public class Activity {
     private String name;
     private String externalId;
     private Float distance;
-    private int movingTime;
-    private int elapsedTime;
+    private Integer duration;
     private Float elevation;
     private String type;
     private String startDate;
-    private boolean commute;
-    private boolean manual;
+    private Boolean commute;
+    private Boolean manual;
     private Float calories;
-
-    public Activity() {
-    }
-
-    public Activity(String id) {
-        this.id = id;
-    }
 
     @Override
     public String toString() {
@@ -35,16 +27,20 @@ public class Activity {
         this.id = id;
     }
 
-    public String getExternalId() {
-        return externalId;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
     }
 
     public Float getDistance() {
@@ -55,20 +51,12 @@ public class Activity {
         this.distance = distance;
     }
 
-    public int getMovingTime() {
-        return movingTime;
+    public Integer getDuration() {
+        return duration;
     }
 
-    public void setMovingTime(int movingTime) {
-        this.movingTime = movingTime;
-    }
-
-    public int getElapsedTime() {
-        return elapsedTime;
-    }
-
-    public void setElapsedTime(int elapsedTime) {
-        this.elapsedTime = elapsedTime;
+    public void setDuration(Integer duration) {
+        this.duration = duration;
     }
 
     public Float getElevation() {
@@ -95,27 +83,19 @@ public class Activity {
         this.startDate = startDate;
     }
 
-    public boolean isCommute() {
+    public Boolean getCommute() {
         return commute;
     }
 
-    public boolean isManual() {
-        return manual;
-    }
-
-    public boolean getCommute() {
-        return commute;
-    }
-
-    public void setCommute(boolean commute) {
+    public void setCommute(Boolean commute) {
         this.commute = commute;
     }
 
-    public boolean getManual() {
+    public Boolean getManual() {
         return manual;
     }
 
-    public void setManual(boolean manual) {
+    public void setManual(Boolean manual) {
         this.manual = manual;
     }
 

@@ -1,4 +1,5 @@
-# my-strava
-Strava(www.strava.com) graphics, using Vaadin. 
+# My Fitness
+Fitness related information UI and graphs using Vaadin and Spring Boot.
 
-http://my-strava.eu-gb.mybluemix.net/
+# Buil
+[![Build Status](https://travis-ci.org/tiberiu-biking/my-fitness.svg?branch=master)](https://travis-ci.org/tiberiu-biking/my-fitness)

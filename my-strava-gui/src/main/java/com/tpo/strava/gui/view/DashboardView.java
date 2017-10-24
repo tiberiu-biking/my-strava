@@ -1,25 +1,23 @@
-package com.tpo.strava.gui.view.dashboard;
+package com.tpo.strava.gui.view;
 
 import com.tpo.fitness.domain.ActivitiesSummary;
-import com.tpo.fitness.domain.Athlete;
+import com.tpo.fitness.service.activity.ActivitiesService;
 import com.tpo.strava.gui.component.card.SparkCard;
 import com.tpo.strava.gui.event.DashboardEventBus;
-import com.tpo.strava.gui.main.MyVaadinUI;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Responsive;
-import com.vaadin.server.VaadinSession;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@SuppressWarnings("serial")
-@SpringView
+@SpringView(name = DashboardView.VIEW_NAME)
 public final class DashboardView extends Panel implements View {
 
-    public static final String TITLE_ID = "dashboard-title";
+    public static final String VIEW_NAME = "";
 
     public static final int ECUATOR_LENGTH_KM = 40008;
     public static final int DISTANCE_TO_THE_MOON_KM = 384400;
@@ -30,8 +28,10 @@ public final class DashboardView extends Panel implements View {
     private final List<ActivitiesSummary> activities;
     private CssLayout dashboardPanels;
 
-    public DashboardView() {
-        activities = getActivities();
+
+    @Autowired
+    public DashboardView(ActivitiesService activitiesService) {
+        activities = activitiesService.getSummary();
         addStyleName(ValoTheme.PANEL_BORDERLESS);
         setSizeFull();
         DashboardEventBus.register(this);
@@ -101,11 +101,6 @@ public final class DashboardView extends Panel implements View {
         sparks.addComponent(biersBurnedSparkCard);
 
         return sparks;
-    }
-
-    private List<ActivitiesSummary> getActivities() {
-        Athlete athlete = (Athlete) VaadinSession.getCurrent().getAttribute(Athlete.class.getName());
-        return MyVaadinUI.getActivityService().getSummary();
     }
 
     private float getTotalKm() {

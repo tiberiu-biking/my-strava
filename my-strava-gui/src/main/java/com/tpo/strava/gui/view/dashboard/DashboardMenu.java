@@ -7,7 +7,6 @@ import com.tpo.strava.gui.event.DashboardEventBus;
 import com.tpo.strava.gui.navigator.DashboardViewType;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.ExternalResource;
-import com.vaadin.server.VaadinSession;
 import com.vaadin.shared.ui.ContentMode;
 import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
@@ -15,18 +14,22 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.themes.ValoTheme;
 
+import static com.vaadin.ui.UI.getCurrent;
+
 public final class DashboardMenu extends CustomComponent {
 
     public static final String ID = "dashboard-menu";
     public static final String REPORTS_BADGE_ID = "dashboard-menu-reports-badge";
     public static final String NOTIFICATIONS_BADGE_ID = "dashboard-menu-notifications-badge";
     private static final String STYLE_VISIBLE = "valo-menu-visible";
+    private final Athlete athlete;
 
     private Label notificationsBadge;
     private Label reportsBadge;
     private MenuItem settingsItem;
 
-    public DashboardMenu() {
+    public DashboardMenu(Athlete athlete) {
+        this.athlete = athlete;
         setPrimaryStyleName("valo-menu");
         setId(ID);
         setSizeUndefined();
@@ -60,14 +63,10 @@ public final class DashboardMenu extends CustomComponent {
         return logoWrapper;
     }
 
-    private Athlete getCurrentUser() {
-        return (Athlete) VaadinSession.getCurrent().getAttribute(Athlete.class.getName());
-    }
 
     private Component buildUserMenu() {
         final MenuBar settings = new MenuBar();
         settings.addStyleName("user-menu");
-        final Athlete athlete = getCurrentUser();
         settingsItem = settings.addItem("", new ExternalResource(athlete.getProfileMediumPicture()), null);
         updateUserName(null);
         settingsItem.addItem("Online Profile", new MenuBar.Command() {
@@ -134,7 +133,7 @@ public final class DashboardMenu extends CustomComponent {
             Component menuItemComponent = new ValoMenuItemButton(view);
 
 
-            if (view == DashboardViewType.DASHBOARD) {
+            if (view == DashboardViewType.HOME) {
                 notificationsBadge = new Label();
                 notificationsBadge.setId(NOTIFICATIONS_BADGE_ID);
                 menuItemComponent = buildBadgeWrapper(menuItemComponent,
@@ -191,8 +190,7 @@ public final class DashboardMenu extends CustomComponent {
 
     @Subscribe
     public void updateUserName(final DashboardEvent.ProfileUpdatedEvent event) {
-        Athlete user = getCurrentUser();
-        settingsItem.setText(user.getFirstName() + " " + user.getLastName());
+        settingsItem.setText(athlete.getFirstName() + " " + athlete.getLastName());
     }
 
     public final class ValoMenuItemButton extends Button {
@@ -205,17 +203,9 @@ public final class DashboardMenu extends CustomComponent {
             this.view = view;
             setPrimaryStyleName("valo-menu-item");
             setIcon(view.getIcon());
-            setCaption(view.getViewName().substring(0, 1).toUpperCase()
-                    + view.getViewName().substring(1));
+            setCaption(view.getCaption());
             DashboardEventBus.register(this);
-            addClickListener(new ClickListener() {
-                @Override
-                public void buttonClick(final ClickEvent event) {
-                    UI.getCurrent().getNavigator()
-                            .navigateTo(view.getViewName());
-                }
-            });
-
+            addClickListener((ClickListener) event -> getCurrent().getNavigator().navigateTo(view.getViewName()));
         }
 
         @Subscribe

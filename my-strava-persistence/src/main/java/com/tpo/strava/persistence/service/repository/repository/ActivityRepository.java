@@ -15,6 +15,8 @@ public interface ActivityRepository {
 
     List<Activity> getAll();
 
+    List<Activity> getAllInChronologicalOrder();
+
     Activity findFirstByOrderByInsertDateDesc();
 
     Optional<Long> getLastStartDate();

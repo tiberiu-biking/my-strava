@@ -45,6 +45,14 @@ public class ActivityDatabaseRepository implements ActivityRepository {
     }
 
     @Override
+    public List<Activity> getAllInChronologicalOrder() {
+        return activityJpaRepository.findAllByOrderByInsertDateDesc()
+                .stream()
+                .map(activityEntityTranslator::to)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Activity findFirstByOrderByInsertDateDesc() {
         return activityEntityTranslator.to(activityJpaRepository.findFirstByOrderByInsertDateDesc());
     }

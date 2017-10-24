@@ -9,5 +9,7 @@ public interface ActivitiesService {
 
     List<Activity> getAll();
 
+    List<Activity> getAllInChronologicalOrder();
+
     List<ActivitiesSummary> getSummary();
 }

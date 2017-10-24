@@ -39,6 +39,11 @@ public class UIActivitiesService implements ActivitiesService {
     }
 
     @Override
+    public List<Activity> getAllInChronologicalOrder() {
+        return activityRepository.getAllInChronologicalOrder();
+    }
+
+    @Override
     public List<ActivitiesSummary> getSummary() {
         List<Activity> activities = activityRepository.getAll();
         DateTime firstStartDate = new DateTime(activities.get(0).getStartDate());

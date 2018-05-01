@@ -95,7 +95,7 @@
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.3.6</version>
                 <configuration>
-                    <repository>com.tposudo apt-get -y install docker-engine/${project.artifactId}</repository>
+                    <repository>com.tpo.myfitness/${project.artifactId}</repository>
                     <buildArgs>
                         <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>

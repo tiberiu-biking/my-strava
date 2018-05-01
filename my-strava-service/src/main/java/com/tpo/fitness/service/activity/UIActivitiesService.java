@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -46,22 +47,26 @@ public class UIActivitiesService implements ActivitiesService {
     @Override
     public List<ActivitiesSummary> getSummary() {
         List<Activity> activities = activityRepository.getAll();
-        DateTime firstStartDate = new DateTime(activities.get(0).getStartDate());
+        if (!activities.isEmpty()) {
+            DateTime firstStartDate = new DateTime(activities.get(0).getStartDate());
 
-        List<ActivitiesSummary> activitiesSummaries = generateEmptySummaries(firstStartDate.year().get());
+            List<ActivitiesSummary> activitiesSummaries = generateEmptySummaries(firstStartDate.year().get());
 
-        for (Activity activity : activities) {
-            DateTime startDate = new DateTime(activity.getStartDate());
+            for (Activity activity : activities) {
+                DateTime startDate = new DateTime(activity.getStartDate());
 
-            for (ActivitiesSummary summary : activitiesSummaries) {
-                if ((summary.getMonth() == startDate.monthOfYear().get()) &&
-                        (summary.getYear() == startDate.year().get())) {
-                    summary.setCalories(summary.getCalories() + activity.getCalories().longValue());
-                    summary.setDistance(summary.getDistance() + (activity.getDistance() / 1000));
+                for (ActivitiesSummary summary : activitiesSummaries) {
+                    if ((summary.getMonth() == startDate.monthOfYear().get()) &&
+                            (summary.getYear() == startDate.year().get())) {
+                        summary.setCalories(summary.getCalories() + activity.getCalories().longValue());
+                        summary.setDistance(summary.getDistance() + (activity.getDistance() / 1000));
+                    }
                 }
             }
+            return activitiesSummaries;
+        } else {
+            return Collections.emptyList();
         }
-        return activitiesSummaries;
     }
 
     private List<ActivitiesSummary> generateEmptySummaries(int startYear) {

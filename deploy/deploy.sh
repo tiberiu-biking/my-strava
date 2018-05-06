@@ -1,10 +1,8 @@
 #!/bin/sh
 
 # stop service
+sudo service gui-ngrok stop
 sudo service gui stop
-
-# remove service
-sudo rm -rfv /etc/init.d/gui
 
 # remove jar
 sudo rm -rfv /home/gui/gui.jar
@@ -17,6 +15,14 @@ sudo chown gui:apps /home/gui/gui.jar
 
 # create service
 sudo cp deploy/gui.service /etc/systemd/system
+sudo cp deploy/gui-ngrok.service /etc/systemd/system
+
+# reload service
+sudo systemctl daemon-reload
 
 # start service
 sudo service gui start
+sudo service gui-ngrok start
+
+# status
+sudo service gui status

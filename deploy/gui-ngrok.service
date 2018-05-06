@@ -1,0 +1,11 @@
+[Unit]
+Description=gui-ngrok
+After=syslog.target
+
+[Service]
+User=gui
+ExecStart=/home/gui/start-ngrok
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target

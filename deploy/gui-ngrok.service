@@ -4,7 +4,7 @@ After=syslog.target
 
 [Service]
 User=gui
-ExecStart=/home/gui/start-ngrok
+ExecStart=/home/gui/start-ngrok.sh
 SuccessExitStatus=143
 
 [Install]

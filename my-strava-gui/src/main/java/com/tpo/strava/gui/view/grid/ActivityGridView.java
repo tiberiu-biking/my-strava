@@ -29,9 +29,10 @@ public class ActivityGridView extends AbstractActivitiesView {
         grid.addColumn(Activity::getName).setCaption("Name");
         grid.addColumn(Activity::getType).setCaption("Type");
         grid.addColumn(Activity::getCalories).setCaption("Calories");
-        grid.addColumn(Activity::getDuration).setCaption("Duration");
-        grid.addColumn(Activity::getDistance).setCaption("Distance");
-        grid.addColumn(Activity::getElevation).setCaption("Elevation");
+        grid.addColumn(Activity::getDuration).setCaption("Duration(minutes)");
+        grid.addColumn(Activity::getDistance).setCaption("Distance(km)");
+        grid.addColumn(Activity::getElevation).setCaption("Elevation(meters)");
+        grid.addColumn(Activity::getStartDate).setCaption("Date");
         return grid;
     }
 

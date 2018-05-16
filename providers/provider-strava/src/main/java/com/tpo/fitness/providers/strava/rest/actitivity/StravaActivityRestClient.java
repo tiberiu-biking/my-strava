@@ -51,13 +51,18 @@ public class StravaActivityRestClient implements ActivityRestClient {
     @Override
     public List<Activity> findActivities(long after) {
         List<StravaActivity> activities = new ArrayList<>();
-        String uriString = buildAthleteActivitiesAfterUrl(accessToken, after);
-        logger.info("Finding activities after {} using uri {}", after, uriString);
-        StravaActivity[] summaryActivityList = restTemplate.getForObject(uriString, StravaActivity[].class);
-        activities.addAll(Arrays.asList(summaryActivityList));
+        boolean isPageLeft = true;
+        int page = 1;
+        while (isPageLeft) {
+            String uriString = buildAthleteActivitiesAfterUrl(accessToken, after, page);
+            logger.info("Finding activities after {} using uri {}", after, uriString);
+            StravaActivity[] summaryActivityList = restTemplate.getForObject(uriString, StravaActivity[].class);
+            activities.addAll(Arrays.asList(summaryActivityList));
+            isPageLeft = !ArrayUtils.isEmpty(summaryActivityList);
+            page++;
+        }
 
         logger.info("Found {} activities after {}", activities.size(), new Date(after * 1000));
-
         return getDetailedActivities(activities);
     }
 

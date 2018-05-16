@@ -24,7 +24,7 @@ public class StravaActivityTranslator {
         activity.setStartDate(stravaActivity.getStart_date());
         activity.setCalories(stravaActivity.getCalories());
 
-        activity.setDistance(stravaActivity.getDistance() / 100);
+        activity.setDistance(stravaActivity.getDistance() / 1000);
         activity.setElevation(stravaActivity.getTotal_elevation_gain());
         activity.setCalories(stravaActivity.getCalories());
         activity.setCommute(stravaActivity.isCommute());

@@ -18,11 +18,12 @@ public class StravaURIBuilder {
                 .toUriString();
     }
 
-    public static String buildAthleteActivitiesAfterUrl(String accessToken, long after) {
+    public static String buildAthleteActivitiesAfterUrl(String accessToken, long after, int page) {
         return UriComponentsBuilder
                 .fromUriString(ATHLETE_ACTIVITIES_URL)
                 .queryParam(ACCESS_TOKEN, accessToken)
                 .queryParam(AFTER, after)
+                .queryParam(PAGE, page)
                 .toUriString();
     }
 

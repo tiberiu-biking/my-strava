@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -46,7 +45,7 @@ public class ActivityDatabaseRepository implements ActivityRepository {
 
     @Override
     public List<Activity> getAllInChronologicalOrder() {
-        return activityJpaRepository.findAllByOrderByInsertDateDesc()
+        return activityJpaRepository.findAllByOrderByStartDateDesc()
                 .stream()
                 .map(activityEntityTranslator::to)
                 .collect(Collectors.toList());
@@ -54,16 +53,16 @@ public class ActivityDatabaseRepository implements ActivityRepository {
 
     @Override
     public Activity findFirstByOrderByInsertDateDesc() {
-        return activityEntityTranslator.to(activityJpaRepository.findFirstByOrderByInsertDateDesc());
+        return activityEntityTranslator.to(activityJpaRepository.findFirstByOrderByStartDateDesc());
     }
 
     @Override
-    public Optional<Long> getLastStartDate() {
-        ActivityEntity lastActivity = activityJpaRepository.findFirstByOrderByInsertDateDesc();
+    public Long getLastStartDate() {
+        ActivityEntity lastActivity = activityJpaRepository.findFirstByOrderByStartDateDesc();
         if (lastActivity != null) {
-            return Optional.of(lastActivity.getInsertDate());
+            return lastActivity.getInsertDate();
         } else {
-            return Optional.empty();
+            return 0L;
         }
     }
 }

@@ -1,7 +1,6 @@
 #!/bin/sh
 
 # stop service
-# sudo service gui-ngrok stop
 sudo service gui stop
 
 # remove jar
@@ -15,18 +14,15 @@ sudo chown gui:apps /home/gui/gui.jar
 
 # create service
 sudo cp deploy/gui.service /etc/systemd/system
-# sudo cp deploy/gui-ngrok.service /etc/systemd/system
 
 # reload service
 sudo systemctl daemon-reload
 
 # start service
 sudo service gui start
-#sudo service gui-ngrok start
 
 # status
 sudo service gui status
-#sudo service gui-ngrok status
 
 # get public url
-#curl -s 'http://localhost:4040/api/tunnels' | jq -r '.tunnels[0].public_url'
+curl -s 'http://localhost:4040/api/tunnels' | jq -r '.tunnels[0].public_url'

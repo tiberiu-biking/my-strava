@@ -31,7 +31,7 @@ public class StravaSynchronizer implements Synchronizer {
     }
 
     @Async
-    @Scheduled(fixedRate = 600000)
+    @Scheduled(fixedRateString = "${sync.rate}")
     public void sync() {
         log.info("Starting sync...");
 

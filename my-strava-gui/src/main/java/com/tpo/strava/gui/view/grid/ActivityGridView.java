@@ -22,9 +22,7 @@ public class ActivityGridView extends AbstractActivitiesView {
     }
 
     private Grid<Activity> buildGrid() {
-        Grid<Activity> grid = new Grid<>();
-        grid.setSizeFull();
-        grid.setSelectionMode(Grid.SelectionMode.SINGLE);
+        Grid<Activity> grid = createGrid();
         grid.setItems(activitiesService.getAllInChronologicalOrder());
         grid.addColumn(Activity::getName).setCaption("Name");
         grid.addColumn(Activity::getType).setCaption("Type");
@@ -33,6 +31,13 @@ public class ActivityGridView extends AbstractActivitiesView {
         grid.addColumn(Activity::getDistance).setCaption("Distance(km)");
         grid.addColumn(Activity::getElevation).setCaption("Elevation(meters)");
         grid.addColumn(Activity::getStartDate).setCaption("Date");
+        return grid;
+    }
+
+    private Grid<Activity> createGrid() {
+        Grid<Activity> grid = new Grid<>();
+        grid.setSizeFull();
+        grid.setSelectionMode(Grid.SelectionMode.SINGLE);
         return grid;
     }
 

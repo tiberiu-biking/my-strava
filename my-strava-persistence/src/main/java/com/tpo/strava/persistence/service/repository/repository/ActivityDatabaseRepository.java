@@ -60,7 +60,7 @@ public class ActivityDatabaseRepository implements ActivityRepository {
     public Long getLastStartDate() {
         ActivityEntity lastActivity = activityJpaRepository.findFirstByOrderByStartDateDesc();
         if (lastActivity != null) {
-            return lastActivity.getInsertDate();
+            return lastActivity.getStartDate().toInstant().getEpochSecond();
         } else {
             return 0L;
         }

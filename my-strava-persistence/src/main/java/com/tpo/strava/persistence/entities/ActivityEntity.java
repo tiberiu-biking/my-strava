@@ -1,10 +1,13 @@
 package com.tpo.strava.persistence.entities;
 
-import javax.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
-/**
- * Created by Tiberiu on 23/10/15.
- */
+import javax.persistence.*;
+import java.util.Date;
+
+@Getter
+@Setter
 @Entity(name = "activities")
 public class ActivityEntity {
 
@@ -25,7 +28,7 @@ public class ActivityEntity {
     private Long insertDate;
 
     @Column
-    private String startDate;
+    private Date startDate;
 
     @Column
     private String name;
@@ -38,84 +41,4 @@ public class ActivityEntity {
 
     @Column
     private Integer duration;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Float getCalories() {
-        return calories;
-    }
-
-    public void setCalories(Float calories) {
-        this.calories = calories;
-    }
-
-    public String getActivityId() {
-        return activityId;
-    }
-
-    public void setActivityId(String activityId) {
-        this.activityId = activityId;
-    }
-
-    public long getInsertDate() {
-        return insertDate;
-    }
-
-    public void setInsertDate(Long insertDate) {
-        this.insertDate = insertDate;
-    }
-
-    public Float getDistance() {
-        return distance;
-    }
-
-    public void setDistance(Float distance) {
-        this.distance = distance;
-    }
-
-    public String getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public Float getElevation() {
-        return elevation;
-    }
-
-    public void setElevation(Float elevation) {
-        this.elevation = elevation;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
 }

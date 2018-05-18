@@ -21,7 +21,7 @@ public class StravaActivityTranslator {
         Activity activity = new Activity();
         activity.setId(stravaActivity.getId());
         activity.setName(stravaActivity.getName());
-        activity.setStartDate(stravaActivity.getStart_date());
+        activity.setStartDate(stravaActivity.getStartDate());
         activity.setCalories(stravaActivity.getCalories());
 
         activity.setDistance(stravaActivity.getDistance() / 1000);

@@ -24,10 +24,10 @@ public class ActivityGridView extends AbstractActivitiesView {
     private Grid<Activity> buildGrid() {
         Grid<Activity> grid = createGrid();
         grid.setItems(activitiesService.getAllInChronologicalOrder());
-        grid.addColumn(Activity::getName).setCaption("Name");
-        grid.addColumn(Activity::getType).setCaption("Type");
-        grid.addColumn(Activity::getCalories).setCaption("Calories");
-        grid.addColumn(Activity::getDuration).setCaption("Duration(minutes)");
+        grid.addColumn(Activity::getName).setCaption("Name").setHidable(false);
+        grid.addColumn(Activity::getType).setCaption("Type").setHidable(false);
+        grid.addColumn(Activity::getCalories).setCaption("Calories").setHidable(false);
+        grid.addColumn(Activity::getDuration).setCaption("Duration(minutes)").setHidable(false);
         grid.addColumn(Activity::getDistance).setCaption("Distance(km)").setHidable(true);
         grid.addColumn(Activity::getElevation).setCaption("Elevation(meters)").setHidable(true);
         grid.addColumn(Activity::getStartDate).setCaption("Date").setHidable(true);

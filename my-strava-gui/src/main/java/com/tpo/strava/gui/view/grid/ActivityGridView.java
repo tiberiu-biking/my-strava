@@ -28,9 +28,9 @@ public class ActivityGridView extends AbstractActivitiesView {
         grid.addColumn(Activity::getType).setCaption("Type");
         grid.addColumn(Activity::getCalories).setCaption("Calories");
         grid.addColumn(Activity::getDuration).setCaption("Duration(minutes)");
-        grid.addColumn(Activity::getDistance).setCaption("Distance(km)");
-        grid.addColumn(Activity::getElevation).setCaption("Elevation(meters)");
-        grid.addColumn(Activity::getStartDate).setCaption("Date");
+        grid.addColumn(Activity::getDistance).setCaption("Distance(km)").setHidable(true);
+        grid.addColumn(Activity::getElevation).setCaption("Elevation(meters)").setHidable(true);
+        grid.addColumn(Activity::getStartDate).setCaption("Date").setHidable(true);
         return grid;
     }
 
@@ -38,6 +38,7 @@ public class ActivityGridView extends AbstractActivitiesView {
         Grid<Activity> grid = new Grid<>();
         grid.setSizeFull();
         grid.setSelectionMode(Grid.SelectionMode.SINGLE);
+        grid.setFrozenColumnCount(1);
         return grid;
     }
 

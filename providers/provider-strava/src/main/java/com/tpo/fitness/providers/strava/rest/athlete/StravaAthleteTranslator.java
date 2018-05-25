@@ -13,6 +13,8 @@ public class StravaAthleteTranslator {
         athlete.setFirstName(stravaAthlete.getFirstname());
         athlete.setLastName(stravaAthlete.getLastname());
         athlete.setProfileMediumPicture(stravaAthlete.getProfile_medium());
+        athlete.setShoes(stravaAthlete.getShoes());
+        athlete.setBikes(stravaAthlete.getBikes());
         return athlete;
     }
 }

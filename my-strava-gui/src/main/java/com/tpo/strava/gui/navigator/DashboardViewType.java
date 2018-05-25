@@ -4,22 +4,27 @@ import com.tpo.strava.gui.view.DashboardView;
 import com.tpo.strava.gui.view.chart.CaloriesChartView;
 import com.tpo.strava.gui.view.chart.DistanceChartView;
 import com.tpo.strava.gui.view.grid.ActivityGridView;
+import com.tpo.strava.gui.view.grid.GearGridView;
 import com.vaadin.icons.VaadinIcons;
+import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
 
 public enum DashboardViewType {
 
-    HOME(DashboardView.VIEW_NAME, VaadinIcons.HOME, "Dashboard"),
-    CALORIES(CaloriesChartView.VIEW_NAME, VaadinIcons.FIRE, "Calories"),
-    DISTANCES(DistanceChartView.VIEW_NAME, VaadinIcons.BAR_CHART, "Distances"),
-    WORKOUTS(ActivityGridView.VIEW_NAME, VaadinIcons.GRID, "Workouts");
+    DASHBOARD(DashboardView.VIEW_NAME, DashboardView.class, VaadinIcons.HOME, "Dashboard"),
+    CALORIES(CaloriesChartView.VIEW_NAME, CaloriesChartView.class, VaadinIcons.FIRE, "Calories"),
+    DISTANCES(DistanceChartView.VIEW_NAME, DistanceChartView.class, VaadinIcons.BAR_CHART, "Distances"),
+    WORKOUTS(ActivityGridView.VIEW_NAME, ActivityGridView.class, VaadinIcons.GRID, "Workouts"),
+    GEAR(GearGridView.VIEW_NAME, DashboardView.class, VaadinIcons.TOOLBOX, "My Gear");
 
     private final String viewName;
+    private final Class<? extends View> viewClass;
     private final Resource icon;
     private final String caption;
 
-    DashboardViewType(final String viewName, final Resource icon, String caption) {
+    DashboardViewType(final String viewName, Class<? extends View> viewClass, final Resource icon, String caption) {
         this.viewName = viewName;
+        this.viewClass = viewClass;
         this.icon = icon;
         this.caption = caption;
     }
@@ -34,6 +39,21 @@ public enum DashboardViewType {
 
     public String getCaption() {
         return caption;
+    }
+
+    public Class<? extends View> getViewClass() {
+        return viewClass;
+    }
+
+    public static DashboardViewType getByViewName(final String viewName) {
+        DashboardViewType result = null;
+        for (DashboardViewType viewType : values()) {
+            if (viewType.getViewName().equals(viewName)) {
+                result = viewType;
+                break;
+            }
+        }
+        return result;
     }
 
 }

@@ -10,12 +10,12 @@ import com.vaadin.ui.Grid;
  * @author Tiberiu
  * @since 14.10.17
  */
-@SpringView(name = ActivityGridView.VIEW_NAME)
-public class ActivityGridView extends AbstractActivitiesView {
+@SpringView(name = GearGridView.VIEW_NAME)
+public class GearGridView extends AbstractActivitiesView {
 
-    public static final String VIEW_NAME = "activities";
+    public static final String VIEW_NAME = "gears";
 
-    public ActivityGridView(ActivitiesService uiActivitiesService) {
+    public GearGridView(ActivitiesService uiActivitiesService) {
         super(uiActivitiesService);
         Grid<Activity> grid = buildGrid();
         addComponent(grid);
@@ -26,11 +26,7 @@ public class ActivityGridView extends AbstractActivitiesView {
         grid.setItems(activitiesService.getAllInChronologicalOrder());
         grid.addColumn(Activity::getName).setCaption("Name").setHidable(false);
         grid.addColumn(Activity::getType).setCaption("Type").setHidable(false);
-        grid.addColumn(Activity::getCalories).setCaption("Calories").setHidable(false);
-        grid.addColumn(Activity::getDuration).setCaption("Duration(minutes)").setHidable(false);
         grid.addColumn(Activity::getDistance).setCaption("Distance(km)").setHidable(true);
-        grid.addColumn(Activity::getElevation).setCaption("Elevation(meters)").setHidable(true);
-        grid.addColumn(Activity::getStartDate).setCaption("Date").setHidable(true);
         return grid;
     }
 

@@ -5,4 +5,6 @@ import com.tpo.fitness.domain.Athlete;
 public interface AthleteService {
 
     Athlete getAthlete();
+
+    Athlete authenticate(String userName, String password);
 }

@@ -2,22 +2,16 @@ package com.tpo.fitness.service.athlete.activity;
 
 import com.tpo.fitness.domain.Athlete;
 import com.tpo.fitness.providers.api.service.AthleteRestClient;
-import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.spring.annotation.UIScope;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * Created by Tiberiu on 25/10/15.
  */
-@SpringComponent
-@UIScope
+@Slf4j
 @Service
 public class UIAthleteService implements AthleteService {
-
-    private static final Logger logger = LoggerFactory.getLogger(UIAthleteService.class);
 
     private final AthleteRestClient stravaAthleteRestClient;
 
@@ -28,6 +22,11 @@ public class UIAthleteService implements AthleteService {
 
     @Override
     public Athlete getAthlete() {
+        return stravaAthleteRestClient.getAthlete();
+    }
+
+    @Override
+    public Athlete authenticate(String userName, String password) {
         return stravaAthleteRestClient.getAthlete();
     }
 }

@@ -4,11 +4,8 @@ import com.tpo.fitness.domain.ActivitiesSummary;
 import com.tpo.fitness.domain.activity.Activity;
 import com.tpo.strava.persistence.service.repository.repository.ActivityDatabaseRepository;
 import com.tpo.strava.persistence.service.repository.repository.ActivityRepository;
-import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.spring.annotation.UIScope;
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +16,9 @@ import java.util.List;
 /**
  * Created by Tiberiu on 25/10/15.
  */
-//@CacheConfig(cacheNames = "activities")
-@SpringComponent
-@UIScope
+@Slf4j
 @Service
 public class UIActivitiesService implements ActivitiesService {
-
-    private static final Logger logger = LoggerFactory.getLogger(UIActivitiesService.class);
 
     private ActivityRepository activityRepository;
 

@@ -1,7 +1,7 @@
 package com.tpo.strava.gui.view.main;
 
-import com.tpo.fitness.service.athlete.activity.AthleteService;
 import com.tpo.strava.gui.view.dashboard.DashboardMenu;
+import com.tpo.strava.gui.view.login.UserSession;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
@@ -16,26 +16,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 @SpringComponent
 public class MainScreen extends CustomComponent {
 
+    private final HorizontalLayout layout;
+    private final SpringViewProvider springViewProvider;
+
     @Autowired
-    public MainScreen(SpringViewProvider springViewProvider, AthleteService athleteService) {
+    private UserSession userSession;
+
+    @Autowired
+    public MainScreen(SpringViewProvider springViewProvider) {
+        this.springViewProvider = springViewProvider;
         addStyleName("mainview");
 
-        HorizontalLayout layout = new HorizontalLayout();
+        layout = new HorizontalLayout();
         layout.setSizeFull();
         setCompositionRoot(layout);
         setSizeFull();
-
-        layout.addComponent(new DashboardMenu(athleteService.getAthlete()));
-
-        CssLayout viewContainer = new CssLayout();
-        viewContainer.setSizeFull();
-        layout.addComponent(viewContainer);
-        layout.setExpandRatio(viewContainer, 1f);
-
-        Navigator navigator = new Navigator(UI.getCurrent(), viewContainer);
-        navigator.addProvider(springViewProvider);
-        navigator.setErrorView(ErrorView.class);
-        navigator.navigateTo(navigator.getState());
-
     }
+
+    public void refresh() {
+        if (userSession.isLoggedIn()) {
+            CssLayout viewContainer = new CssLayout();
+            viewContainer.setSizeFull();
+
+            layout.addComponent(new DashboardMenu(userSession.getUser()));
+            layout.addComponent(viewContainer);
+            layout.setExpandRatio(viewContainer, 1f);
+
+            Navigator navigator = new Navigator(UI.getCurrent(), viewContainer);
+            navigator.addProvider(springViewProvider);
+            navigator.setErrorView(ErrorView.class);
+            navigator.navigateTo(navigator.getState());
+
+        }
+    }
+
 }

@@ -6,8 +6,6 @@ import com.tpo.fitness.service.sync.Synchronizer;
 import com.tpo.strava.persistence.service.repository.repository.ActivityDatabaseRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,8 +28,8 @@ public class StravaSynchronizer implements Synchronizer {
         this.activityDatabaseRepository = activityDatabaseRepository;
     }
 
-    @Async
-    @Scheduled(fixedRateString = "${sync.rate}")
+    //@Async
+    //@Scheduled(fixedRateString = "${sync.rate}")
     public void sync() {
         log.info("Starting sync...");
 

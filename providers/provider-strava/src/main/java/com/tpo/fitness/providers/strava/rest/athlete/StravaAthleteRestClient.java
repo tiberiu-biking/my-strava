@@ -21,15 +21,13 @@ public class StravaAthleteRestClient implements AthleteRestClient {
     private static final Logger logger = LoggerFactory.getLogger(StravaAthleteRestClient.class);
 
     private final RestTemplate restTemplate;
-    private final String accessToken;
 
-    public StravaAthleteRestClient(String accessToken) {
-        this.accessToken = accessToken;
+    public StravaAthleteRestClient() {
         restTemplate = new RestTemplate();
     }
 
     @Override
-    public Athlete getAthlete() {
+    public Athlete getAthlete(String accessToken) {
         String uriString = UriComponentsBuilder
                 .fromUriString(ATHLETE_URL)
                 .queryParam(ACCESS_TOKEN, accessToken)

@@ -3,7 +3,6 @@ package com.tpo.strava.gui.view.dashboard;
 import com.google.common.eventbus.Subscribe;
 import com.tpo.fitness.domain.Athlete;
 import com.tpo.strava.gui.event.DashboardEvent;
-import com.tpo.strava.gui.event.DashboardEventBus;
 import com.tpo.strava.gui.navigator.DashboardViewType;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.ExternalResource;
@@ -33,7 +32,6 @@ public final class DashboardMenu extends CustomComponent {
         setPrimaryStyleName("valo-menu");
         setId(ID);
         setSizeUndefined();
-        DashboardEventBus.register(this);
         setCompositionRoot(buildContent());
     }
 
@@ -191,7 +189,6 @@ public final class DashboardMenu extends CustomComponent {
             setPrimaryStyleName("valo-menu-item");
             setIcon(view.getIcon());
             setCaption(view.getCaption());
-            DashboardEventBus.register(this);
             addClickListener((ClickListener) event -> getCurrent().getNavigator().navigateTo(view.getViewName()));
         }
 

@@ -1,9 +1,5 @@
 package com.tpo.strava.gui.navigator;
 
-import com.tpo.strava.gui.event.DashboardEvent.BrowserResizeEvent;
-import com.tpo.strava.gui.event.DashboardEvent.CloseOpenWindowsEvent;
-import com.tpo.strava.gui.event.DashboardEvent.PostViewChangeEvent;
-import com.tpo.strava.gui.event.DashboardEventBus;
 import com.tpo.strava.gui.view.DashboardView;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
@@ -31,9 +27,6 @@ public class DashboardNavigator extends Navigator {
             @Override
             public void afterViewChange(final ViewChangeEvent event) {
                 DashboardViewType view = DashboardViewType.getByViewName(event.getViewName());
-                DashboardEventBus.post(new PostViewChangeEvent(view));
-                DashboardEventBus.post(new BrowserResizeEvent());
-                DashboardEventBus.post(new CloseOpenWindowsEvent());
             }
         });
     }

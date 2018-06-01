@@ -1,7 +1,7 @@
 package com.tpo.strava.gui.main;
 
 import com.tpo.strava.gui.view.DashboardView;
-import com.tpo.strava.web.config.WebConfiguration;
+import com.tpo.strava.gui.view.login.WebConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

@@ -21,12 +21,7 @@ public class UIAthleteService implements AthleteService {
     }
 
     @Override
-    public Athlete getAthlete() {
-        return stravaAthleteRestClient.getAthlete();
-    }
-
-    @Override
-    public Athlete authenticate(String userName, String password) {
-        return stravaAthleteRestClient.getAthlete();
+    public Athlete login(String authCode) {
+        return stravaAthleteRestClient.getAthlete(authCode);
     }
 }

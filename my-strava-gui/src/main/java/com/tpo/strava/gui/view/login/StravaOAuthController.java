@@ -1,11 +1,11 @@
-package com.tpo.fitness.service.auth;
+package com.tpo.strava.gui.view.login;
 
 import com.github.scribejava.core.builder.ServiceBuilder;
-import com.github.scribejava.core.model.Token;
-import com.github.scribejava.core.model.Verifier;
-import com.github.scribejava.core.oauth.OAuthService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.github.scribejava.core.oauth.OAuth20Service;
+import com.tpo.fitness.service.properties.AppProperties;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,17 +15,17 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by Tiberiu on 20/10/15.
  */
+@Slf4j
 @RestController
 public class StravaOAuthController {
 
-    private static final Logger logger = LoggerFactory.getLogger(StravaOAuthController.class);
-    private static final Token EMPTY_TOKEN = null;
-
-    private OAuthService authService;
+    private OAuth20Service authService;
 
     private String clientSecret;
     private String clientId;
@@ -36,6 +36,9 @@ public class StravaOAuthController {
     @Value("${strava.token.url}")
     private String authTokenUrl;
 
+    @Autowired
+    private AppProperties appProperties;
+
     public StravaOAuthController(String clientSecret, String clientId) {
         this.clientSecret = clientSecret;
         this.clientId = clientId;
@@ -43,25 +46,27 @@ public class StravaOAuthController {
 
     @RequestMapping("/strava/oauth/authorize")
     public ModelAndView authorize(HttpServletRequest request, HttpServletResponse response) {
-        authService = new ServiceBuilder()
-                .provider(StravaOAuth2Api.class)
-                .apiKey(clientId)
+
+        StravaOAuth2Api api = new StravaOAuth2Api();
+
+        authService = new ServiceBuilder(clientId)
                 .apiSecret(clientSecret)
                 .callback(redirectUri)
-                .build();
+                .debug()
+                .scope("public")
+                .build(api);
 
-        String authorizationUrl = authService.getAuthorizationUrl(EMPTY_TOKEN);
-        logger.info("Authorization url: " + authorizationUrl);
+        String authorizationUrl = authService.getAuthorizationUrl();
+        log.info("Authorization url: " + authorizationUrl);
 
         return new ModelAndView(new RedirectView(authorizationUrl));
     }
 
     @RequestMapping("/strava/oauth/token")
-    public ModelAndView exchangeToken(@RequestParam(value = "code") String authCode) {
-        logger.info("Auth code: " + authCode);
-        Verifier verifier = new Verifier(authCode);
-        Token accessToken = authService.getAccessToken(EMPTY_TOKEN, verifier);
-        logger.info("Access token:" + accessToken.getToken());
-        return new ModelAndView(new RedirectView(authTokenUrl + accessToken.getToken()));
+    public ModelAndView exchangeToken(@RequestParam(value = "code") String authCode) throws InterruptedException, ExecutionException, IOException {
+        log.info("Auth code: " + authCode);
+        OAuth2AccessToken accessToken = authService.getAccessToken(authCode);
+        log.info("Access token:" + accessToken.getAccessToken());
+        return new ModelAndView(new RedirectView(authTokenUrl + accessToken.getAccessToken()));
     }
 }

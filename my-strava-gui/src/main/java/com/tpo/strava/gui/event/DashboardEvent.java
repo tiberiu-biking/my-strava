@@ -2,27 +2,20 @@ package com.tpo.strava.gui.event;
 
 
 import com.tpo.strava.gui.navigator.DashboardViewType;
+import lombok.Getter;
 
 /*
  * Event bus events used in Dashboard are listed here as inner classes.
  */
 public abstract class DashboardEvent {
 
+    @Getter
     public static final class UserLoginRequestedEvent {
-        private final String userName, password;
 
-        public UserLoginRequestedEvent(final String userName,
-                                       final String password) {
-            this.userName = userName;
-            this.password = password;
-        }
+        private final String authCode;
 
-        public String getUserName() {
-            return userName;
-        }
-
-        public String getPassword() {
-            return password;
+        public UserLoginRequestedEvent(final String authCode) {
+            this.authCode = authCode;
         }
     }
 

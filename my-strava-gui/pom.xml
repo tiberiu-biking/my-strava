@@ -26,6 +26,17 @@
         </dependency>
 
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.vaadin</groupId>
+            <artifactId>viritin</artifactId>
+            <version>2.5</version>
+        </dependency>
+
+        <dependency>
             <groupId>at.downdrown.vaadinaddons</groupId>
             <artifactId>highchartsapi</artifactId>
             <version>2.2.1</version>
@@ -57,6 +68,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.scribejava</groupId>
+            <artifactId>scribejava-apis</artifactId>
+            <version>5.5.0</version>
         </dependency>
 
     </dependencies>

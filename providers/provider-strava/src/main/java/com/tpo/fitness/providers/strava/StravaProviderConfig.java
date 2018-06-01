@@ -25,7 +25,7 @@ public class StravaProviderConfig {
 
     @Bean
     public AthleteRestClient stravaAthleteRestClient() {
-        return new StravaAthleteRestClient(authToken);
+        return new StravaAthleteRestClient();
     }
 
 }

@@ -9,5 +9,5 @@ import com.tpo.fitness.domain.Athlete;
  * @since 08.10.17
  */
 public interface AthleteRestClient {
-    Athlete getAthlete();
+    Athlete getAthlete(String authCode);
 }

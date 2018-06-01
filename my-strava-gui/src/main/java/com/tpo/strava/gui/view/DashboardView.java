@@ -3,7 +3,6 @@ package com.tpo.strava.gui.view;
 import com.tpo.fitness.domain.ActivitiesSummary;
 import com.tpo.fitness.service.activity.ActivitiesService;
 import com.tpo.strava.gui.component.card.SparkCard;
-import com.tpo.strava.gui.event.DashboardEventBus;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Responsive;
@@ -34,7 +33,6 @@ public final class DashboardView extends Panel implements View {
         activities = activitiesService.getSummary();
         addStyleName(ValoTheme.PANEL_BORDERLESS);
         setSizeFull();
-        DashboardEventBus.register(this);
 
         root = new VerticalLayout();
         root.setSizeFull();

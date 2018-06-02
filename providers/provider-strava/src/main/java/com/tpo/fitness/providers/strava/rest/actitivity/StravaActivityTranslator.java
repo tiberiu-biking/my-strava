@@ -20,6 +20,7 @@ public class StravaActivityTranslator {
     public static Activity translate(StravaActivity stravaActivity) {
         Activity activity = new Activity();
         activity.setId(stravaActivity.getId());
+        activity.setAthleteId(stravaActivity.getAthlete().getId());
         activity.setName(stravaActivity.getName());
         activity.setStartDate(stravaActivity.getStartDate());
         activity.setCalories(stravaActivity.getCalories());

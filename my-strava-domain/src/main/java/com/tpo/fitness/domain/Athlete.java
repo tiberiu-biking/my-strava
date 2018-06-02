@@ -12,7 +12,7 @@ import java.util.List;
 @Setter
 public class Athlete {
 
-    private int id;
+    private String id;
     private String firstName;
     private String lastName;
     private String profileMediumPicture;
@@ -22,4 +22,5 @@ public class Athlete {
     private String sex;
     private List<Gear> bikes;
     private List<Gear> shoes;
+    private String authToken;
 }

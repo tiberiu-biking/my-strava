@@ -1,6 +1,7 @@
 package com.tpo.fitness.providers.api.service;
 
 
+import com.tpo.fitness.domain.Athlete;
 import com.tpo.fitness.domain.activity.Activity;
 
 import java.util.List;
@@ -13,9 +14,9 @@ import java.util.List;
  */
 public interface ActivityRestClient {
 
-    List<Activity> getAllActivities();
+    List<Activity> getAllActivitiesByAthlete(Athlete athlete);
 
-    List<Activity> findActivities(long after);
+    List<Activity> findActivitiesAfterByAthlete(Athlete athlete, long after);
 
-    Activity getActivity(String activityId);
+    Activity findOneByAthleteId(Athlete athlete, String activityId);
 }

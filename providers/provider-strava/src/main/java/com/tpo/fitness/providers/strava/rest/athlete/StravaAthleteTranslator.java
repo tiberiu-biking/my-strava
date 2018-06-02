@@ -10,6 +10,7 @@ public class StravaAthleteTranslator {
 
     public static Athlete translate(StravaAthlete stravaAthlete) {
         Athlete athlete = new Athlete();
+        athlete.setId(stravaAthlete.getId());
         athlete.setFirstName(stravaAthlete.getFirstname());
         athlete.setLastName(stravaAthlete.getLastname());
         athlete.setProfileMediumPicture(stravaAthlete.getProfile_medium());

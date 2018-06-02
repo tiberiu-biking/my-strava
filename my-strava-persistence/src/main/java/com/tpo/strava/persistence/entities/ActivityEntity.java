@@ -19,6 +19,9 @@ public class ActivityEntity {
     private String activityId;
 
     @Column
+    private String athleteId;
+
+    @Column
     private Float calories;
 
     @Column

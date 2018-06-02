@@ -1,11 +1,13 @@
 package com.tpo.fitness.service.sync.strava;
 
+import com.tpo.fitness.domain.Athlete;
 import com.tpo.fitness.domain.activity.Activity;
 import com.tpo.fitness.providers.api.service.ActivityRestClient;
 import com.tpo.fitness.service.sync.Synchronizer;
 import com.tpo.strava.persistence.service.repository.repository.ActivityDatabaseRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +20,8 @@ import java.util.List;
 @Service
 public class StravaSynchronizer implements Synchronizer {
 
-    private ActivityRestClient stravaActivityRestClient;
-    private ActivityDatabaseRepository activityDatabaseRepository;
+    private final ActivityRestClient         stravaActivityRestClient;
+    private final ActivityDatabaseRepository activityDatabaseRepository;
 
     @Autowired
     public StravaSynchronizer(ActivityRestClient stravaActivityRestClient,
@@ -28,14 +30,12 @@ public class StravaSynchronizer implements Synchronizer {
         this.activityDatabaseRepository = activityDatabaseRepository;
     }
 
-    //@Async
-    //@Scheduled(fixedRateString = "${sync.rate}")
-    public void sync() {
-        log.info("Starting sync...");
+    @Async
+    public void sync(Athlete athlete) {
+        log.info("Starting sync athlete {} activities...", athlete.getId());
+        Long lastStartDate = activityDatabaseRepository.getLastStartDateByAthlete(athlete);
 
-        Long lastStartDate = activityDatabaseRepository.getLastStartDate();
-
-        List<Activity> activities = stravaActivityRestClient.findActivities(lastStartDate);
+        List<Activity> activities = stravaActivityRestClient.findActivitiesAfterByAthlete(athlete, lastStartDate);
 
         log.info("Found {} new activities", activities.size());
         activities.forEach(this::persistActivity);

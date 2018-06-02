@@ -3,18 +3,20 @@ package com.tpo.fitness.providers.strava.rest.athlete;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.tpo.fitness.domain.Club;
 import com.tpo.fitness.domain.Gear;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 /**
  * Created by Tiberiu on 21/10/15.
  */
+@Getter
+@Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StravaAthlete {
 
-
-    private int id;
+    private String id;
     private String resource_state;
     private String firstname;
     private String lastname;
@@ -40,241 +42,5 @@ public class StravaAthlete {
     private List<Club> clubs;
     private List<Gear> bikes;
     private List<Gear> shoes;
-
     private String token;
-
-    public StravaAthlete(int id) {
-        this.id = id;
-    }
-
-    public StravaAthlete() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getResource_state() {
-        return resource_state;
-    }
-
-    public void setResource_state(String resource_state) {
-        this.resource_state = resource_state;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public String getProfile_medium() {
-        return profile_medium;
-    }
-
-    public void setProfile_medium(String profile_medium) {
-        this.profile_medium = profile_medium;
-    }
-
-    public String getProfile() {
-        return profile;
-    }
-
-    public void setProfile(String profile) {
-        this.profile = profile;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getFriend() {
-        return friend;
-    }
-
-    public void setFriend(String friend) {
-        this.friend = friend;
-    }
-
-    public String getFollower() {
-        return follower;
-    }
-
-    public void setFollower(String follower) {
-        this.follower = follower;
-    }
-
-    public boolean getPremium() {
-        return premium;
-    }
-
-    public void setPremium(boolean premium) {
-        this.premium = premium;
-    }
-
-    public String getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
-    }
-
-    public String getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(String updated_at) {
-        this.updated_at = updated_at;
-    }
-
-    public boolean getApprove_followers() {
-        return approve_followers;
-    }
-
-    public void setApprove_followers(boolean approve_followers) {
-        this.approve_followers = approve_followers;
-    }
-
-    public int getFollower_count() {
-        return follower_count;
-    }
-
-    public void setFollower_count(int follower_count) {
-        this.follower_count = follower_count;
-    }
-
-    public int getFriend_count() {
-        return friend_count;
-    }
-
-    public void setFriend_count(int friend_count) {
-        this.friend_count = friend_count;
-    }
-
-    public int getMutual_friend_count() {
-        return mutual_friend_count;
-    }
-
-    public void setMutual_friend_count(int mutual_friend_count) {
-        this.mutual_friend_count = mutual_friend_count;
-    }
-
-    public String getDate_preference() {
-        return date_preference;
-    }
-
-    public void setDate_preference(String date_preference) {
-        this.date_preference = date_preference;
-    }
-
-    public String getMeasurement_preference() {
-        return measurement_preference;
-    }
-
-    public void setMeasurement_preference(String measurement_preference) {
-        this.measurement_preference = measurement_preference;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public int getFtp() {
-        return ftp;
-    }
-
-    public void setFtp(int ftp) {
-        this.ftp = ftp;
-    }
-
-    public float getWeight() {
-        return weight;
-    }
-
-    public void setWeight(float weight) {
-        this.weight = weight;
-    }
-
-    public List<Club> getClubs() {
-        return clubs;
-    }
-
-    public void setClubs(List<Club> clubs) {
-        this.clubs = clubs;
-    }
-
-    public List<Gear> getBikes() {
-        return bikes;
-    }
-
-    public void setBikes(List<Gear> bikes) {
-        this.bikes = bikes;
-    }
-
-    public List<Gear> getShoes() {
-        return shoes;
-    }
-
-    public void setShoes(List<Gear> shoes) {
-        this.shoes = shoes;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .append("id", id)
-                .append("lastname", lastname)
-                .append("firstname", firstname)
-                .append("profile", profile)
-                .append("city", city)
-                .append("sex", sex)
-                .toString();
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 }

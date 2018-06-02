@@ -10,6 +10,7 @@ import java.util.Date;
 public class Activity {
 
     private String id;
+    private String athleteId;
     private String name;
     private String externalId;
     private Float distance;

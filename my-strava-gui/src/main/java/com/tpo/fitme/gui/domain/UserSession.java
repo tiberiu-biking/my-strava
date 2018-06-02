@@ -1,4 +1,4 @@
-package com.tpo.strava.gui.view.login;
+package com.tpo.fitme.gui.domain;
 
 import com.tpo.fitness.domain.Athlete;
 import com.tpo.fitness.service.athlete.activity.AthleteService;

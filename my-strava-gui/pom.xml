@@ -70,12 +70,6 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.github.scribejava</groupId>
-            <artifactId>scribejava-apis</artifactId>
-            <version>5.5.0</version>
-        </dependency>
-
     </dependencies>
 
     <repositories>
@@ -130,7 +124,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>com.tpo.strava.gui.main.MyFitnessApp</mainClass>
+                    <mainClass>com.tpo.fitme.gui.MyFitnessApp</mainClass>
                     <executable>true</executable>
                 </configuration>
             </plugin>

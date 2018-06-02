@@ -1,5 +1,6 @@
 package com.tpo.strava.persistence.service.repository.repository;
 
+import com.tpo.fitness.domain.Athlete;
 import com.tpo.fitness.domain.activity.Activity;
 import com.tpo.strava.persistence.entities.ActivityEntity;
 import com.tpo.strava.persistence.repository.ActivityJpaRepository;
@@ -52,13 +53,13 @@ public class ActivityDatabaseRepository implements ActivityRepository {
     }
 
     @Override
-    public Activity findFirstByOrderByInsertDateDesc() {
-        return activityEntityTranslator.to(activityJpaRepository.findFirstByOrderByStartDateDesc());
+    public Activity findFirstByOrderByInsertDateDesc(Athlete athlete) {
+        return activityEntityTranslator.to(activityJpaRepository.findFirstByAthleteIdOrderByStartDateDesc(athlete));
     }
 
     @Override
-    public Long getLastStartDate() {
-        ActivityEntity lastActivity = activityJpaRepository.findFirstByOrderByStartDateDesc();
+    public Long getLastStartDateByAthlete(Athlete athlete) {
+        ActivityEntity lastActivity = activityJpaRepository.findFirstByAthleteIdOrderByStartDateDesc(athlete);
         if (lastActivity != null) {
             return lastActivity.getStartDate().toInstant().getEpochSecond();
         } else {

@@ -1,5 +1,6 @@
 package com.tpo.strava.persistence.service.repository.repository;
 
+import com.tpo.fitness.domain.Athlete;
 import com.tpo.fitness.domain.activity.Activity;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface ActivityRepository {
 
     List<Activity> getAllInChronologicalOrder();
 
-    Activity findFirstByOrderByInsertDateDesc();
+    Activity findFirstByOrderByInsertDateDesc(Athlete athleteId);
 
-    Long getLastStartDate();
+    Long getLastStartDateByAthlete(Athlete athleteId);
 }

@@ -4,13 +4,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.github.scribejava.core.model.OAuthConstants;
 import com.github.scribejava.core.oauth.OAuth20Service;
 import com.tpo.fitme.gui.domain.UserSession;
-import com.vaadin.server.Page;
-import com.vaadin.server.RequestHandler;
-import com.vaadin.server.ThemeResource;
-import com.vaadin.server.VaadinRequest;
-import com.vaadin.server.VaadinResponse;
-import com.vaadin.server.VaadinServletResponse;
-import com.vaadin.server.VaadinSession;
+import com.vaadin.server.*;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -36,11 +30,10 @@ public class LoginScreen extends Window implements RequestHandler {
     @Autowired
     private UserSession userSession;
 
-    private final String redirectUrl;
+    private String redirectUrl;
 
     public LoginScreen() {
         super("Login");
-        redirectUrl = "http://localhost:8080";
     }
 
     @Override
@@ -49,6 +42,7 @@ public class LoginScreen extends Window implements RequestHandler {
         VaadinSession.getCurrent().addRequestHandler(this);
         MVerticalLayout mVerticalLayout = buildContent();
         setContent(mVerticalLayout);
+        redirectUrl = Page.getCurrent().getLocation().toString();
     }
 
     private MVerticalLayout buildContent() {

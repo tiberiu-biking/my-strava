@@ -6,6 +6,7 @@ import com.tpo.fitness.providers.api.service.ActivityRestClient;
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,9 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.tpo.fitness.providers.strava.rest.actitivity.StravaURIBuilder.buildActivityDetailsURL;
-import static com.tpo.fitness.providers.strava.rest.actitivity.StravaURIBuilder.buildAthleteActivitiesAfterUrl;
-import static com.tpo.fitness.providers.strava.rest.actitivity.StravaURIBuilder.buildAthleteActivitiesByPageUrl;
+import static com.tpo.fitness.providers.strava.rest.actitivity.StravaURIBuilder.*;
 
 @Service
 public class StravaActivityRestClient implements ActivityRestClient {
@@ -31,6 +30,7 @@ public class StravaActivityRestClient implements ActivityRestClient {
     }
 
     @Override
+    @Retryable
     public List<Activity> getAllActivitiesByAthlete(Athlete athlete) {
         List<StravaActivity> activities = new ArrayList<>();
         boolean isPageLeft = true;
@@ -50,6 +50,7 @@ public class StravaActivityRestClient implements ActivityRestClient {
     }
 
     @Override
+    @Retryable
     public List<Activity> findActivitiesAfterByAthlete(Athlete athlete, long after) {
         List<StravaActivity> activities = new ArrayList<>();
         boolean isPageLeft = true;
@@ -69,6 +70,7 @@ public class StravaActivityRestClient implements ActivityRestClient {
 
 
     @Override
+    @Retryable
     public Activity findOneByAthleteId(Athlete athlete, String activityId) {
         String uriString = buildActivityDetailsURL(athlete.getAuthToken(), activityId);
         logger.info("Get activity details using url {}", uriString);

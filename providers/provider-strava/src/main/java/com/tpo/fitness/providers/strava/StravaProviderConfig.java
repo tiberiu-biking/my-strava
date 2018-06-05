@@ -6,12 +6,14 @@ import com.tpo.fitness.providers.strava.rest.actitivity.StravaActivityRestClient
 import com.tpo.fitness.providers.strava.rest.athlete.StravaAthleteRestClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.retry.annotation.EnableRetry;
 
 /**
  * @author Tiberiu
  * @since 08.10.17
  */
 @Configuration
+@EnableRetry
 public class StravaProviderConfig {
 
     @Bean

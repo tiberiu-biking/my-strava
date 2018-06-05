@@ -27,14 +27,16 @@ public class StravaAthleteRestClient implements AthleteRestClient {
     }
 
     @Override
-    public Athlete getAthlete(String accessToken) {
+    public Athlete getAthlete(String authToken) {
         String uriString = UriComponentsBuilder
                 .fromUriString(ATHLETE_URL)
-                .queryParam(ACCESS_TOKEN, accessToken)
+                .queryParam(ACCESS_TOKEN, authToken)
                 .toUriString();
         logger.debug("ActivityEntity details uri {}", uriString);
         StravaAthlete stravaAthlete = restTemplate.getForObject(uriString, StravaAthlete.class);
-        return StravaAthleteTranslator.translate(stravaAthlete);
+        Athlete translate = StravaAthleteTranslator.translate(stravaAthlete);
+        translate.setAuthToken(authToken);
+        return translate;
     }
 
 }

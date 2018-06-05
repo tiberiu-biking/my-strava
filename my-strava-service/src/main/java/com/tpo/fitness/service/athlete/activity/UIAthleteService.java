@@ -31,6 +31,8 @@ public class UIAthleteService implements AthleteService {
         Athlete athlete = stravaAthleteRestClient.getAthlete(authCode);
         if (athleteRepository.exists(athlete.getId())) {
             athleteRepository.updateAuthToken(athlete);
+        } else {
+            athleteRepository.save(athlete);
         }
         synchronizer.sync(athlete);
         return athlete;

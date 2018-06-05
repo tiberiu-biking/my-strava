@@ -54,12 +54,12 @@ public class ActivityDatabaseRepository implements ActivityRepository {
 
     @Override
     public Activity findFirstByOrderByInsertDateDesc(Athlete athlete) {
-        return activityEntityTranslator.to(activityJpaRepository.findFirstByAthleteIdOrderByStartDateDesc(athlete));
+        return activityEntityTranslator.to(activityJpaRepository.findFirstByAthleteIdOrderByStartDateDesc(athlete.getId()));
     }
 
     @Override
     public Long getLastStartDateByAthlete(Athlete athlete) {
-        ActivityEntity lastActivity = activityJpaRepository.findFirstByAthleteIdOrderByStartDateDesc(athlete);
+        ActivityEntity lastActivity = activityJpaRepository.findFirstByAthleteIdOrderByStartDateDesc(athlete.getId());
         if (lastActivity != null) {
             return lastActivity.getStartDate().toInstant().getEpochSecond();
         } else {

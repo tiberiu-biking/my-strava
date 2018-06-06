@@ -18,14 +18,14 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class StravaSynchronizer implements Synchronizer {
+public class AsyncSynchronizer implements Synchronizer {
 
     private final ActivityRestClient         stravaActivityRestClient;
     private final ActivityDatabaseRepository activityDatabaseRepository;
 
     @Autowired
-    public StravaSynchronizer(ActivityRestClient stravaActivityRestClient,
-                              ActivityDatabaseRepository activityDatabaseRepository) {
+    public AsyncSynchronizer(ActivityRestClient stravaActivityRestClient,
+                             ActivityDatabaseRepository activityDatabaseRepository) {
         this.stravaActivityRestClient = stravaActivityRestClient;
         this.activityDatabaseRepository = activityDatabaseRepository;
     }
@@ -35,10 +35,12 @@ public class StravaSynchronizer implements Synchronizer {
         log.info("Starting sync athlete {} activities...", athlete.getId());
         Long lastStartDate = activityDatabaseRepository.getLastStartDateByAthlete(athlete);
 
-        List<Activity> activities = stravaActivityRestClient.findActivitiesAfterByAthlete(athlete, lastStartDate);
+        List<Activity> activities = stravaActivityRestClient.findAllAfter(athlete, lastStartDate);
 
         log.info("Found {} new activities", activities.size());
-        activities.forEach(this::persistActivity);
+        activities.stream()
+                .map(activity -> stravaActivityRestClient.getOne(athlete, activity.getId()))
+                .forEach(this::persistActivity);
 
         log.info("Sync done!");
     }

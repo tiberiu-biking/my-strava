@@ -9,7 +9,7 @@ import at.downdrown.vaadinaddons.highchartsapi.model.ChartType;
 import at.downdrown.vaadinaddons.highchartsapi.model.data.HighChartsData;
 import at.downdrown.vaadinaddons.highchartsapi.model.plotoptions.ColumnChartPlotOptions;
 import at.downdrown.vaadinaddons.highchartsapi.model.series.ColumnChartSeries;
-import com.tpo.fitness.domain.ActivitiesSummary;
+import com.tpo.fitness.domain.summary.ActivitiesSummary;
 import com.vaadin.shared.ui.colorpicker.Color;
 import com.vaadin.ui.VerticalLayout;
 import org.joda.time.DateTime;

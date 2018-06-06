@@ -1,22 +1,15 @@
 package com.tpo.strava.gui.view.dashboard;
 
 import com.tpo.fitness.domain.Athlete;
+import com.tpo.fitness.service.sync.Synchronizer;
 import com.tpo.strava.gui.navigator.DashboardViewType;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.shared.ui.ContentMode;
-import com.vaadin.ui.Alignment;
-import com.vaadin.ui.Button;
+import com.vaadin.ui.*;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.MenuBar;
 import com.vaadin.ui.MenuBar.MenuItem;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.themes.ValoTheme;
 
 import static com.vaadin.ui.UI.getCurrent;
@@ -28,13 +21,15 @@ public final class DashboardMenu extends CustomComponent {
     public static final  String  NOTIFICATIONS_BADGE_ID = "dashboard-menu-notifications-badge";
     private static final String  STYLE_VISIBLE          = "valo-menu-visible";
     private final        Athlete athlete;
+    private final Synchronizer synchronizer;
 
     private Label    notificationsBadge;
     private Label    reportsBadge;
     private MenuItem settingsItem;
 
-    public DashboardMenu(Athlete athlete) {
+    public DashboardMenu(Athlete athlete, Synchronizer synchronizer) {
         this.athlete = athlete;
+        this.synchronizer = synchronizer;
         setPrimaryStyleName("valo-menu");
         setId(ID);
         setSizeUndefined();
@@ -72,17 +67,12 @@ public final class DashboardMenu extends CustomComponent {
         final MenuBar settings = new MenuBar();
         settings.addStyleName("user-menu");
         settingsItem = settings.addItem("", new ExternalResource(athlete.getProfileMediumPicture()), null);
-        settingsItem.addItem("Online Profile", new MenuBar.Command() {
-            @Override
-            public void menuSelected(final MenuItem selectedItem) {
-                Notification.show("Hi!");
-            }
-        });
 
-        MenuItem test = settingsItem.addItem("Online Profile", new MenuBar.Command() {
+        settingsItem.addItem("Sync", new MenuBar.Command() {
             @Override
             public void menuSelected(final MenuItem selectedItem) {
-                Notification.show("Hi!");
+                Notification.show("Synchronization started!");
+                synchronizer.sync(athlete);
             }
         });
 

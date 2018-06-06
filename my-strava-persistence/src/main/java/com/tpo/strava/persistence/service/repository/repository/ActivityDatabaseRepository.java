@@ -8,7 +8,9 @@ import com.tpo.strava.persistence.service.mapper.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,7 +39,7 @@ public class ActivityDatabaseRepository implements ActivityRepository {
     }
 
     @Override
-    public List<Activity> getAll() {
+    public List<Activity> findAll() {
         List<ActivityEntity> activityEntities = activityJpaRepository.findAll();
         return activityEntities.parallelStream()
                 .map(activityEntityTranslator::to)
@@ -45,7 +47,16 @@ public class ActivityDatabaseRepository implements ActivityRepository {
     }
 
     @Override
-    public List<Activity> getAllInChronologicalOrder() {
+    public List<Activity> findAllSinceTheLast(Duration duration) {
+        Date after = new Date(Instant.now().minusMillis(duration.toMillis()).toEpochMilli());
+        List<ActivityEntity> activityEntities = activityJpaRepository.findAllByStartDateAfter(after);
+        return activityEntities.parallelStream()
+                .map(activityEntityTranslator::to)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Activity> findAllInChronologicalOrder() {
         return activityJpaRepository.findAllByOrderByStartDateDesc()
                 .stream()
                 .map(activityEntityTranslator::to)

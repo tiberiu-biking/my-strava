@@ -1,4 +1,4 @@
-package com.tpo.fitness.service.config;
+package com.tpo.fitme.service;
 
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.oauth.OAuth20Service;
@@ -12,22 +12,25 @@ import com.tpo.fitness.service.athlete.activity.AthleteService;
 import com.tpo.fitness.service.athlete.activity.UIAthleteService;
 import com.tpo.fitness.service.properties.AppProperties;
 import com.tpo.fitness.service.sync.Synchronizer;
-import com.tpo.fitness.service.sync.strava.StravaSynchronizer;
+import com.tpo.fitness.service.sync.strava.AsyncSynchronizer;
 import com.tpo.strava.persistence.PersistenceConfiguration;
 import com.tpo.strava.persistence.service.repository.repository.ActivityDatabaseRepository;
 import com.tpo.strava.persistence.service.repository.repository.AthleteRepository;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
- * Created by Tiberiu on 28/11/15.
+ * @author Tiberiu
+ * @since 05.06.18
  */
-@Configuration
-@Import({PersistenceConfiguration.class, StravaProviderConfig.class})
 @EnableAsync
+@ComponentScan
+@Import({PersistenceConfiguration.class, StravaProviderConfig.class})
+@Configuration
 public class ServicesConfiguration {
 
     @Bean
@@ -38,7 +41,7 @@ public class ServicesConfiguration {
     @Bean
     public Synchronizer stravaSynchronizer(ActivityRestClient stravaActivityRestClient,
                                            ActivityDatabaseRepository activityDatabaseRepository) {
-        return new StravaSynchronizer(stravaActivityRestClient, activityDatabaseRepository);
+        return new AsyncSynchronizer(stravaActivityRestClient, activityDatabaseRepository);
     }
 
     @Bean
@@ -60,5 +63,4 @@ public class ServicesConfiguration {
                 .scope("public")
                 .build(api);
     }
-
 }

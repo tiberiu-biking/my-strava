@@ -22,7 +22,7 @@ public class ActivityEntity {
     private String athleteId;
 
     @Column
-    private Float calories;
+    private Long calories;
 
     @Column
     private Float distance;

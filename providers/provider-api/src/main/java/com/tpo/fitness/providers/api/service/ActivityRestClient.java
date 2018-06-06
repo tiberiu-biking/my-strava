@@ -14,9 +14,9 @@ import java.util.List;
  */
 public interface ActivityRestClient {
 
-    List<Activity> getAllActivitiesByAthlete(Athlete athlete);
+    List<Activity> findAll(Athlete athlete);
 
-    List<Activity> findActivitiesAfterByAthlete(Athlete athlete, long after);
+    List<Activity> findAllAfter(Athlete athlete, long after);
 
-    Activity findOneByAthleteId(Athlete athlete, String activityId);
+    Activity getOne(Athlete athlete, String activityId);
 }

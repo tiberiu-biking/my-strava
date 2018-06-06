@@ -1,7 +1,6 @@
 package com.tpo.strava.gui.view;
 
-import com.tpo.fitness.domain.ActivitiesSummary;
-import com.tpo.fitness.service.activity.ActivitiesService;
+import com.tpo.fitme.service.statistics.ActivitiesSummaryService;
 import com.tpo.strava.gui.component.card.SparkCard;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -11,26 +10,20 @@ import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.List;
+import static java.lang.String.valueOf;
 
 @SpringView(name = DashboardView.VIEW_NAME)
 public final class DashboardView extends Panel implements View {
 
     public static final String VIEW_NAME = "";
 
-    public static final int ECUATOR_LENGTH_KM = 40008;
-    public static final int DISTANCE_TO_THE_MOON_KM = 384400;
-    private static final float CALORIES_PER_BURGER = 295;
-    private static final float CALORIES_PER_BEER = 43;
-
     private final VerticalLayout root;
-    private final List<ActivitiesSummary> activities;
+    private final ActivitiesSummaryService activitiesSummaryService;
     private CssLayout dashboardPanels;
 
-
     @Autowired
-    public DashboardView(ActivitiesService activitiesService) {
-        activities = activitiesService.getSummary();
+    public DashboardView(ActivitiesSummaryService activitiesSummaryService) {
+        this.activitiesSummaryService = activitiesSummaryService;
         addStyleName(ValoTheme.PANEL_BORDERLESS);
         setSizeFull();
 
@@ -83,40 +76,23 @@ public final class DashboardView extends Panel implements View {
         sparks.setWidth("100%");
         Responsive.makeResponsive(sparks);
 
-        float totalKm = getTotalKm();
-        SparkCard worldTripsSparkCard = new SparkCard("trips around the world", Float.toString(totalKm / ECUATOR_LENGTH_KM));
+        SparkCard worldTripsSparkCard = new SparkCard("trips around the world", valueOf(activitiesSummaryService.getTripsAroundTheWorld()));
         sparks.addComponent(worldTripsSparkCard);
 
-        SparkCard moonTripsSparkCard = new SparkCard("trips to the moon", Float.toString(totalKm / DISTANCE_TO_THE_MOON_KM));
+        SparkCard moonTripsSparkCard = new SparkCard("trips to the moon", valueOf(activitiesSummaryService.getTripsToTheMoon()));
         sparks.addComponent(moonTripsSparkCard);
 
-        float totalCalories = getTotalCalories();
-
-        SparkCard burgersBurnedSparkCard = new SparkCard("burgers burned", Float.toString(totalCalories / CALORIES_PER_BURGER));
+        SparkCard burgersBurnedSparkCard = new SparkCard("burgers burned", valueOf(activitiesSummaryService.getBurgerBurned()));
         sparks.addComponent(burgersBurnedSparkCard);
 
-        SparkCard biersBurnedSparkCard = new SparkCard("beers burned", Long.toString(Math.round(totalCalories / CALORIES_PER_BEER)));
+        SparkCard biersBurnedSparkCard = new SparkCard("beers burned", valueOf(activitiesSummaryService.getBeersBurned()));
         sparks.addComponent(biersBurnedSparkCard);
 
         return sparks;
     }
 
-    private float getTotalKm() {
-        float totalDistance = 0;
-        for (ActivitiesSummary summary : activities) {
-            totalDistance = totalDistance + summary.getDistance();
-        }
-        return totalDistance;
-    }
 
-    private long getTotalCalories() {
-        long totalCalories = 0L;
 
-        for (ActivitiesSummary summary : activities) {
-            totalCalories = totalCalories + summary.getCalories();
-        }
-        return totalCalories;
-    }
 
     @Override
     public void enter(ViewChangeEvent event) {

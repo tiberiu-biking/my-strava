@@ -3,6 +3,7 @@ package com.tpo.strava.persistence.service.repository.repository;
 import com.tpo.fitness.domain.Athlete;
 import com.tpo.fitness.domain.activity.Activity;
 
+import java.time.Duration;
 import java.util.List;
 
 /**
@@ -13,9 +14,11 @@ public interface ActivityRepository {
 
     void save(Activity activity);
 
-    List<Activity> getAll();
+    List<Activity> findAll();
 
-    List<Activity> getAllInChronologicalOrder();
+    List<Activity> findAllSinceTheLast(Duration duration);
+
+    List<Activity> findAllInChronologicalOrder();
 
     Activity findFirstByOrderByInsertDateDesc(Athlete athleteId);
 

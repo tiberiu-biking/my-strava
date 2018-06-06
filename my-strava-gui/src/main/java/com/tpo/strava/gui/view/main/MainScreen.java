@@ -1,7 +1,8 @@
 package com.tpo.strava.gui.view.main;
 
-import com.tpo.strava.gui.view.dashboard.DashboardMenu;
 import com.tpo.fitme.gui.domain.UserSession;
+import com.tpo.fitness.service.sync.Synchronizer;
+import com.tpo.strava.gui.view.dashboard.DashboardMenu;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
@@ -18,11 +19,13 @@ public class MainScreen extends CustomComponent {
 
     private final SpringViewProvider springViewProvider;
     private final UserSession userSession;
+    private final Synchronizer synchronizer;
 
     @Autowired
-    public MainScreen(SpringViewProvider springViewProvider, UserSession userSession) {
+    public MainScreen(SpringViewProvider springViewProvider, UserSession userSession, Synchronizer synchronizer) {
         this.springViewProvider = springViewProvider;
         this.userSession = userSession;
+        this.synchronizer = synchronizer;
         addStyleName("mainview");
         setSizeFull();
     }
@@ -35,7 +38,7 @@ public class MainScreen extends CustomComponent {
             CssLayout viewContainer = new CssLayout();
             viewContainer.setSizeFull();
 
-            layout.addComponent(new DashboardMenu(userSession.getUser()));
+            layout.addComponent(new DashboardMenu(userSession.getUser(), synchronizer));
             layout.addComponent(viewContainer);
             layout.setExpandRatio(viewContainer, 1f);
 

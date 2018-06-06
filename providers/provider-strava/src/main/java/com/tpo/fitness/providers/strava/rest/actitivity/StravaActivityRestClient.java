@@ -3,9 +3,8 @@ package com.tpo.fitness.providers.strava.rest.actitivity;
 import com.tpo.fitness.domain.Athlete;
 import com.tpo.fitness.domain.activity.Activity;
 import com.tpo.fitness.providers.api.service.ActivityRestClient;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -18,10 +17,9 @@ import java.util.stream.Collectors;
 
 import static com.tpo.fitness.providers.strava.rest.actitivity.StravaURIBuilder.*;
 
+@Slf4j
 @Service
 public class StravaActivityRestClient implements ActivityRestClient {
-
-    private static final Logger logger = LoggerFactory.getLogger(StravaActivityRestClient.class);
 
     private final RestTemplate restTemplate;
 
@@ -31,60 +29,52 @@ public class StravaActivityRestClient implements ActivityRestClient {
 
     @Override
     @Retryable
-    public List<Activity> getAllActivitiesByAthlete(Athlete athlete) {
+    public List<Activity> findAll(Athlete athlete) {
         List<StravaActivity> activities = new ArrayList<>();
         boolean isPageLeft = true;
         int page = 1;
         while (isPageLeft) {
             String uriString = buildAthleteActivitiesByPageUrl(athlete.getAuthToken(), page);
-            logger.info("Loading activities page {} using url  {}", uriString);
+            log.info("Loading activities page {} using url  {}", uriString);
             StravaActivity[] summaryActivityList = restTemplate.getForObject(uriString, StravaActivity[].class);
             activities.addAll(Arrays.asList(summaryActivityList));
             isPageLeft = !ArrayUtils.isEmpty(summaryActivityList);
             page++;
         }
-        logger.info("Found {} activities", activities.size());
+        log.info("Found {} activities", activities.size());
 
-
-        return getDetailedActivities(athlete, activities);
+        return activities.stream().map(StravaActivityTranslator::translate).collect(Collectors.toList());
     }
 
     @Override
     @Retryable
-    public List<Activity> findActivitiesAfterByAthlete(Athlete athlete, long after) {
+    public List<Activity> findAllAfter(Athlete athlete, long after) {
         List<StravaActivity> activities = new ArrayList<>();
+
         boolean isPageLeft = true;
         int page = 1;
+
         while (isPageLeft) {
             String uriString = buildAthleteActivitiesAfterUrl(athlete.getAuthToken(), after, page);
-            logger.info("Finding activities after {} using uri {}", after, uriString);
+            log.info("Finding activities after {} using uri {}", after, uriString);
             StravaActivity[] summaryActivityList = restTemplate.getForObject(uriString, StravaActivity[].class);
             activities.addAll(Arrays.asList(summaryActivityList));
             isPageLeft = !ArrayUtils.isEmpty(summaryActivityList);
             page++;
         }
 
-        logger.info("Found {} activities after {}", activities.size(), new Date(after * 1000));
-        return getDetailedActivities(athlete, activities);
+        log.info("Found {} activities after {}", activities.size(), new Date(after * 1000));
+        return activities.stream().map(StravaActivityTranslator::translate).collect(Collectors.toList());
     }
 
 
     @Override
-    @Retryable
-    public Activity findOneByAthleteId(Athlete athlete, String activityId) {
+    @Retryable(label = "getOne")
+    public Activity getOne(Athlete athlete, String activityId) {
         String uriString = buildActivityDetailsURL(athlete.getAuthToken(), activityId);
-        logger.info("Get activity details using url {}", uriString);
-
+        log.info("Get activity details using url {}", uriString);
         StravaActivity stravaActivity = restTemplate.getForObject(uriString, StravaActivity.class);
         return StravaActivityTranslator.translate(stravaActivity);
     }
-
-
-    private List<Activity> getDetailedActivities(Athlete athlete, List<StravaActivity> activities) {
-        return activities.stream()
-                         .map(stravaActivity -> findOneByAthleteId(athlete, stravaActivity.getId()))
-                         .collect(Collectors.toList());
-    }
-
 
 }

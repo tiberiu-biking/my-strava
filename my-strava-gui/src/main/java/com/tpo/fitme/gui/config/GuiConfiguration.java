@@ -1,8 +1,8 @@
 package com.tpo.fitme.gui.config;
 
-import com.tpo.fitness.service.config.ServicesConfiguration;
-import com.tpo.strava.gui.view.DashboardView;
 import com.tpo.fitme.gui.domain.UserSession;
+import com.tpo.fitme.service.ServicesConfiguration;
+import com.tpo.strava.gui.view.DashboardView;
 import com.vaadin.spring.annotation.VaadinSessionScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

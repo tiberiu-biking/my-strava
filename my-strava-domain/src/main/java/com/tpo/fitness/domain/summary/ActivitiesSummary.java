@@ -1,4 +1,4 @@
-package com.tpo.fitness.domain;
+package com.tpo.fitness.domain.summary;
 
 import org.joda.time.DateTime;
 

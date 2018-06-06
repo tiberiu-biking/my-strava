@@ -55,7 +55,7 @@ public class StravaActivity {
     private Float kilojoules;
     private Float average_heartrate;
     private Float max_heartrate;
-    private Float calories;
+    private Long calories;
     private int truncated;
     private boolean has_kudoed;
 //    private List<SegmentEf  fort> segment_efforts;

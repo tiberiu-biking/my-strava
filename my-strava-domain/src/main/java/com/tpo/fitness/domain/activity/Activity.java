@@ -20,7 +20,7 @@ public class Activity {
     private Date startDate;
     private Boolean commute;
     private Boolean manual;
-    private Float calories;
+    private Long calories;
 
     @Override
     public String toString() {

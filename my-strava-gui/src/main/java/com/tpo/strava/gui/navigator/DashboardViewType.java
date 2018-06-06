@@ -4,7 +4,6 @@ import com.tpo.strava.gui.view.DashboardView;
 import com.tpo.strava.gui.view.chart.CaloriesChartView;
 import com.tpo.strava.gui.view.chart.DistanceChartView;
 import com.tpo.strava.gui.view.grid.ActivityGridView;
-import com.tpo.strava.gui.view.grid.GearGridView;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.navigator.View;
 import com.vaadin.server.Resource;
@@ -14,8 +13,7 @@ public enum DashboardViewType {
     DASHBOARD(DashboardView.VIEW_NAME, DashboardView.class, VaadinIcons.HOME, "Dashboard"),
     CALORIES(CaloriesChartView.VIEW_NAME, CaloriesChartView.class, VaadinIcons.FIRE, "Calories"),
     DISTANCES(DistanceChartView.VIEW_NAME, DistanceChartView.class, VaadinIcons.BAR_CHART, "Distances"),
-    WORKOUTS(ActivityGridView.VIEW_NAME, ActivityGridView.class, VaadinIcons.GRID, "Workouts"),
-    GEAR(GearGridView.VIEW_NAME, DashboardView.class, VaadinIcons.TOOLBOX, "My Gear");
+    WORKOUTS(ActivityGridView.VIEW_NAME, ActivityGridView.class, VaadinIcons.GRID, "Workouts");
 
     private final String viewName;
     private final Class<? extends View> viewClass;

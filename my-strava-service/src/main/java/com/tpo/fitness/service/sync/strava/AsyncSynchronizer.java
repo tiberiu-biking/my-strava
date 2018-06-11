@@ -38,21 +38,24 @@ public class AsyncSynchronizer implements Synchronizer {
         if (isInProgress.get()) {
             log.info("Sync in progress, exiting!");
         } else {
-            isInProgress.set(true);
-            log.info("Starting sync athlete {} activities...", athlete.getId());
-            Long lastStartDate = activityRepository.getLastStartDateByAthlete(athlete);
+            try {
+                isInProgress.set(true);
+                log.info("Starting sync athlete {} activities...", athlete.getId());
+                Long lastStartDate = activityRepository.getLastStartDateByAthlete(athlete);
 
-            List<Activity> activities = activityRestClient.getAllAfter(athlete, lastStartDate);
+                List<Activity> activities = activityRestClient.getAllAfter(athlete, lastStartDate);
 
-            log.info("Found {} new activities", activities.size());
+                log.info("Found {} new activities", activities.size());
 
-            activities.stream()
-                    .filter(activity -> !activityRepository.findByExternalId(activity.getExternalId()).isPresent())
-                    .map(activity -> activityRestClient.getOne(athlete, activity.getExternalId()))
-                    .forEach(this::persistActivity);
+                activities.stream()
+                        .filter(activity -> !activityRepository.findByExternalId(activity.getExternalId()).isPresent())
+                        .map(activity -> activityRestClient.getOne(athlete, activity.getExternalId()))
+                        .forEach(this::persistActivity);
 
-            log.info("Sync done!");
-            isInProgress.set(false);
+                log.info("Sync done!");
+            } finally {
+                isInProgress.set(false);
+            }
         }
     }
 

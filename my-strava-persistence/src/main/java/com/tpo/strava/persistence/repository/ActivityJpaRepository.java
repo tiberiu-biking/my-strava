@@ -15,4 +15,6 @@ public interface ActivityJpaRepository extends JpaRepository<ActivityEntity, Lon
     List<ActivityEntity> findAllByOrderByStartDateDesc();
 
     List<ActivityEntity> findAllByStartDateAfter(Date after);
+
+    ActivityEntity findByExternalId(String externalId);
 }

@@ -23,8 +23,8 @@ public class StravaActivityRestClient implements ActivityRestClient {
 
     private final RestTemplate restTemplate;
 
-    public StravaActivityRestClient() {
-        restTemplate = new RestTemplate();
+    public StravaActivityRestClient(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
     }
 
     @Override
@@ -48,7 +48,7 @@ public class StravaActivityRestClient implements ActivityRestClient {
 
     @Override
     @Retryable
-    public List<Activity> findAllAfter(Athlete athlete, long after) {
+    public List<Activity> getAllAfter(Athlete athlete, long after) {
         List<StravaActivity> activities = new ArrayList<>();
 
         boolean isPageLeft = true;

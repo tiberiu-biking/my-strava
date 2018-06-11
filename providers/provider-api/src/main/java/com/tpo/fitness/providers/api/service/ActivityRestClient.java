@@ -16,7 +16,7 @@ public interface ActivityRestClient {
 
     List<Activity> findAll(Athlete athlete);
 
-    List<Activity> findAllAfter(Athlete athlete, long after);
+    List<Activity> getAllAfter(Athlete athlete, long after);
 
     Activity getOne(Athlete athlete, String activityId);
 }

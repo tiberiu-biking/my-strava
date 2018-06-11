@@ -8,10 +8,12 @@ import com.tpo.strava.persistence.service.mapper.Translator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -19,7 +21,7 @@ import java.util.stream.Collectors;
  * @since 06.10.17
  */
 @Service
-public class ActivityDatabaseRepository implements ActivityRepository {
+class ActivityDatabaseRepository implements ActivityRepository {
 
     private final ActivityJpaRepository activityJpaRepository;
     private final Translator<ActivityEntity, Activity> activityEntityTranslator;
@@ -32,10 +34,11 @@ public class ActivityDatabaseRepository implements ActivityRepository {
     }
 
     @Override
-    public void save(Activity activity) {
+    @Transactional
+    public Activity save(Activity activity) {
         ActivityEntity activityEntity = activityEntityTranslator.from(activity);
         activityEntity.setInsertDate(Instant.now().getEpochSecond());
-        activityJpaRepository.save(activityEntity);
+        return activityEntityTranslator.to(activityJpaRepository.saveAndFlush(activityEntity));
     }
 
     @Override
@@ -44,6 +47,16 @@ public class ActivityDatabaseRepository implements ActivityRepository {
         return activityEntities.parallelStream()
                 .map(activityEntityTranslator::to)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<Activity> findByExternalId(String id) {
+        ActivityEntity activityEntity = activityJpaRepository.findByExternalId(id);
+        if (activityEntity != null) {
+            return Optional.of(activityEntityTranslator.to(activityEntity));
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override

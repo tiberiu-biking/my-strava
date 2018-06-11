@@ -9,7 +9,7 @@ import java.util.Date;
 @Setter
 public class Activity {
 
-    private String id;
+    private Long id;
     private String athleteId;
     private String name;
     private String externalId;

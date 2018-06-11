@@ -13,8 +13,10 @@ public class StravaActivity {
 
     private String id;
     private int resource_state;
-    private String external_id;
-    private int upload_id;
+    @JsonProperty("external_id")
+    private String externalId;
+    @JsonProperty("uploadId")
+    private int uploadId;
     private Athlete athlete;
     private String name;
     private Float distance;

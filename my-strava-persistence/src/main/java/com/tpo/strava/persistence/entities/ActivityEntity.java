@@ -16,7 +16,7 @@ public class ActivityEntity {
     private Long id;
 
     @Column
-    private String activityId;
+    private String externalId;
 
     @Column
     private String athleteId;

@@ -27,11 +27,11 @@ public class StravaURIBuilder {
                 .toUriString();
     }
 
-    public static String buildActivityDetailsURL(String accessToken, String activityId) {
+    public static String buildActivityDetailsURL(String accessToken, String externalId) {
         return UriComponentsBuilder
                 .fromUriString(ACTIVITIES_URL)
                 .queryParam(ACCESS_TOKEN, accessToken)
-                .pathSegment(activityId)
+                .pathSegment(externalId)
                 .toUriString();
     }
 

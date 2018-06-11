@@ -5,6 +5,7 @@ import com.tpo.fitness.domain.activity.Activity;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Tiberiu
@@ -12,9 +13,11 @@ import java.util.List;
  */
 public interface ActivityRepository {
 
-    void save(Activity activity);
+    Activity save(Activity activity);
 
     List<Activity> findAll();
+
+    Optional<Activity> findByExternalId(String externalId);
 
     List<Activity> findAllSinceTheLast(Duration duration);
 

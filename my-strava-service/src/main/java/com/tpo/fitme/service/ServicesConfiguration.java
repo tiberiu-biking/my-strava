@@ -14,12 +14,10 @@ import com.tpo.fitness.service.properties.AppProperties;
 import com.tpo.fitness.service.sync.Synchronizer;
 import com.tpo.fitness.service.sync.strava.AsyncSynchronizer;
 import com.tpo.strava.persistence.PersistenceConfiguration;
-import com.tpo.strava.persistence.service.repository.repository.ActivityDatabaseRepository;
+import com.tpo.strava.persistence.service.repository.repository.ActivityRepository;
 import com.tpo.strava.persistence.service.repository.repository.AthleteRepository;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.EnableAsync;
 
@@ -39,13 +37,14 @@ public class ServicesConfiguration {
     }
 
     @Bean
+    @Scope(scopeName = ConfigurableBeanFactory.SCOPE_SINGLETON)
     public Synchronizer stravaSynchronizer(ActivityRestClient stravaActivityRestClient,
-                                           ActivityDatabaseRepository activityDatabaseRepository) {
+                                           ActivityRepository activityDatabaseRepository) {
         return new AsyncSynchronizer(stravaActivityRestClient, activityDatabaseRepository);
     }
 
     @Bean
-    public ActivitiesService uiActivitiesService(ActivityDatabaseRepository activityDatabaseRepository) {
+    public ActivitiesService uiActivitiesService(ActivityRepository activityDatabaseRepository) {
         return new UIActivitiesService(activityDatabaseRepository);
     }
 

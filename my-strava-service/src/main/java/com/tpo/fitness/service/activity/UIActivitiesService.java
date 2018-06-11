@@ -1,7 +1,6 @@
 package com.tpo.fitness.service.activity;
 
 import com.tpo.fitness.domain.activity.Activity;
-import com.tpo.strava.persistence.service.repository.repository.ActivityDatabaseRepository;
 import com.tpo.strava.persistence.service.repository.repository.ActivityRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +16,11 @@ import java.util.List;
 @Service
 public class UIActivitiesService implements ActivitiesService {
 
-    private ActivityRepository activityRepository;
+    private final ActivityRepository activityRepository;
 
     @Autowired
-    public UIActivitiesService(ActivityDatabaseRepository activityDatabaseRepository) {
-        this.activityRepository = activityDatabaseRepository;
+    public UIActivitiesService(ActivityRepository activityRepository) {
+        this.activityRepository = activityRepository;
     }
 
     @Override

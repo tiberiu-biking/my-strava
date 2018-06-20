@@ -1,17 +1,25 @@
 package com.tpo.fitness.domain.summary;
 
-import org.joda.time.DateTime;
+
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 /**
  * Created by Tiberiu on 28/10/15.
  */
+@Getter
+@Setter
+@EqualsAndHashCode
 public class ActivitiesSummary {
 
     private Long calories;
     private Float distance;
     private Integer month;
     private Integer year;
-    private DateTime dateTime;
+    private LocalDateTime dateTime;
 
     public ActivitiesSummary() {
         distance = 0F;
@@ -20,59 +28,5 @@ public class ActivitiesSummary {
 
     public String getPeriod() {
         return month + "/" + year;
-    }
-
-    public Long getCalories() {
-        return calories;
-    }
-
-    public void setCalories(Long calories) {
-        this.calories = calories;
-    }
-
-    public Integer getYear() {
-        return year;
-    }
-
-    public void setYear(Integer year) {
-        this.year = year;
-    }
-
-    public Integer getMonth() {
-        return month;
-    }
-
-    public void setMonth(Integer month) {
-        this.month = month;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ActivitiesSummary that = (ActivitiesSummary) o;
-        return com.google.common.base.Objects.equal(month, that.month) &&
-                com.google.common.base.Objects.equal(year, that.year);
-    }
-
-    @Override
-    public int hashCode() {
-        return com.google.common.base.Objects.hashCode(month, year);
-    }
-
-    public Float getDistance() {
-        return distance;
-    }
-
-    public void setDistance(Float distance) {
-        this.distance = distance;
-    }
-
-    public DateTime getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(DateTime dateTime) {
-        this.dateTime = dateTime;
     }
 }

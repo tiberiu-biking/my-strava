@@ -1,8 +1,8 @@
 package com.tpo.fitme.service.summary;
 
-import com.tpo.fitness.domain.activity.Activity;
-import com.tpo.fitness.domain.summary.ActivitiesSummary;
-import com.tpo.fitness.domain.summary.Summary;
+import com.tpo.fitme.domain.activity.Activity;
+import com.tpo.fitme.domain.summary.ActivitiesSummary;
+import com.tpo.fitme.domain.summary.Summary;
 import com.tpo.fitness.service.activity.ActivitiesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

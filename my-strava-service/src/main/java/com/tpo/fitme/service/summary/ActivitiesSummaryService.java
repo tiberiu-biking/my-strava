@@ -1,6 +1,6 @@
 package com.tpo.fitme.service.summary;
 
-import com.tpo.fitness.domain.summary.Summary;
+import com.tpo.fitme.domain.summary.Summary;
 
 import java.time.Duration;
 

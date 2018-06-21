@@ -1,7 +1,7 @@
 package com.tpo.fitness.service.activity;
 
-import com.tpo.fitness.domain.Sport;
-import com.tpo.fitness.domain.activity.Activity;
+import com.tpo.fitme.domain.Sport;
+import com.tpo.fitme.domain.activity.Activity;
 import com.tpo.strava.persistence.service.repository.repository.ActivityRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

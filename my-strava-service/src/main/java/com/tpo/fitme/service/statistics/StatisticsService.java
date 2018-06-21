@@ -1,6 +1,6 @@
 package com.tpo.fitme.service.statistics;
 
-import com.tpo.fitness.domain.Sport;
+import com.tpo.fitme.domain.Sport;
 
 import java.time.LocalDateTime;
 

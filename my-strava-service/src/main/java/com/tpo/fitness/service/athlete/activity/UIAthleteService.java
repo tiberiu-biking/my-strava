@@ -1,6 +1,6 @@
 package com.tpo.fitness.service.athlete.activity;
 
-import com.tpo.fitness.domain.Athlete;
+import com.tpo.fitme.domain.Athlete;
 import com.tpo.fitness.providers.api.service.AthleteRestClient;
 import com.tpo.fitness.service.sync.Synchronizer;
 import com.tpo.strava.persistence.service.repository.repository.AthleteRepository;

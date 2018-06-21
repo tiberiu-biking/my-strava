@@ -1,7 +1,7 @@
 package com.tpo.fitness.service.activity;
 
-import com.tpo.fitness.domain.Sport;
-import com.tpo.fitness.domain.activity.Activity;
+import com.tpo.fitme.domain.Sport;
+import com.tpo.fitme.domain.activity.Activity;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

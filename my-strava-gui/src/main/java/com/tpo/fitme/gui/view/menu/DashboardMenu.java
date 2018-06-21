@@ -1,7 +1,7 @@
 package com.tpo.fitme.gui.view.menu;
 
+import com.tpo.fitme.domain.Athlete;
 import com.tpo.fitme.gui.navigator.DashboardViewType;
-import com.tpo.fitness.domain.Athlete;
 import com.tpo.fitness.service.sync.Synchronizer;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.ExternalResource;

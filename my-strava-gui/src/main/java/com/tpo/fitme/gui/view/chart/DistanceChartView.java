@@ -2,10 +2,10 @@ package com.tpo.fitme.gui.view.chart;
 
 import at.downdrown.vaadinaddons.highchartsapi.model.data.HighChartsData;
 import at.downdrown.vaadinaddons.highchartsapi.model.data.base.StringIntData;
+import com.tpo.fitme.domain.summary.ActivitiesSummary;
+import com.tpo.fitme.domain.summary.Summary;
 import com.tpo.fitme.gui.component.chart.StravaChart;
 import com.tpo.fitme.service.summary.ActivitiesSummaryService;
-import com.tpo.fitness.domain.summary.ActivitiesSummary;
-import com.tpo.fitness.domain.summary.Summary;
 import com.vaadin.spring.annotation.SpringView;
 
 import javax.annotation.PostConstruct;

@@ -1,7 +1,7 @@
 package com.tpo.fitme.gui.view.grid;
 
+import com.tpo.fitme.domain.activity.Activity;
 import com.tpo.fitme.gui.view.chart.AbstractActivitiesView;
-import com.tpo.fitness.domain.activity.Activity;
 import com.tpo.fitness.service.activity.ActivitiesService;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Grid;

@@ -1,9 +1,9 @@
 package com.tpo.fitme.gui.view.dashboard;
 
+import com.tpo.fitme.domain.Sport;
 import com.tpo.fitme.gui.component.textfield.ReadOnlyTextField;
 import com.tpo.fitme.gui.constants.ThemedIcon;
 import com.tpo.fitme.service.statistics.StatisticsService;
-import com.tpo.fitness.domain.Sport;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;

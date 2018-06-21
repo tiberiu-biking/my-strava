@@ -1,6 +1,6 @@
 package com.tpo.fitme.gui.domain;
 
-import com.tpo.fitness.domain.Athlete;
+import com.tpo.fitme.domain.Athlete;
 import com.tpo.fitness.service.athlete.activity.AthleteService;
 import com.vaadin.spring.annotation.VaadinSessionScope;
 import lombok.Getter;

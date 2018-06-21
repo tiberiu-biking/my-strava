@@ -1,6 +1,6 @@
 package com.tpo.fitness.providers.api.service;
 
-import com.tpo.fitness.domain.Athlete;
+import com.tpo.fitme.domain.Athlete;
 
 /**
  * A REST client for retrieving activities from an activity provider.

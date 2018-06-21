@@ -1,8 +1,8 @@
 package com.tpo.fitness.providers.api.service;
 
 
-import com.tpo.fitness.domain.Athlete;
-import com.tpo.fitness.domain.activity.Activity;
+import com.tpo.fitme.domain.Athlete;
+import com.tpo.fitme.domain.activity.Activity;
 
 import java.time.LocalDateTime;
 import java.util.List;

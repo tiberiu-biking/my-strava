@@ -1,8 +1,8 @@
-package com.tpo.strava.gui.view.grid;
+package com.tpo.fitme.gui.view.grid;
 
+import com.tpo.fitme.gui.view.chart.AbstractActivitiesView;
 import com.tpo.fitness.domain.activity.Activity;
 import com.tpo.fitness.service.activity.ActivitiesService;
-import com.tpo.strava.gui.view.chart.AbstractActivitiesView;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Grid;
 
@@ -25,7 +25,7 @@ public class ActivityGridView extends AbstractActivitiesView {
         Grid<Activity> grid = createGrid();
         grid.setItems(activitiesService.getAllInChronologicalOrder());
         grid.addColumn(Activity::getName).setCaption("Name").setHidable(false);
-        grid.addColumn(Activity::getType).setCaption("Type").setHidable(false);
+        grid.addColumn(Activity::getSport).setCaption("Type").setHidable(false);
         grid.addColumn(Activity::getCalories).setCaption("Calories").setHidable(false);
         grid.addColumn(Activity::getDuration).setCaption("Duration(minutes)").setHidable(false);
         grid.addColumn(Activity::getDistance).setCaption("Distance(km)").setHidable(true);

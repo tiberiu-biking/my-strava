@@ -2,7 +2,6 @@ package com.tpo.fitme.gui.config;
 
 import com.tpo.fitme.gui.domain.UserSession;
 import com.tpo.fitme.service.ServicesConfiguration;
-import com.tpo.strava.gui.view.DashboardView;
 import com.vaadin.spring.annotation.VaadinSessionScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -15,7 +14,7 @@ import org.springframework.web.context.annotation.SessionScope;
  */
 @Configuration
 @Import({ServicesConfiguration.class})
-@ComponentScan(basePackageClasses = DashboardView.class)
+@ComponentScan
 public class GuiConfiguration {
 
     @Bean

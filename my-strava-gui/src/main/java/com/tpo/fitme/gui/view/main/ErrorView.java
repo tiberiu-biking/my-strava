@@ -1,4 +1,4 @@
-package com.tpo.strava.gui.view.main;
+package com.tpo.fitme.gui.view.main;
 
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener;

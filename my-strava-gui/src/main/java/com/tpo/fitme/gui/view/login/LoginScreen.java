@@ -1,4 +1,4 @@
-package com.tpo.strava.gui.view.login;
+package com.tpo.fitme.gui.view.login;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.github.scribejava.core.model.OAuthConstants;
@@ -19,9 +19,9 @@ import org.vaadin.viritin.layouts.MVerticalLayout;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
+@Slf4j
 @Scope("prototype")
 @SpringComponent
-@Slf4j
 public class LoginScreen extends Window implements RequestHandler {
 
     @Autowired

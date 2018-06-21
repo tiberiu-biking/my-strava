@@ -1,11 +1,11 @@
-package com.tpo.strava.gui.view.chart;
+package com.tpo.fitme.gui.view.chart;
 
 import at.downdrown.vaadinaddons.highchartsapi.model.data.HighChartsData;
 import at.downdrown.vaadinaddons.highchartsapi.model.data.base.StringDoubleData;
-import com.tpo.fitme.service.statistics.ActivitiesSummaryService;
+import com.tpo.fitme.gui.component.chart.StravaChart;
+import com.tpo.fitme.service.summary.ActivitiesSummaryService;
 import com.tpo.fitness.domain.summary.ActivitiesSummary;
 import com.tpo.fitness.domain.summary.Summary;
-import com.tpo.strava.gui.component.chart.StravaChart;
 import com.vaadin.spring.annotation.SpringView;
 import org.springframework.beans.factory.annotation.Autowired;
 

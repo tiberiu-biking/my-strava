@@ -1,6 +1,6 @@
-package com.tpo.strava.gui.navigator;
+package com.tpo.fitme.gui.navigator;
 
-import com.tpo.strava.gui.view.DashboardView;
+import com.tpo.fitme.gui.view.dashboard.DashboardView;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.navigator.ViewChangeListener;
 import com.vaadin.spring.navigator.SpringViewProvider;

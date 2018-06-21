@@ -1,8 +1,8 @@
-package com.tpo.strava.gui.view.dashboard;
+package com.tpo.fitme.gui.view.menu;
 
+import com.tpo.fitme.gui.navigator.DashboardViewType;
 import com.tpo.fitness.domain.Athlete;
 import com.tpo.fitness.service.sync.Synchronizer;
-import com.tpo.strava.gui.navigator.DashboardViewType;
 import com.vaadin.icons.VaadinIcons;
 import com.vaadin.server.ExternalResource;
 import com.vaadin.shared.ui.ContentMode;

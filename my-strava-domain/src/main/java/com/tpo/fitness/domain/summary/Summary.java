@@ -24,14 +24,14 @@ public class Summary {
     private float sumKm() {
         return activitiesSummaries.stream()
                 .map(ActivitiesSummary::getDistance)
-                .reduce((distance1, distance2) -> distance1 + distance2)
+                .reduce(Float::sum)
                 .orElse((float) 0);
     }
 
     private float sumCalories() {
         return activitiesSummaries.stream()
                 .map(ActivitiesSummary::getCalories)
-                .reduce((cal1, cal2) -> cal1 + cal2)
+                .reduce(Long::sum)
                 .orElse(0L);
     }
 }

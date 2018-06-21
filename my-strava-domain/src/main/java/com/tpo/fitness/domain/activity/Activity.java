@@ -3,11 +3,13 @@ package com.tpo.fitness.domain.activity;
 import com.tpo.fitness.domain.Sport;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@ToString
 public class Activity {
 
     private Long id;
@@ -22,9 +24,4 @@ public class Activity {
     private Boolean commute;
     private Boolean manual;
     private Long calories;
-
-    @Override
-    public String toString() {
-        return name;
-    }
 }

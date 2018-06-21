@@ -9,9 +9,9 @@ import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,7 +48,7 @@ public class StravaActivityRestClient implements ActivityRestClient {
 
     @Override
     @Retryable
-    public List<Activity> getAllAfter(Athlete athlete, long after) {
+    public List<Activity> getAllAfter(Athlete athlete, LocalDateTime after) {
         List<StravaActivity> activities = new ArrayList<>();
 
         boolean isPageLeft = true;
@@ -63,7 +63,7 @@ public class StravaActivityRestClient implements ActivityRestClient {
             page++;
         }
 
-        log.info("Found {} activities after {}", activities.size(), new Date(after * 1000));
+        log.info("Found {} activities after {}", activities.size(), after);
         return activities.stream().map(StravaActivityTranslator::translate).collect(Collectors.toList());
     }
 

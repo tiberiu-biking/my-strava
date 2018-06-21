@@ -2,6 +2,9 @@ package com.tpo.fitness.providers.strava.rest.actitivity;
 
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+
 import static com.tpo.fitness.providers.strava.rest.StravaRestConstants.*;
 
 /**
@@ -18,11 +21,11 @@ public class StravaURIBuilder {
                 .toUriString();
     }
 
-    public static String buildAthleteActivitiesAfterUrl(String accessToken, long after, int page) {
+    public static String buildAthleteActivitiesAfterUrl(String accessToken, LocalDateTime after, int page) {
         return UriComponentsBuilder
                 .fromUriString(ATHLETE_ACTIVITIES_URL)
                 .queryParam(ACCESS_TOKEN, accessToken)
-                .queryParam(AFTER, after)
+                .queryParam(AFTER, after.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toEpochSecond())
                 .queryParam(PAGE, page)
                 .toUriString();
     }

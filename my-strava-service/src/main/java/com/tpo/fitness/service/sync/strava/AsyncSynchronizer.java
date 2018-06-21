@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -41,7 +42,7 @@ public class AsyncSynchronizer implements Synchronizer {
             try {
                 isInProgress.set(true);
                 log.info("Starting sync athlete {} activities...", athlete.getId());
-                Long lastStartDate = activityRepository.getLastStartDateByAthlete(athlete);
+                LocalDateTime lastStartDate = activityRepository.getLastStartDateByAthlete(athlete);
 
                 List<Activity> activities = activityRestClient.getAllAfter(athlete, lastStartDate);
 

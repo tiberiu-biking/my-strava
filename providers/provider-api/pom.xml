@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.tpo.strava</groupId>
-            <artifactId>my-strava-domain</artifactId>
+            <artifactId>fitme-domain</artifactId>
             <version>${project.version}</version>
         </dependency>
 

@@ -1,6 +1,6 @@
 package com.tpo.strava.persistence.repository;
 
-import com.tpo.fitness.domain.Sport;
+import com.tpo.fitme.domain.Sport;
 import com.tpo.strava.persistence.entities.ActivityEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,8 +1,8 @@
 package com.tpo.strava.persistence.service.repository.repository;
 
-import com.tpo.fitness.domain.Athlete;
-import com.tpo.fitness.domain.Sport;
-import com.tpo.fitness.domain.activity.Activity;
+import com.tpo.fitme.domain.Athlete;
+import com.tpo.fitme.domain.Sport;
+import com.tpo.fitme.domain.activity.Activity;
 import com.tpo.strava.persistence.entities.ActivityEntity;
 import com.tpo.strava.persistence.repository.ActivityJpaRepository;
 import com.tpo.strava.persistence.service.mapper.Translator;

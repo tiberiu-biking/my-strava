@@ -1,6 +1,6 @@
 package com.tpo.strava.persistence.service.mapper.athlete;
 
-import com.tpo.fitness.domain.Athlete;
+import com.tpo.fitme.domain.Athlete;
 import com.tpo.strava.persistence.entities.AthleteEntity;
 import com.tpo.strava.persistence.service.mapper.Translator;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package com.tpo.strava.persistence.entities;
 
-import com.tpo.fitness.domain.Sport;
+import com.tpo.fitme.domain.Sport;
 import lombok.Getter;
 import lombok.Setter;
 

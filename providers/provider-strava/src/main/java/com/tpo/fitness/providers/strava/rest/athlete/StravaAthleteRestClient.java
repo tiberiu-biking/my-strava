@@ -1,6 +1,6 @@
 package com.tpo.fitness.providers.strava.rest.athlete;
 
-import com.tpo.fitness.domain.Athlete;
+import com.tpo.fitme.domain.Athlete;
 import com.tpo.fitness.providers.api.service.AthleteRestClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

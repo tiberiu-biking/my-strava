@@ -1,7 +1,7 @@
 package com.tpo.fitness.providers.strava.rest.actitivity;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.tpo.fitness.domain.Athlete;
+import com.tpo.fitme.domain.Athlete;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,7 +1,7 @@
 package com.tpo.fitness.providers.strava.rest.actitivity;
 
-import com.tpo.fitness.domain.Athlete;
-import com.tpo.fitness.domain.activity.Activity;
+import com.tpo.fitme.domain.Athlete;
+import com.tpo.fitme.domain.activity.Activity;
 import com.tpo.fitness.providers.api.service.ActivityRestClient;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;

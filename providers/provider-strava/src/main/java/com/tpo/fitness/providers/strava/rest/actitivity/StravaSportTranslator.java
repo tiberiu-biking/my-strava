@@ -1,10 +1,10 @@
 package com.tpo.fitness.providers.strava.rest.actitivity;
 
-import com.tpo.fitness.domain.Sport;
-import com.tpo.fitness.domain.WorkoutType;
+import com.tpo.fitme.domain.Sport;
+import com.tpo.fitme.domain.WorkoutType;
 import lombok.experimental.UtilityClass;
 
-import static com.tpo.fitness.domain.Sport.*;
+import static com.tpo.fitme.domain.Sport.*;
 
 /**
  * @author Tiberiu

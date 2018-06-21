@@ -1,6 +1,6 @@
 package com.tpo.fitness.providers.strava.rest.actitivity;
 
-import com.tpo.fitness.domain.activity.Activity;
+import com.tpo.fitme.domain.activity.Activity;
 
 import java.time.ZoneId;
 import java.util.List;

@@ -28,9 +28,10 @@ public class DistanceChartView extends AbstractActivitiesSummaryView {
 
     private StravaChart buildChart(Summary summary) {
         return new StravaChart("Distances", summary.getActivitiesSummaries()) {
+
             @Override
             protected HighChartsData getColumnValue(ActivitiesSummary activity) {
-                return new StringIntData(activity.getPeriod(), activity.getDistance().intValue());
+                return new StringIntData(activity.getMonth() + "/" + activity.getYear(), activity.getDistance().intValue());
             }
         };
     }

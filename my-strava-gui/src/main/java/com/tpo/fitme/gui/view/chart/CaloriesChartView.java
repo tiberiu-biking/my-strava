@@ -31,8 +31,8 @@ public class CaloriesChartView extends AbstractActivitiesSummaryView {
     private StravaChart buildChart(Summary summary) {
         return new StravaChart("Calories", summary.getActivitiesSummaries()) {
             @Override
-            protected HighChartsData getColumnValue(ActivitiesSummary activity) {
-                return new StringDoubleData(activity.getPeriod(), activity.getCalories());
+            protected HighChartsData getColumnValue(ActivitiesSummary activitiesSummary) {
+                return new StringDoubleData(activitiesSummary.getYear() + "/" + activitiesSummary.getMonth(), activitiesSummary.getCalories());
             }
         };
     }

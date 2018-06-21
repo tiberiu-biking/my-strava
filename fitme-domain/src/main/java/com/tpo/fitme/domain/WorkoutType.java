@@ -1,4 +1,4 @@
-package com.tpo.fitness.domain;
+package com.tpo.fitme.domain;
 
 import lombok.Getter;
 

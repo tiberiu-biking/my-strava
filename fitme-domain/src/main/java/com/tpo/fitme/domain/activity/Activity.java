@@ -1,6 +1,6 @@
-package com.tpo.fitness.domain.activity;
+package com.tpo.fitme.domain.activity;
 
-import com.tpo.fitness.domain.Sport;
+import com.tpo.fitme.domain.Sport;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

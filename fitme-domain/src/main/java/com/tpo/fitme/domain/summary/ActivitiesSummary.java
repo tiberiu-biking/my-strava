@@ -1,4 +1,4 @@
-package com.tpo.fitness.domain.summary;
+package com.tpo.fitme.domain.summary;
 
 
 import lombok.Data;

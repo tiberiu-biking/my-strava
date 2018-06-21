@@ -18,7 +18,7 @@
     <name>my-strava-parent</name>
 
     <modules>
-        <module>my-strava-domain</module>
+        <module>fitme-domain</module>
         <module>providers</module>
         <module>my-strava-persistence</module>
         <module>my-strava-service</module>

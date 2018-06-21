@@ -10,7 +10,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>my-strava-domain</artifactId>
+    <artifactId>fitme-domain</artifactId>
 
     <dependencies>
 

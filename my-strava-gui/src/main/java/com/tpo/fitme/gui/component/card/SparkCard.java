@@ -1,4 +1,4 @@
-package com.tpo.strava.gui.component.card;
+package com.tpo.fitme.gui.component.card;
 
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Label;

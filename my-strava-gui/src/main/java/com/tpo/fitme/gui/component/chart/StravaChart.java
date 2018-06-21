@@ -1,4 +1,4 @@
-package com.tpo.strava.gui.component.chart;
+package com.tpo.fitme.gui.component.chart;
 
 import at.downdrown.vaadinaddons.highchartsapi.HighChart;
 import at.downdrown.vaadinaddons.highchartsapi.HighChartFactory;
@@ -12,10 +12,12 @@ import at.downdrown.vaadinaddons.highchartsapi.model.series.ColumnChartSeries;
 import com.tpo.fitness.domain.summary.ActivitiesSummary;
 import com.vaadin.shared.ui.colorpicker.Color;
 import com.vaadin.ui.VerticalLayout;
-import org.joda.time.DateTime;
 
+import java.time.LocalDateTime;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Tiberiu on 29/10/15.
@@ -48,8 +50,8 @@ public abstract class StravaChart extends VerticalLayout {
 
         List<String> xCategories = new ArrayList<>();
         for (ActivitiesSummary activity : activities) {
-            DateTime dateTime = activity.getDateTime();
-            xCategories.add(dateTime.monthOfYear().getAsShortText() + " " + dateTime.year().getAsString());
+            LocalDateTime dateTime = activity.getDateTime();
+            xCategories.add(dateTime.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " + dateTime.getYear());
         }
         xAxis.setCategories(xCategories);
         columnConfiguration.setxAxis(xAxis);

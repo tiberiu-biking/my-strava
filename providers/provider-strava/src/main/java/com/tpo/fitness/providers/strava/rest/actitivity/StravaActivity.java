@@ -24,6 +24,8 @@ public class StravaActivity {
     private Integer movingTime;
     @JsonProperty("elapsed_time")
     private Integer elapsedTime;
+    @JsonProperty("workout_type")
+    private Integer workoutType;
     @JsonProperty("total_elevation_gain")
     private Float total_elevation_gain;
     private String type;

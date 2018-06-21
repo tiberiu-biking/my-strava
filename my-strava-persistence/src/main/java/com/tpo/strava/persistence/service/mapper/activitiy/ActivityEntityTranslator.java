@@ -21,7 +21,7 @@ public class ActivityEntityTranslator implements Translator<ActivityEntity, Acti
         activityEntity.setDistance(activity.getDistance());
         activityEntity.setCalories(activity.getCalories());
         activityEntity.setStartDate(activity.getStartDate());
-        activityEntity.setType(activity.getType());
+        activityEntity.setSport(activity.getSport());
         activityEntity.setElevation(activity.getElevation());
         activityEntity.setDuration(activity.getDuration());
         return activityEntity;
@@ -37,7 +37,7 @@ public class ActivityEntityTranslator implements Translator<ActivityEntity, Acti
         activity.setCalories(activityEntity.getCalories());
         activity.setStartDate(activityEntity.getStartDate());
         activity.setName(activityEntity.getName());
-        activity.setType(activityEntity.getType());
+        activity.setSport(activityEntity.getSport());
         activity.setElevation(activityEntity.getElevation());
         activity.setDuration(activityEntity.getDuration());
         return activity;

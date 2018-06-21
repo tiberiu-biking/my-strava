@@ -2,6 +2,7 @@ package com.tpo.fitness.providers.strava.rest.actitivity;
 
 import com.tpo.fitness.domain.activity.Activity;
 
+import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +23,7 @@ public class StravaActivityTranslator {
         activity.setExternalId(stravaActivity.getId());
         activity.setAthleteId(stravaActivity.getAthlete().getId());
         activity.setName(stravaActivity.getName());
-        activity.setStartDate(stravaActivity.getStartDate());
+        activity.setStartDate(stravaActivity.getStartDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
         activity.setCalories(stravaActivity.getCalories());
 
         activity.setDistance(stravaActivity.getDistance() / 1000);
@@ -30,7 +31,8 @@ public class StravaActivityTranslator {
         activity.setCalories(stravaActivity.getCalories());
         activity.setCommute(stravaActivity.isCommute());
         activity.setDuration(stravaActivity.getMovingTime() / 60);
-        activity.setType(stravaActivity.getType());
+        activity.setSport(StravaSportTranslator.translate(stravaActivity.getType(), stravaActivity.getWorkoutType()));
         return activity;
     }
+
 }

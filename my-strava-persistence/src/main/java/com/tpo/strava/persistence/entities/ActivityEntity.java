@@ -1,10 +1,11 @@
 package com.tpo.strava.persistence.entities;
 
+import com.tpo.fitness.domain.Sport;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -31,17 +32,18 @@ public class ActivityEntity {
     private Long insertDate;
 
     @Column
-    private Date startDate;
+    private LocalDateTime startDate;
 
     @Column
     private String name;
-
-    @Column
-    private String type;
 
     @Column
     private Float elevation;
 
     @Column
     private Integer duration;
+
+    @Column
+    @Enumerated(value = EnumType.STRING)
+    private Sport sport;
 }

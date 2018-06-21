@@ -7,7 +7,7 @@ import com.tpo.fitness.providers.api.service.ActivityRestClient;
 import com.tpo.fitness.providers.api.service.AthleteRestClient;
 import com.tpo.fitness.providers.strava.StravaProviderConfig;
 import com.tpo.fitness.service.activity.ActivitiesService;
-import com.tpo.fitness.service.activity.UIActivitiesService;
+import com.tpo.fitness.service.activity.DefaultActivitiesService;
 import com.tpo.fitness.service.athlete.activity.AthleteService;
 import com.tpo.fitness.service.athlete.activity.UIAthleteService;
 import com.tpo.fitness.service.properties.AppProperties;
@@ -45,7 +45,7 @@ public class ServicesConfiguration {
 
     @Bean
     public ActivitiesService uiActivitiesService(ActivityRepository activityDatabaseRepository) {
-        return new UIActivitiesService(activityDatabaseRepository);
+        return new DefaultActivitiesService(activityDatabaseRepository);
     }
 
     @Bean

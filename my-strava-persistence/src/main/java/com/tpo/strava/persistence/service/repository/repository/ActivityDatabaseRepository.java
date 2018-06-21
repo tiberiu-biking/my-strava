@@ -1,6 +1,7 @@
 package com.tpo.strava.persistence.service.repository.repository;
 
 import com.tpo.fitness.domain.Athlete;
+import com.tpo.fitness.domain.Sport;
 import com.tpo.fitness.domain.activity.Activity;
 import com.tpo.strava.persistence.entities.ActivityEntity;
 import com.tpo.strava.persistence.repository.ActivityJpaRepository;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,6 +51,22 @@ class ActivityDatabaseRepository implements ActivityRepository {
     }
 
     @Override
+    public List<Activity> findBySport(Sport sport) {
+        List<ActivityEntity> activityEntities = activityJpaRepository.findBySport(sport);
+        return activityEntities.parallelStream()
+                .map(activityEntityTranslator::to)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Activity> findBySportAndStartDateAfter(Sport sport, LocalDateTime date) {
+        List<ActivityEntity> activityEntities = activityJpaRepository.findBySportAndStartDateAfter(sport, date);
+        return activityEntities.parallelStream()
+                .map(activityEntityTranslator::to)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Optional<Activity> findByExternalId(String id) {
         ActivityEntity activityEntity = activityJpaRepository.findByExternalId(id);
         if (activityEntity != null) {
@@ -60,8 +77,8 @@ class ActivityDatabaseRepository implements ActivityRepository {
     }
 
     @Override
-    public List<Activity> findAllSinceTheLast(Duration duration) {
-        Date after = new Date(Instant.now().minusMillis(duration.toMillis()).toEpochMilli());
+    public List<Activity> findAllForTheLast(Duration duration) {
+        LocalDateTime after = LocalDateTime.now().minusNanos(duration.toNanos());
         List<ActivityEntity> activityEntities = activityJpaRepository.findAllByStartDateAfter(after);
         return activityEntities.parallelStream()
                 .map(activityEntityTranslator::to)
@@ -82,12 +99,12 @@ class ActivityDatabaseRepository implements ActivityRepository {
     }
 
     @Override
-    public Long getLastStartDateByAthlete(Athlete athlete) {
+    public LocalDateTime getLastStartDateByAthlete(Athlete athlete) {
         ActivityEntity lastActivity = activityJpaRepository.findFirstByAthleteIdOrderByStartDateDesc(athlete.getId());
         if (lastActivity != null) {
-            return lastActivity.getStartDate().toInstant().getEpochSecond();
+            return lastActivity.getStartDate();
         } else {
-            return 0L;
+            return LocalDateTime.MIN;
         }
     }
 }

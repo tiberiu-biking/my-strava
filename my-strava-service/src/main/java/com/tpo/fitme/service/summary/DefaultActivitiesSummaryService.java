@@ -1,14 +1,14 @@
-package com.tpo.fitme.service.statistics;
+package com.tpo.fitme.service.summary;
 
 import com.tpo.fitness.domain.activity.Activity;
 import com.tpo.fitness.domain.summary.ActivitiesSummary;
 import com.tpo.fitness.domain.summary.Summary;
 import com.tpo.fitness.service.activity.ActivitiesService;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -44,15 +44,15 @@ public class DefaultActivitiesSummaryService implements ActivitiesSummaryService
             activities = activityRepository.findAllSinceTheLast(duration);
         }
         if (!activities.isEmpty()) {
-            DateTime firstStartDate = new DateTime(activities.get(0).getStartDate());
-            activitiesSummaries = generateEmptySummaries(firstStartDate.year().get());
+            LocalDateTime firstStartDate = activities.get(0).getStartDate();
+            activitiesSummaries = generateEmptySummaries(firstStartDate.getYear());
 
             for (Activity activity : activities) {
-                DateTime startDate = new DateTime(activity.getStartDate());
+                LocalDateTime startDate = activity.getStartDate();
 
                 for (ActivitiesSummary summary : activitiesSummaries) {
-                    if ((summary.getMonth() == startDate.monthOfYear().get()) &&
-                            (summary.getYear() == startDate.year().get())) {
+                    if ((summary.getMonth() == startDate.getMonthValue()) &&
+                            (summary.getYear() == startDate.getYear())) {
                         summary.setCalories(summary.getCalories() + activity.getCalories());
                         summary.setDistance(summary.getDistance() + activity.getDistance());
                     }
@@ -90,15 +90,15 @@ public class DefaultActivitiesSummaryService implements ActivitiesSummaryService
     private List<ActivitiesSummary> generateEmptySummaries(int startYear) {
         ArrayList<ActivitiesSummary> resultList = new ArrayList<>();
 
-        int currentYear = DateTime.now().year().get();
-        int currentMonth = DateTime.now().monthOfYear().get();
+        int currentYear = LocalDateTime.now().getYear();
+        int currentMonth = LocalDateTime.now().getMonthValue();
 
         for (int year = startYear; year <= currentYear; year++)
             for (int month = 1; month <= currentMonth; month++) {
                 ActivitiesSummary newSummary = new ActivitiesSummary();
                 newSummary.setMonth(month);
                 newSummary.setYear(year);
-                newSummary.setDateTime(new DateTime(year, month, 1, 0, 0, 0));
+                newSummary.setDateTime(LocalDateTime.of(year, month, 1, 0, 0, 0));
                 resultList.add(newSummary);
             }
         return resultList;

@@ -1,4 +1,4 @@
-package com.tpo.fitme.service.statistics;
+package com.tpo.fitme.service.summary;
 
 import com.tpo.fitness.domain.summary.Summary;
 

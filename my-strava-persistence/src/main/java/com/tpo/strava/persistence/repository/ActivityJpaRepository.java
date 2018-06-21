@@ -1,9 +1,10 @@
 package com.tpo.strava.persistence.repository;
 
+import com.tpo.fitness.domain.Sport;
 import com.tpo.strava.persistence.entities.ActivityEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -14,7 +15,11 @@ public interface ActivityJpaRepository extends JpaRepository<ActivityEntity, Lon
 
     List<ActivityEntity> findAllByOrderByStartDateDesc();
 
-    List<ActivityEntity> findAllByStartDateAfter(Date after);
+    List<ActivityEntity> findAllByStartDateAfter(LocalDateTime after);
 
     ActivityEntity findByExternalId(String externalId);
+
+    List<ActivityEntity> findBySport(Sport sport);
+
+    List<ActivityEntity> findBySportAndStartDateAfter(Sport sport, LocalDateTime date);
 }

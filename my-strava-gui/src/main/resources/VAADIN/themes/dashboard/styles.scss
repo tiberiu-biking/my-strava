@@ -36,3 +36,17 @@
 .backgroundimage {
   background: url("img/login.png") !important;
 }
+
+.dashboard .dashboard-view.dashboard-view .dashboard-panels .card {
+  padding: 0;
+  height: auto;
+}
+
+.dashboard [class*="margin-bottom"] > tbody > [class*="lastrow"] > td {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.dashboard .v-margin-top {
+  padding-top: 0;
+}

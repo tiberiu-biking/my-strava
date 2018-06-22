@@ -9,7 +9,6 @@ import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Window;
-import com.vaadin.ui.themes.ValoTheme;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -59,9 +58,10 @@ public class LoginScreen extends Window implements RequestHandler {
         String authorizationUrl = authService.getAuthorizationUrl();
         log.info("Authorization url: " + authorizationUrl);
 
-        return new MButton(new ThemeResource("img/connect-with-strava.png"))
-                .withStyleName(ValoTheme.BUTTON_LINK)
-                .withSize("193", "4")
+        return new MButton()
+                .withStyleName("primary-strava")
+                .withIcon(new ThemeResource("img/connect-with-strava.png"))
+                .withUndefinedSize()
                 .withListener(
                         (Button.ClickListener) clickEvent ->
                                 Page.getCurrent().setLocation(authorizationUrl));

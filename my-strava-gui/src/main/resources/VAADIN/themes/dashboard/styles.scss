@@ -34,7 +34,7 @@
 }
 
 .backgroundimage {
-  background: url("img/login.png") !important;
+  background: url("VAADIN/themes/dashboard/img/login.png") !important;
 }
 
 .dashboard .dashboard-view.dashboard-view .dashboard-panels .card {
@@ -49,4 +49,16 @@
 
 .dashboard .v-margin-top {
   padding-top: 0;
+}
+
+.dashboard .v-csslayout-card > .v-margin-top {
+  padding-top: 0;
+}
+
+.dashboard .v-button-primary-strava {
+  color: white;
+  background: #FC4C02;
+  box-shadow: none;
+  border: none;
+  height: 48px;
 }

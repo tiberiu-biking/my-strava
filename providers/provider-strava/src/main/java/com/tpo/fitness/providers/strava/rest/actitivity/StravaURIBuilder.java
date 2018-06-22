@@ -3,7 +3,7 @@ package com.tpo.fitness.providers.strava.rest.actitivity;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
+import java.time.ZoneOffset;
 
 import static com.tpo.fitness.providers.strava.rest.StravaRestConstants.*;
 
@@ -25,7 +25,7 @@ public class StravaURIBuilder {
         return UriComponentsBuilder
                 .fromUriString(ATHLETE_ACTIVITIES_URL)
                 .queryParam(ACCESS_TOKEN, accessToken)
-                .queryParam(AFTER, after.toLocalDate().atStartOfDay(ZoneId.systemDefault()).toEpochSecond())
+                .queryParam(AFTER, after.atZone(ZoneOffset.systemDefault()).toInstant().getEpochSecond())
                 .queryParam(PAGE, page)
                 .toUriString();
     }

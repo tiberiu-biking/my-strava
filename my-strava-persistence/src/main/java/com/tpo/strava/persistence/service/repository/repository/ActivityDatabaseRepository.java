@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 @Service
 class ActivityDatabaseRepository implements ActivityRepository {
 
+    private static final LocalDateTime BEGINNING_OF_TIME = LocalDateTime.ofInstant(Instant.EPOCH, ZoneId.systemDefault());
     private final ActivityJpaRepository activityJpaRepository;
     private final Translator<ActivityEntity, Activity> activityEntityTranslator;
 
@@ -104,7 +106,7 @@ class ActivityDatabaseRepository implements ActivityRepository {
         if (lastActivity != null) {
             return lastActivity.getStartDate();
         } else {
-            return LocalDateTime.MIN;
+            return BEGINNING_OF_TIME;
         }
     }
 }

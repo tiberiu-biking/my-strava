@@ -1,4 +1,4 @@
-package com.tpo.fitness.providers.strava.rest;
+package com.tpo.fitme.strava.client.rest.constants;
 
 /**
  * @author Tiberiu

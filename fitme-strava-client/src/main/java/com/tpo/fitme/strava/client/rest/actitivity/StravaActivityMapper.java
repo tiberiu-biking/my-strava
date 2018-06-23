@@ -1,24 +1,18 @@
-package com.tpo.fitness.providers.strava.rest.actitivity;
+package com.tpo.fitme.strava.client.rest.actitivity;
 
 import com.tpo.fitme.domain.activity.Activity;
+import org.springframework.stereotype.Component;
 
 import java.time.ZoneId;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author Tiberiu
  * @since 08.10.17
  */
-public class StravaActivityTranslator {
+@Component
+class StravaActivityMapper {
 
-    public static List<Activity> translate(List<StravaActivity> stravaActivities) {
-        return stravaActivities.parallelStream()
-                .map(StravaActivityTranslator::translate)
-                .collect(Collectors.toList());
-    }
-
-    public static Activity translate(StravaActivity stravaActivity) {
+    Activity map(StravaActivity stravaActivity) {
         Activity activity = new Activity();
         activity.setExternalId(stravaActivity.getId());
         activity.setAthleteId(stravaActivity.getAthlete().getId());
@@ -27,7 +21,7 @@ public class StravaActivityTranslator {
         activity.setCalories(stravaActivity.getCalories());
 
         activity.setDistance(stravaActivity.getDistance() / 1000);
-        activity.setElevation(stravaActivity.getTotal_elevation_gain());
+        activity.setElevation(stravaActivity.getTotalElevationGain());
         activity.setCalories(stravaActivity.getCalories());
         activity.setCommute(stravaActivity.isCommute());
         activity.setDuration(stravaActivity.getMovingTime() / 60);

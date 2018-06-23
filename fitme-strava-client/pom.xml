@@ -5,25 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>providers</artifactId>
         <groupId>com.tpo.strava</groupId>
+        <artifactId>my-strava-parent</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>provider-strava</artifactId>
+    <artifactId>fitme-strava-client</artifactId>
 
     <dependencies>
-
-        <dependency>
-            <groupId>com.tpo.strava</groupId>
-            <artifactId>provider-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -31,8 +20,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
+            <groupId>com.tpo.strava</groupId>
+            <artifactId>fitme-domain</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -40,6 +30,7 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.4</version>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.retry</groupId>
             <artifactId>spring-retry</artifactId>

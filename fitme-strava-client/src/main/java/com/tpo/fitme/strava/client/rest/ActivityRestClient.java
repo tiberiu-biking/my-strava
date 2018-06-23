@@ -1,4 +1,4 @@
-package com.tpo.fitness.providers.api.service;
+package com.tpo.fitme.strava.client.rest;
 
 
 import com.tpo.fitme.domain.Athlete;
@@ -7,12 +7,6 @@ import com.tpo.fitme.domain.activity.Activity;
 import java.time.LocalDateTime;
 import java.util.List;
 
-/**
- * A REST client for retrieving activities from an activity provider.
- *
- * @author Tiberiu
- * @since 08.10.17
- */
 public interface ActivityRestClient {
 
     List<Activity> findAll(Athlete athlete);

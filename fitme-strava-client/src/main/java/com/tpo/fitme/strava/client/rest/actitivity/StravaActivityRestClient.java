@@ -1,10 +1,11 @@
-package com.tpo.fitness.providers.strava.rest.actitivity;
+package com.tpo.fitme.strava.client.rest.actitivity;
 
 import com.tpo.fitme.domain.Athlete;
 import com.tpo.fitme.domain.activity.Activity;
-import com.tpo.fitness.providers.api.service.ActivityRestClient;
+import com.tpo.fitme.strava.client.rest.ActivityRestClient;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ArrayUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -15,16 +16,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.tpo.fitness.providers.strava.rest.actitivity.StravaURIBuilder.*;
+import static com.tpo.fitme.strava.client.rest.actitivity.StravaURIBuilder.*;
 
 @Slf4j
 @Service
 public class StravaActivityRestClient implements ActivityRestClient {
 
     private final RestTemplate restTemplate;
+    private final StravaActivityMapper stravaActivityMapper;
 
-    public StravaActivityRestClient(RestTemplate restTemplate) {
+    @Autowired
+    public StravaActivityRestClient(RestTemplate restTemplate, StravaActivityMapper stravaActivityMapper) {
         this.restTemplate = restTemplate;
+        this.stravaActivityMapper = stravaActivityMapper;
     }
 
     @Override
@@ -43,7 +47,7 @@ public class StravaActivityRestClient implements ActivityRestClient {
         }
         log.info("Found {} activities", activities.size());
 
-        return activities.stream().map(StravaActivityTranslator::translate).collect(Collectors.toList());
+        return activities.stream().map(stravaActivityMapper::map).collect(Collectors.toList());
     }
 
     @Override
@@ -64,17 +68,17 @@ public class StravaActivityRestClient implements ActivityRestClient {
         }
 
         log.info("Found {} activities after {}", activities.size(), after);
-        return activities.stream().map(StravaActivityTranslator::translate).collect(Collectors.toList());
+        return activities.stream().map(stravaActivityMapper::map).collect(Collectors.toList());
     }
 
 
     @Override
-    @Retryable(label = "getOne")
+    @Retryable
     public Activity getOne(Athlete athlete, String activityId) {
         String uriString = buildActivityDetailsURL(athlete.getAuthToken(), activityId);
         log.info("Get activity details using url {}", uriString);
         StravaActivity stravaActivity = restTemplate.getForObject(uriString, StravaActivity.class);
-        return StravaActivityTranslator.translate(stravaActivity);
+        return stravaActivityMapper.map(stravaActivity);
     }
 
 }

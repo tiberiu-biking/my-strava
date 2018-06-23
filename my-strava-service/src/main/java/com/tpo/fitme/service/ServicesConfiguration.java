@@ -3,9 +3,9 @@ package com.tpo.fitme.service;
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.oauth.OAuth20Service;
 import com.tpo.fitme.service.oauth.StravaOAuth2Api;
-import com.tpo.fitness.providers.api.service.ActivityRestClient;
-import com.tpo.fitness.providers.api.service.AthleteRestClient;
-import com.tpo.fitness.providers.strava.StravaProviderConfig;
+import com.tpo.fitme.strava.client.rest.ActivityRestClient;
+import com.tpo.fitme.strava.client.rest.AthleteRestClient;
+import com.tpo.fitme.strava.client.rest.StravaClientConfig;
 import com.tpo.fitness.service.activity.ActivitiesService;
 import com.tpo.fitness.service.activity.DefaultActivitiesService;
 import com.tpo.fitness.service.athlete.activity.AthleteService;
@@ -27,7 +27,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
  */
 @EnableAsync
 @ComponentScan
-@Import({PersistenceConfiguration.class, StravaProviderConfig.class})
+@Import({PersistenceConfiguration.class, StravaClientConfig.class})
 @Configuration
 public class ServicesConfiguration {
 

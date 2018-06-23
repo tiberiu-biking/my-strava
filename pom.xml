@@ -19,7 +19,7 @@
 
     <modules>
         <module>fitme-domain</module>
-        <module>providers</module>
+        <module>fitme-strava-client</module>
         <module>my-strava-persistence</module>
         <module>my-strava-service</module>
         <module>my-strava-web</module>

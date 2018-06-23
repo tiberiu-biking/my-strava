@@ -1,7 +1,7 @@
 package com.tpo.fitness.service.athlete.activity;
 
 import com.tpo.fitme.domain.Athlete;
-import com.tpo.fitness.providers.api.service.AthleteRestClient;
+import com.tpo.fitme.strava.client.rest.AthleteRestClient;
 import com.tpo.fitness.service.sync.Synchronizer;
 import com.tpo.strava.persistence.service.repository.repository.AthleteRepository;
 import lombok.extern.slf4j.Slf4j;

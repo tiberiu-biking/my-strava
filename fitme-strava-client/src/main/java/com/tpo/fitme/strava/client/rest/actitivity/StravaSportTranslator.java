@@ -1,4 +1,4 @@
-package com.tpo.fitness.providers.strava.rest.actitivity;
+package com.tpo.fitme.strava.client.rest.actitivity;
 
 import com.tpo.fitme.domain.Sport;
 import com.tpo.fitme.domain.WorkoutType;
@@ -11,9 +11,9 @@ import static com.tpo.fitme.domain.Sport.*;
  * @since 21.06.18
  */
 @UtilityClass
-public class StravaSportTranslator {
+class StravaSportTranslator {
 
-    public static Sport translate(String sport, Integer workoutType) {
+    static Sport translate(String sport, Integer workoutType) {
         Sport result = Sport.valueOf(sport.toUpperCase());
 
         if (RIDE.equals(result)) {

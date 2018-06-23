@@ -27,7 +27,7 @@
 
         <dependency>
             <groupId>com.tpo.strava</groupId>
-            <artifactId>provider-strava</artifactId>
+            <artifactId>fitme-strava-client</artifactId>
             <version>${project.version}</version>
         </dependency>
 

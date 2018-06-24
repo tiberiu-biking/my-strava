@@ -36,8 +36,10 @@ public class DefaultActivitiesService implements ActivitiesService {
     }
 
     @Override
-    public List<Activity> findAllBySportSince(Sport sport, LocalDateTime date) {
-        return activityRepository.findBySportAndStartDateAfter(sport, date);
+    public List<Activity> findAllBySportAndYear(Sport sport, int year) {
+        LocalDateTime startOfTheYear = LocalDateTime.of(year, 1, 1, 0, 0, 0);
+        LocalDateTime endOfTheYear = LocalDateTime.of(year, 12, 31, 23, 59, 59);
+        return activityRepository.findBySportAndStartDateBetween(sport, startOfTheYear, endOfTheYear);
     }
 
     @Override

@@ -21,7 +21,7 @@ public interface ActivityRepository {
 
     List<Activity> findBySport(Sport sport);
 
-    List<Activity> findBySportAndStartDateAfter(Sport sport, LocalDateTime date);
+    List<Activity> findBySportAndStartDateBetween(Sport sport, LocalDateTime from, LocalDateTime to);
 
     Optional<Activity> findByExternalId(String externalId);
 

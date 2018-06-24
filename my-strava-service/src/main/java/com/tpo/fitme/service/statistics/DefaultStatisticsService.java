@@ -6,8 +6,6 @@ import com.tpo.fitness.service.activity.ActivitiesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 /**
  * @author Tiberiu
  * @since 19.06.18
@@ -32,8 +30,8 @@ public class DefaultStatisticsService implements StatisticsService {
     }
 
     @Override
-    public float getTotalDistance(Sport sport, LocalDateTime since) {
-        return activitiesService.findAllBySportSince(sport, since)
+    public float getTotalDistance(Sport sport, int year) {
+        return activitiesService.findAllBySportAndYear(sport, year)
                 .stream()
                 .map(Activity::getDistance)
                 .reduce(0f, Float::sum)

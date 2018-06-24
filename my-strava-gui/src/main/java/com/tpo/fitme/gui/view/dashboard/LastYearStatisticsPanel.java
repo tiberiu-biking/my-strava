@@ -6,7 +6,6 @@ import com.vaadin.spring.annotation.UIScope;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
-import java.time.temporal.TemporalAdjusters;
 
 /**
  * @author Tiberiu
@@ -22,8 +21,9 @@ public class LastYearStatisticsPanel extends YearlyStatisticsPanel {
     }
 
     @Override
-    LocalDateTime getYear() {
-        return LocalDateTime.now().minusYears(1).with(TemporalAdjusters.firstDayOfYear());
+    int getYear() {
+        return LocalDateTime.now().minusYears(1).getYear();
+//        return LocalDateTime.now().minusYears(1).with(TemporalAdjusters.firstDayOfYear());
     }
 
     @Override

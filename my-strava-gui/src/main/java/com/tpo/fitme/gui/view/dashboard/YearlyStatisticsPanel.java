@@ -10,7 +10,6 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.themes.ValoTheme;
 
 import javax.annotation.PostConstruct;
-import java.time.LocalDateTime;
 
 import static java.lang.String.valueOf;
 
@@ -19,7 +18,7 @@ import static java.lang.String.valueOf;
  * @since 13.06.18
  */
 abstract class YearlyStatisticsPanel extends HorizontalLayout {
-    abstract LocalDateTime getYear();
+    abstract int getYear();
 
     abstract String getTitle();
 

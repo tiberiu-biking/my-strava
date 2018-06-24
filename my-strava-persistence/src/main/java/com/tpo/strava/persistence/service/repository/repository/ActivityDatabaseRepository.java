@@ -61,8 +61,8 @@ class ActivityDatabaseRepository implements ActivityRepository {
     }
 
     @Override
-    public List<Activity> findBySportAndStartDateAfter(Sport sport, LocalDateTime date) {
-        List<ActivityEntity> activityEntities = activityJpaRepository.findBySportAndStartDateAfter(sport, date);
+    public List<Activity> findBySportAndStartDateBetween(Sport sport, LocalDateTime from, LocalDateTime to) {
+        List<ActivityEntity> activityEntities = activityJpaRepository.findBySportAndStartDateBetween(sport, from, to);
         return activityEntities.parallelStream()
                 .map(activityEntityTranslator::to)
                 .collect(Collectors.toList());

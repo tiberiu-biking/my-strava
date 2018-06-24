@@ -21,5 +21,5 @@ public interface ActivityJpaRepository extends JpaRepository<ActivityEntity, Lon
 
     List<ActivityEntity> findBySport(Sport sport);
 
-    List<ActivityEntity> findBySportAndStartDateAfter(Sport sport, LocalDateTime date);
+    List<ActivityEntity> findBySportAndStartDateBetween(Sport sport, LocalDateTime from, LocalDateTime to);
 }

@@ -6,6 +6,7 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.server.Responsive;
 import com.vaadin.spring.annotation.SpringView;
+import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import javax.annotation.PostConstruct;
 
 import static java.lang.String.valueOf;
 
+@UIScope
 @SpringView(name = DashboardView.VIEW_NAME)
 public final class DashboardView extends Panel implements View {
 
@@ -23,7 +25,10 @@ public final class DashboardView extends Panel implements View {
     private CssLayout dashboardPanels;
 
     @Autowired
-    private ThisYearPanel thisYearPanel;
+    private ThisYearStatisticsPanel thisYearStatisticsPanel;
+
+    @Autowired
+    private LastYearStatisticsPanel lastYearStatisticsPanel;
 
     @Autowired
     private AllTimePanel allTimePanel;
@@ -31,7 +36,6 @@ public final class DashboardView extends Panel implements View {
     @Autowired
     private ActivitiesSummaryService activitiesSummaryService;
 
-    @Autowired
     public DashboardView() {
         addStyleName(ValoTheme.PANEL_BORDERLESS);
         setSizeFull();
@@ -57,7 +61,8 @@ public final class DashboardView extends Panel implements View {
         dashboardPanels = new CssLayout();
         dashboardPanels.addStyleName("dashboard-panels");
         Responsive.makeResponsive(dashboardPanels);
-        dashboardPanels.addComponent(createContentWrapper(thisYearPanel));
+        dashboardPanels.addComponent(createContentWrapper(thisYearStatisticsPanel));
+        dashboardPanels.addComponent(createContentWrapper(lastYearStatisticsPanel));
         dashboardPanels.addComponent(createContentWrapper(allTimePanel));
         return dashboardPanels;
     }

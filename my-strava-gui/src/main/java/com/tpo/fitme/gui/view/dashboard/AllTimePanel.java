@@ -5,6 +5,7 @@ import com.tpo.fitme.gui.component.textfield.ReadOnlyTextField;
 import com.tpo.fitme.gui.constants.ThemedIcon;
 import com.tpo.fitme.service.statistics.StatisticsService;
 import com.vaadin.spring.annotation.SpringComponent;
+import com.vaadin.spring.annotation.UIScope;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
@@ -19,6 +20,7 @@ import static java.lang.String.valueOf;
  * @author Tiberiu
  * @since 13.06.18
  */
+@UIScope
 @SpringComponent
 public class AllTimePanel extends HorizontalLayout {
 

@@ -10,7 +10,8 @@ import java.util.List;
 /**
  * Created by Tiberiu on 23/10/15.
  */
-public interface ActivityJpaRepository extends JpaRepository<ActivityEntity, Long> {
+public interface ActivityRepository extends JpaRepository<ActivityEntity, Long> {
+
     ActivityEntity findFirstByAthleteIdOrderByStartDateDesc(String athleteId);
 
     List<ActivityEntity> findAllByOrderByStartDateDesc();

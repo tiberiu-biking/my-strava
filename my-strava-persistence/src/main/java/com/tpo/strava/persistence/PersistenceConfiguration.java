@@ -1,7 +1,7 @@
 package com.tpo.strava.persistence;
 
 import com.tpo.strava.persistence.entities.ActivityEntity;
-import com.tpo.strava.persistence.repository.ActivityJpaRepository;
+import com.tpo.strava.persistence.repository.ActivityRepository;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -9,13 +9,10 @@ import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-/**
- * Created by Tiberiu on 23/10/15.
- */
 @Configuration
 @EnableTransactionManagement
 @EntityScan(basePackageClasses = {ActivityEntity.class, Jsr310JpaConverters.class})
-@EnableJpaRepositories(basePackageClasses = ActivityJpaRepository.class)
+@EnableJpaRepositories(basePackageClasses = ActivityRepository.class)
 @ComponentScan
 public class PersistenceConfiguration {
 }

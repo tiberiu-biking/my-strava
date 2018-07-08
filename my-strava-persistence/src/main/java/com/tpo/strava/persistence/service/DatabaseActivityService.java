@@ -1,11 +1,11 @@
-package com.tpo.strava.persistence.service.repository.repository;
+package com.tpo.strava.persistence.service;
 
 import com.tpo.fitme.domain.Athlete;
 import com.tpo.fitme.domain.Sport;
 import com.tpo.fitme.domain.activity.Activity;
 import com.tpo.strava.persistence.entities.ActivityEntity;
-import com.tpo.strava.persistence.repository.ActivityJpaRepository;
-import com.tpo.strava.persistence.service.mapper.Translator;
+import com.tpo.strava.persistence.repository.ActivityRepository;
+import com.tpo.strava.persistence.service.mapper.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,56 +23,58 @@ import java.util.stream.Collectors;
  * @since 06.10.17
  */
 @Service
-class ActivityDatabaseRepository implements ActivityRepository {
+class DatabaseActivityService implements ActivityService {
 
     private static final LocalDateTime BEGINNING_OF_TIME = LocalDateTime.ofInstant(Instant.EPOCH, ZoneId.systemDefault());
-    private final ActivityJpaRepository activityJpaRepository;
-    private final Translator<ActivityEntity, Activity> activityEntityTranslator;
+    private final ActivityRepository activityRepository;
+    private final Mapper<ActivityEntity, Activity> activityEntityMapper;
 
     @Autowired
-    public ActivityDatabaseRepository(ActivityJpaRepository activityJpaRepository,
-                                      Translator<ActivityEntity, Activity> activityEntityTranslator) {
-        this.activityJpaRepository = activityJpaRepository;
-        this.activityEntityTranslator = activityEntityTranslator;
+    public DatabaseActivityService(ActivityRepository activityRepository,
+                                   Mapper<ActivityEntity, Activity> activityEntityMapper) {
+        this.activityRepository = activityRepository;
+        this.activityEntityMapper = activityEntityMapper;
     }
 
     @Override
     @Transactional
     public Activity save(Activity activity) {
-        ActivityEntity activityEntity = activityEntityTranslator.from(activity);
+        ActivityEntity activityEntity = activityEntityMapper.from(activity);
         activityEntity.setInsertDate(Instant.now().getEpochSecond());
-        return activityEntityTranslator.to(activityJpaRepository.saveAndFlush(activityEntity));
+        return activityEntityMapper.to(activityRepository.saveAndFlush(activityEntity));
     }
 
     @Override
     public List<Activity> findAll() {
-        List<ActivityEntity> activityEntities = activityJpaRepository.findAll();
+        List<ActivityEntity> activityEntities = activityRepository.findAll();
         return activityEntities.parallelStream()
-                .map(activityEntityTranslator::to)
+                .map(activityEntityMapper::to)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Activity> findBySport(Sport sport) {
-        List<ActivityEntity> activityEntities = activityJpaRepository.findBySport(sport);
+    public List<Activity> findAllBySport(Sport sport) {
+        List<ActivityEntity> activityEntities = activityRepository.findBySport(sport);
         return activityEntities.parallelStream()
-                .map(activityEntityTranslator::to)
+                .map(activityEntityMapper::to)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Activity> findBySportAndStartDateBetween(Sport sport, LocalDateTime from, LocalDateTime to) {
-        List<ActivityEntity> activityEntities = activityJpaRepository.findBySportAndStartDateBetween(sport, from, to);
+    public List<Activity> findAllBySportAndYear(Sport sport, int year) {
+        LocalDateTime startOfTheYear = LocalDateTime.of(year, 1, 1, 0, 0, 0);
+        LocalDateTime endOfTheYear = LocalDateTime.of(year, 12, 31, 23, 59, 59);
+        List<ActivityEntity> activityEntities = activityRepository.findBySportAndStartDateBetween(sport, startOfTheYear, endOfTheYear);
         return activityEntities.parallelStream()
-                .map(activityEntityTranslator::to)
+                .map(activityEntityMapper::to)
                 .collect(Collectors.toList());
     }
 
     @Override
     public Optional<Activity> findByExternalId(String id) {
-        ActivityEntity activityEntity = activityJpaRepository.findByExternalId(id);
+        ActivityEntity activityEntity = activityRepository.findByExternalId(id);
         if (activityEntity != null) {
-            return Optional.of(activityEntityTranslator.to(activityEntity));
+            return Optional.of(activityEntityMapper.to(activityEntity));
         } else {
             return Optional.empty();
         }
@@ -81,28 +83,28 @@ class ActivityDatabaseRepository implements ActivityRepository {
     @Override
     public List<Activity> findAllForTheLast(Duration duration) {
         LocalDateTime after = LocalDateTime.now().minusNanos(duration.toNanos());
-        List<ActivityEntity> activityEntities = activityJpaRepository.findAllByStartDateAfter(after);
+        List<ActivityEntity> activityEntities = activityRepository.findAllByStartDateAfter(after);
         return activityEntities.parallelStream()
-                .map(activityEntityTranslator::to)
+                .map(activityEntityMapper::to)
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<Activity> findAllInChronologicalOrder() {
-        return activityJpaRepository.findAllByOrderByStartDateDesc()
+        return activityRepository.findAllByOrderByStartDateDesc()
                 .stream()
-                .map(activityEntityTranslator::to)
+                .map(activityEntityMapper::to)
                 .collect(Collectors.toList());
     }
 
     @Override
     public Activity findFirstByOrderByInsertDateDesc(Athlete athlete) {
-        return activityEntityTranslator.to(activityJpaRepository.findFirstByAthleteIdOrderByStartDateDesc(athlete.getId()));
+        return activityEntityMapper.to(activityRepository.findFirstByAthleteIdOrderByStartDateDesc(athlete.getId()));
     }
 
     @Override
     public LocalDateTime getLastStartDateByAthlete(Athlete athlete) {
-        ActivityEntity lastActivity = activityJpaRepository.findFirstByAthleteIdOrderByStartDateDesc(athlete.getId());
+        ActivityEntity lastActivity = activityRepository.findFirstByAthleteIdOrderByStartDateDesc(athlete.getId());
         if (lastActivity != null) {
             return lastActivity.getStartDate();
         } else {

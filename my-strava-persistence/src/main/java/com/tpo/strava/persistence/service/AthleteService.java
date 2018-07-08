@@ -1,4 +1,4 @@
-package com.tpo.strava.persistence.service.repository.repository;
+package com.tpo.strava.persistence.service;
 
 import com.tpo.fitme.domain.Athlete;
 
@@ -6,7 +6,7 @@ import com.tpo.fitme.domain.Athlete;
  * @author Tiberiu
  * @since 06.10.17
  */
-public interface AthleteRepository {
+public interface AthleteService {
 
     void save(Athlete athlete);
 

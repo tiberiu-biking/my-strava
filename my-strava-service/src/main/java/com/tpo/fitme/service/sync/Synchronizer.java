@@ -1,4 +1,4 @@
-package com.tpo.fitness.service.sync;
+package com.tpo.fitme.service.sync;
 
 import com.tpo.fitme.domain.Athlete;
 

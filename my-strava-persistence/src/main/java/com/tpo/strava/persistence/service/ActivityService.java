@@ -1,4 +1,4 @@
-package com.tpo.strava.persistence.service.repository.repository;
+package com.tpo.strava.persistence.service;
 
 import com.tpo.fitme.domain.Athlete;
 import com.tpo.fitme.domain.Sport;
@@ -13,15 +13,15 @@ import java.util.Optional;
  * @author Tiberiu
  * @since 06.10.17
  */
-public interface ActivityRepository {
+public interface ActivityService {
 
     Activity save(Activity activity);
 
     List<Activity> findAll();
 
-    List<Activity> findBySport(Sport sport);
+    List<Activity> findAllBySport(Sport sport);
 
-    List<Activity> findBySportAndStartDateBetween(Sport sport, LocalDateTime from, LocalDateTime to);
+    List<Activity> findAllBySportAndYear(Sport sport, int year);
 
     Optional<Activity> findByExternalId(String externalId);
 

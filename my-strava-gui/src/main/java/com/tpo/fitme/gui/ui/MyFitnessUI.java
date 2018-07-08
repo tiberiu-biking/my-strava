@@ -3,6 +3,7 @@ package com.tpo.fitme.gui.ui;
 import com.tpo.fitme.gui.domain.UserSession;
 import com.tpo.fitme.gui.view.login.LoginScreen;
 import com.tpo.fitme.gui.view.main.MainScreen;
+import com.tpo.fitme.service.login.LoginService;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.server.Responsive;
@@ -31,6 +32,9 @@ public class MyFitnessUI extends UI {
     @Autowired
     private Environment environment;
 
+    @Autowired
+    private LoginService loginService;
+
     @Override
     protected void init(VaadinRequest request) {
         Responsive.makeResponsive(this);
@@ -38,7 +42,7 @@ public class MyFitnessUI extends UI {
 
         String token = environment.getProperty("token");
         if (StringUtils.isNotEmpty(token)) {
-            userSession.login(token);
+            userSession.setUser(loginService.login(token));
         }
 
         if (!userSession.isLoggedIn()) {

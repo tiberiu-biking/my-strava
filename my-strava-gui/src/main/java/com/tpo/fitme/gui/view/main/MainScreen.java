@@ -2,7 +2,7 @@ package com.tpo.fitme.gui.view.main;
 
 import com.tpo.fitme.gui.domain.UserSession;
 import com.tpo.fitme.gui.view.menu.DashboardMenu;
-import com.tpo.fitness.service.sync.Synchronizer;
+import com.tpo.fitme.service.sync.Synchronizer;
 import com.vaadin.navigator.Navigator;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;

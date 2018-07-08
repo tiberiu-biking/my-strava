@@ -1,14 +1,12 @@
-package com.tpo.fitness.service.sync.strava;
+package com.tpo.fitme.service.sync;
 
 import com.tpo.fitme.domain.Athlete;
 import com.tpo.fitme.domain.activity.Activity;
 import com.tpo.fitme.strava.client.rest.ActivityRestClient;
-import com.tpo.fitness.service.sync.Synchronizer;
-import com.tpo.strava.persistence.service.repository.repository.ActivityRepository;
+import com.tpo.strava.persistence.service.ActivityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,18 +17,17 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @since 04.10.17
  */
 @Slf4j
-@Service
 public class AsyncSynchronizer implements Synchronizer {
 
     private final ActivityRestClient activityRestClient;
-    private final ActivityRepository activityRepository;
+    private final ActivityService activityService;
     private final AtomicBoolean isInProgress;
 
     @Autowired
     public AsyncSynchronizer(ActivityRestClient activityRestClient,
-                             ActivityRepository activityRepository) {
+                             ActivityService activityService) {
         this.activityRestClient = activityRestClient;
-        this.activityRepository = activityRepository;
+        this.activityService = activityService;
         isInProgress = new AtomicBoolean(false);
     }
 
@@ -42,14 +39,14 @@ public class AsyncSynchronizer implements Synchronizer {
             try {
                 isInProgress.set(true);
                 log.info("Starting sync athlete {} activities...", athlete.getId());
-                LocalDateTime lastStartDate = activityRepository.getLastStartDateByAthlete(athlete);
+                LocalDateTime lastStartDate = activityService.getLastStartDateByAthlete(athlete);
 
                 List<Activity> activities = activityRestClient.getAllAfter(athlete, lastStartDate);
 
                 log.info("Found {} new activities", activities.size());
 
                 activities.stream()
-                        .filter(activity -> !activityRepository.findByExternalId(activity.getExternalId()).isPresent())
+                        .filter(activity -> !activityService.findByExternalId(activity.getExternalId()).isPresent())
                         .map(activity -> activityRestClient.getOne(athlete, activity.getExternalId()))
                         .forEach(this::persistActivity);
 
@@ -61,7 +58,7 @@ public class AsyncSynchronizer implements Synchronizer {
     }
 
     private void persistActivity(Activity activity) {
-        Activity newActivity = activityRepository.save(activity);
+        Activity newActivity = activityService.save(activity);
         log.info("Persisted activity {} with id {}", newActivity.getExternalId(), newActivity.getId());
     }
 }

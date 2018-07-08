@@ -1,8 +1,7 @@
-package com.tpo.strava.persistence.service.mapper.activitiy;
+package com.tpo.strava.persistence.service.mapper;
 
 import com.tpo.fitme.domain.activity.Activity;
 import com.tpo.strava.persistence.entities.ActivityEntity;
-import com.tpo.strava.persistence.service.mapper.Translator;
 import org.springframework.stereotype.Service;
 
 /**
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Service;
  * @since 06.10.17
  */
 @Service
-public class ActivityEntityTranslator implements Translator<ActivityEntity, Activity> {
+public class ActivityEntityMapper implements Mapper<ActivityEntity, Activity> {
 
     @Override
     public ActivityEntity from(Activity activity) {

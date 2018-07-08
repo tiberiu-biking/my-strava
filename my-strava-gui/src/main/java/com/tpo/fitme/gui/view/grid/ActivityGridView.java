@@ -2,7 +2,7 @@ package com.tpo.fitme.gui.view.grid;
 
 import com.tpo.fitme.domain.activity.Activity;
 import com.tpo.fitme.gui.view.chart.AbstractActivitiesView;
-import com.tpo.fitness.service.activity.ActivitiesService;
+import com.tpo.strava.persistence.service.ActivityService;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Grid;
 
@@ -20,15 +20,15 @@ public class ActivityGridView extends AbstractActivitiesView {
 
     public static final String VIEW_NAME = "activities";
 
-    public ActivityGridView(ActivitiesService uiActivitiesService) {
-        super(uiActivitiesService);
+    public ActivityGridView(ActivityService activityService) {
+        super(activityService);
         Grid<Activity> grid = buildGrid();
         addComponent(grid);
     }
 
     private Grid<Activity> buildGrid() {
         Grid<Activity> grid = createGrid();
-        grid.setItems(activitiesService.getAllInChronologicalOrder());
+        grid.setItems(activityService.findAllInChronologicalOrder());
         grid.addColumn(Activity::getName).setCaption("Name").setHidable(false);
         grid.addColumn(Activity::getSport).setCaption("Type").setHidable(false);
 

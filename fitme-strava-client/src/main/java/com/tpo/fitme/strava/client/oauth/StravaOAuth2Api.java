@@ -1,4 +1,4 @@
-package com.tpo.fitme.service.oauth;
+package com.tpo.fitme.strava.client.oauth;
 
 import com.github.scribejava.core.builder.api.ClientAuthenticationType;
 import com.github.scribejava.core.builder.api.DefaultApi20;

@@ -3,7 +3,10 @@ package com.tpo.fitme.gui.view.login;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.github.scribejava.core.model.OAuthConstants;
 import com.github.scribejava.core.oauth.OAuth20Service;
+import com.tpo.fitme.domain.Athlete;
 import com.tpo.fitme.gui.domain.UserSession;
+import com.tpo.fitme.service.login.LoginService;
+import com.tpo.fitme.service.sync.Synchronizer;
 import com.vaadin.server.*;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.ui.Alignment;
@@ -29,6 +32,12 @@ public class LoginScreen extends Window implements RequestHandler {
     @Autowired
     private UserSession userSession;
 
+    @Autowired
+    private Synchronizer synchronizer;
+
+    @Autowired
+    private LoginService loginService;
+
     private String redirectUrl;
 
     public LoginScreen() {
@@ -42,6 +51,32 @@ public class LoginScreen extends Window implements RequestHandler {
         MVerticalLayout mVerticalLayout = buildContent();
         setContent(mVerticalLayout);
         redirectUrl = Page.getCurrent().getLocation().toString();
+    }
+
+    @Override
+    public boolean handleRequest(VaadinSession vaadinSession, VaadinRequest vaadinRequest, VaadinResponse vaadinResponse) throws IOException {
+        String oauthCode = vaadinRequest.getParameter(OAuthConstants.CODE);
+
+        if (oauthCode != null) {
+            try {
+
+                OAuth2AccessToken oAuth2AccessToken = authService.getAccessToken(oauthCode);
+
+                Athlete athlete = loginService.login(oAuth2AccessToken.getAccessToken());
+
+                userSession.setUser(athlete);
+
+                synchronizer.sync(userSession.getUser());
+
+                close();
+                VaadinSession.getCurrent().removeRequestHandler(this);
+                ((VaadinServletResponse) vaadinResponse).getHttpServletResponse().sendRedirect(redirectUrl);
+                return true;
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 
     private MVerticalLayout buildContent() {
@@ -65,23 +100,5 @@ public class LoginScreen extends Window implements RequestHandler {
                 .withListener(
                         (Button.ClickListener) clickEvent ->
                                 Page.getCurrent().setLocation(authorizationUrl));
-    }
-
-    @Override
-    public boolean handleRequest(VaadinSession vaadinSession, VaadinRequest vaadinRequest, VaadinResponse vaadinResponse) throws IOException {
-        String oauthCode = vaadinRequest.getParameter(OAuthConstants.CODE);
-        if (oauthCode != null) {
-            try {
-                OAuth2AccessToken oAuth2AccessToken = authService.getAccessToken(oauthCode);
-                userSession.login(oAuth2AccessToken.getAccessToken());
-                close();
-                VaadinSession.getCurrent().removeRequestHandler(this);
-                ((VaadinServletResponse) vaadinResponse).getHttpServletResponse().sendRedirect(redirectUrl);
-                return true;
-            } catch (InterruptedException | ExecutionException e) {
-                e.printStackTrace();
-            }
-        }
-        return false;
     }
 }

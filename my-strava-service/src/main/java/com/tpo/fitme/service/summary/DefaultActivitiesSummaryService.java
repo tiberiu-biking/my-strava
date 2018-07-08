@@ -3,7 +3,7 @@ package com.tpo.fitme.service.summary;
 import com.tpo.fitme.domain.activity.Activity;
 import com.tpo.fitme.domain.summary.ActivitiesSummary;
 import com.tpo.fitme.domain.summary.Summary;
-import com.tpo.fitness.service.activity.ActivitiesService;
+import com.tpo.strava.persistence.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,11 +22,11 @@ import static com.tpo.fitme.service.constants.Constants.*;
 @Service
 public class DefaultActivitiesSummaryService implements ActivitiesSummaryService {
 
-    private final ActivitiesService activityRepository;
+    private final ActivityService activityService;
 
     @Autowired
-    public DefaultActivitiesSummaryService(ActivitiesService activityRepository) {
-        this.activityRepository = activityRepository;
+    public DefaultActivitiesSummaryService(ActivityService activityService) {
+        this.activityService = activityService;
     }
 
     @Override
@@ -39,9 +39,9 @@ public class DefaultActivitiesSummaryService implements ActivitiesSummaryService
         List<ActivitiesSummary> activitiesSummaries = Collections.emptyList();
         List<Activity> activities;
         if (duration.equals(Duration.ZERO)) {
-            activities = activityRepository.findAll();
+            activities = activityService.findAll();
         } else {
-            activities = activityRepository.findAllSinceTheLast(duration);
+            activities = activityService.findAllForTheLast(duration);
         }
         if (!activities.isEmpty()) {
             LocalDateTime firstStartDate = activities.get(0).getStartDate();
@@ -82,7 +82,7 @@ public class DefaultActivitiesSummaryService implements ActivitiesSummaryService
         return Math.round(divide(generateSummary().getTotalCalories(), CALORIES_PER_BURGER));
     }
 
-    public float divide(float number, float by) {
+    private float divide(float number, float by) {
         float i = number / by;
         return (float) Math.round(i * 100000) / 100000;
     }

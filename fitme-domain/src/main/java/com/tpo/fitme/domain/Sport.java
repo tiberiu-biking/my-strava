@@ -10,6 +10,7 @@ import lombok.Getter;
 public enum Sport {
 
     HIKE("Hiking"),
+    WORKOUT("Workout"),
     ALPINESKI("Alpine Ski"),
     RIDE("Cycling"),
     ROAD("Road Cycling"),

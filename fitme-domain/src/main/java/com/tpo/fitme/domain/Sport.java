@@ -9,6 +9,7 @@ import lombok.Getter;
 @Getter
 public enum Sport {
 
+    SOCCER("Soccer"),
     HIKE("Hiking"),
     WORKOUT("Workout"),
     ALPINESKI("Alpine Ski"),

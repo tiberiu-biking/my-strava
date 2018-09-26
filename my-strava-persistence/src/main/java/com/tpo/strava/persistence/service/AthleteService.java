@@ -10,9 +10,10 @@ public interface AthleteService {
 
     void save(Athlete athlete);
 
-    boolean exists(String id);
+    Athlete findByExternalId(String externalId);
 
-    Athlete fineOne(String id);
+    Athlete fineOne(Long id);
 
     void updateAuthToken(Athlete athlete);
+
 }

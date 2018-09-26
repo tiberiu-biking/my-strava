@@ -27,9 +27,9 @@ public final class DashboardMenu extends CustomComponent {
     private Label    reportsBadge;
     private MenuItem settingsItem;
 
-    public DashboardMenu(Athlete athlete, Synchronizer synchronizer) {
+    public DashboardMenu(Athlete athlete, Synchronizer groupSynchronizer) {
         this.athlete = athlete;
-        this.synchronizer = synchronizer;
+        this.synchronizer = groupSynchronizer;
         setPrimaryStyleName("valo-menu");
         setId(ID);
         setSizeUndefined();

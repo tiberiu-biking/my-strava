@@ -17,15 +17,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @since 04.10.17
  */
 @Slf4j
-public class AsyncSynchronizer implements Synchronizer {
+public class ActivitySynchronizer implements Synchronizer {
 
     private final ActivityRestClient activityRestClient;
     private final ActivityService activityService;
     private final AtomicBoolean isInProgress;
 
     @Autowired
-    public AsyncSynchronizer(ActivityRestClient activityRestClient,
-                             ActivityService activityService) {
+    public ActivitySynchronizer(ActivityRestClient activityRestClient,
+                                ActivityService activityService) {
         this.activityRestClient = activityRestClient;
         this.activityService = activityService;
         isInProgress = new AtomicBoolean(false);

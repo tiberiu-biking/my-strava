@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class Activity {
 
     private Long id;
-    private String athleteId;
+    private Long athleteId;
     private String name;
     private String externalId;
     private Float distance;

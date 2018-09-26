@@ -33,10 +33,6 @@
   color: #FC4C02;
 }
 
-.backgroundimage {
-  background: url("VAADIN/themes/dashboard/img/login.png") !important;
-}
-
 .dashboard .dashboard-view.dashboard-view .dashboard-panels .card {
   padding: 0;
   height: auto;
@@ -61,4 +57,16 @@
   box-shadow: none;
   border: none;
   height: 48px;
+}
+
+.dashboard .v-button-login-strava {
+  border: none;
+  height: 39px;
+  width: 182px;
+  background-image: url(img/connect-with-strava.png);
+}
+
+.dashboard .v-window {
+  width: 300px;
+  height: 200px;
 }

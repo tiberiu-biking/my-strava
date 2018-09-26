@@ -3,9 +3,9 @@ package com.tpo.strava.persistence.entities;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Tiberiu Popa
@@ -17,8 +17,16 @@ import javax.persistence.Id;
 public class AthleteEntity {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column
+    private String externalId;
 
     @Column
     private String authToken;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "athlete_id")
+    private List<GearEntity> gears = new ArrayList<>();
 }

@@ -25,21 +25,27 @@ public class DatabaseAthleteService implements AthleteService {
 
     @Override
     public void save(Athlete athlete) {
-        athleteRepository.save(athleteEntityMapper.from(athlete));
+        athleteRepository.saveAndFlush(athleteEntityMapper.from(athlete));
     }
 
     @Override
-    public boolean exists(String id) {
-        return athleteRepository.exists(id);
+    public Athlete findByExternalId(String id) {
+        return athleteRepository.findByExternalId(id)
+                .map(athleteEntityMapper::to)
+                .orElse(null);
     }
 
     @Override
-    public Athlete fineOne(String id) {
+    public Athlete fineOne(Long id) {
         return athleteEntityMapper.to(athleteRepository.findOne(id));
     }
 
     @Override
     public void updateAuthToken(Athlete athlete) {
-        athleteRepository.save(athleteEntityMapper.from(athlete));
+        athleteRepository.findByExternalId(athlete.getExternalId())
+                .ifPresent(athleteEntity -> {
+                    athleteEntity.setAuthToken(athlete.getAuthToken());
+                    athleteRepository.saveAndFlush(athleteEntity);
+                });
     }
 }

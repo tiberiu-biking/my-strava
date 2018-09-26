@@ -13,7 +13,8 @@ public enum ThemedIcon {
     ROAD("img/road.png"),
     HIKE("img/hike.png"),
     SKI("img/ski.png"),
-    MTB("img/mtb.png");
+    MTB("img/mtb.png"),
+    STRAVA("img/strava-black.png");
 
     private final ThemeResource resource;
 

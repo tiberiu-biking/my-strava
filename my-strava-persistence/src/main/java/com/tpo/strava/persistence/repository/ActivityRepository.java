@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface ActivityRepository extends JpaRepository<ActivityEntity, Long> {
 
-    ActivityEntity findFirstByAthleteIdOrderByStartDateDesc(String athleteId);
+    ActivityEntity findFirstByAthleteIdOrderByStartDateDesc(Long athleteId);
 
     List<ActivityEntity> findAllByOrderByStartDateDesc();
 

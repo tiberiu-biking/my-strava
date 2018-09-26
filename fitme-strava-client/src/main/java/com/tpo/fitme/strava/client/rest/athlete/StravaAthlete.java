@@ -3,10 +3,10 @@ package com.tpo.fitme.strava.client.rest.athlete;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.tpo.fitme.domain.Club;
-import com.tpo.fitme.domain.Gear;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -51,9 +51,9 @@ class StravaAthlete {
 
     private List<Club> clubs;
 
-    private List<Gear> bikes;
+    private List<StravaGear> bikes = new ArrayList<>();
 
-    private List<Gear> shoes;
+    private List<StravaGear> shoes = new ArrayList<>();
 
     private String token;
 

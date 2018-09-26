@@ -20,7 +20,7 @@ public class ActivityEntity {
     private String externalId;
 
     @Column
-    private String athleteId;
+    private Long athleteId;
 
     @Column
     private Long calories;

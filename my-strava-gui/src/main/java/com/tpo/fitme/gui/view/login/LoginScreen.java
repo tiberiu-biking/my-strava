@@ -9,7 +9,6 @@ import com.tpo.fitme.service.login.LoginService;
 import com.tpo.fitme.service.sync.Synchronizer;
 import com.vaadin.server.*;
 import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Window;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +19,8 @@ import org.vaadin.viritin.layouts.MVerticalLayout;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
+
+import static com.vaadin.ui.Alignment.MIDDLE_CENTER;
 
 @Slf4j
 @Scope("prototype")
@@ -40,17 +41,13 @@ public class LoginScreen extends Window implements RequestHandler {
 
     private String redirectUrl;
 
-    public LoginScreen() {
-        super("Login");
-    }
-
     @Override
     public void attach() {
         super.attach();
-        VaadinSession.getCurrent().addRequestHandler(this);
-        MVerticalLayout mVerticalLayout = buildContent();
-        setContent(mVerticalLayout);
         redirectUrl = Page.getCurrent().getLocation().toString();
+        setVisuals();
+        VaadinSession.getCurrent().addRequestHandler(this);
+        setContent(buildContent());
     }
 
     @Override
@@ -81,12 +78,7 @@ public class LoginScreen extends Window implements RequestHandler {
 
     private MVerticalLayout buildContent() {
         Button loginButton = buildOAuthButton();
-        MVerticalLayout mVerticalLayout = new MVerticalLayout(loginButton).alignAll(Alignment.MIDDLE_CENTER).withFullHeight();
-        setModal(true);
-        setWidth("400px");
-        setHeight("300px");
-        addStyleName("login");
-        return mVerticalLayout;
+        return new MVerticalLayout(loginButton).alignAll(MIDDLE_CENTER).withFullHeight();
     }
 
     private Button buildOAuthButton() {
@@ -94,11 +86,16 @@ public class LoginScreen extends Window implements RequestHandler {
         log.info("Authorization url: " + authorizationUrl);
 
         return new MButton()
-                .withStyleName("primary-strava")
-                .withIcon(new ThemeResource("img/connect-with-strava.png"))
+                .withStyleName("login-strava")
                 .withUndefinedSize()
-                .withListener(
-                        (Button.ClickListener) clickEvent ->
-                                Page.getCurrent().setLocation(authorizationUrl));
+                .withListener((Button.ClickListener) clickEvent -> Page.getCurrent().setLocation(authorizationUrl));
     }
+
+    private void setVisuals() {
+        setModal(true);
+        setClosable(false);
+        setDraggable(false);
+        setResizable(false);
+    }
+
 }

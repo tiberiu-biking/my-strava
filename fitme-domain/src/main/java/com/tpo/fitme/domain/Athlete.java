@@ -3,6 +3,7 @@ package com.tpo.fitme.domain;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +13,8 @@ import java.util.List;
 @Setter
 public class Athlete {
 
-    private String id;
+    private Long id;
+    private String externalId;
     private String firstName;
     private String lastName;
     private String profileMediumPicture;
@@ -20,7 +22,6 @@ public class Athlete {
     private String city;
     private String state;
     private String sex;
-    private List<Gear> bikes;
-    private List<Gear> shoes;
+    private List<Gear> gears = new ArrayList<>();
     private String authToken;
 }

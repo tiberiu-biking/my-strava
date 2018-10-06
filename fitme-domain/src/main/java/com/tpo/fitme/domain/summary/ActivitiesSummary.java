@@ -12,10 +12,12 @@ public class ActivitiesSummary {
     private Integer year;
     private Long calories;
     private Float distance;
+    private Float elevation;
     private LocalDateTime dateTime;
 
     public ActivitiesSummary() {
         distance = 0F;
         calories = 0L;
+        elevation = 0F;
     }
 }

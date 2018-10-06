@@ -20,5 +20,7 @@ public interface ActivitiesSummaryService {
 
     long getBeersBurned();
 
+    long getTimesClimbedEverest();
+
     long getBurgerBurned();
 }

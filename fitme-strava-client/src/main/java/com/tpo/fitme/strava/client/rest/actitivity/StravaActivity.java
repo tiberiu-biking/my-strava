@@ -29,7 +29,7 @@ class StravaActivity {
     private Float distance;
 
     @JsonProperty("moving_time")
-    private Integer movingTime;
+    private Long movingTime;
 
     @JsonProperty("elapsed_time")
     private Integer elapsedTime;

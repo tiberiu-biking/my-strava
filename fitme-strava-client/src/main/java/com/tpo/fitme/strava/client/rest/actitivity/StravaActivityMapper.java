@@ -25,7 +25,7 @@ class StravaActivityMapper {
         activity.setCalories(stravaActivity.getCalories());
         activity.setCommute(stravaActivity.isCommute());
         activity.setDuration(stravaActivity.getMovingTime() / 60);
-        activity.setSport(StravaSportTranslator.translate(stravaActivity.getType(), stravaActivity.getWorkoutType()));
+        activity.setSport(StravaSportTranslator.translate(stravaActivity.getType(), stravaActivity.getWorkoutType(), stravaActivity.getName()));
         return activity;
     }
 

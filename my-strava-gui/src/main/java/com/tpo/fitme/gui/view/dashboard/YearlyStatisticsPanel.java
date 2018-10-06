@@ -38,10 +38,11 @@ abstract class YearlyStatisticsPanel extends HorizontalLayout {
 
         details.addComponent(buildTitleLabel());
 
-        details.addComponent(buildField(Sport.ROAD, statisticsService.getTotalDistance(Sport.ROAD, getYear()), ThemedIcon.ROAD));
-        details.addComponent(buildField(Sport.MTB, statisticsService.getTotalDistance(Sport.MTB, getYear()), ThemedIcon.MTB));
-        details.addComponent(buildField(Sport.ALPINESKI, statisticsService.getTotalDistance(Sport.ALPINESKI, getYear()), ThemedIcon.SKI));
-        details.addComponent(buildField(Sport.HIKE, statisticsService.getTotalDistance(Sport.HIKE, getYear()), ThemedIcon.HIKE));
+        details.addComponent(buildField(Sport.ROAD, statisticsService.getTotalDistance(Sport.ROAD, getYear()), ThemedIcon.ROAD, " km"));
+        details.addComponent(buildField(Sport.MTB, statisticsService.getTotalDistance(Sport.MTB, getYear()), ThemedIcon.MTB, " km"));
+        details.addComponent(buildField(Sport.ALPINESKI, statisticsService.getTotalDistance(Sport.ALPINESKI, getYear()), ThemedIcon.SKI, " km"));
+        details.addComponent(buildField(Sport.HIKE, statisticsService.getTotalDistance(Sport.HIKE, getYear()), ThemedIcon.HIKE, " km"));
+        details.addComponent(buildField(Sport.SOCCER, statisticsService.getTotalDuration(Sport.SOCCER, getYear()), ThemedIcon.HIKE, " minutes"));
     }
 
     private FormLayout buildRoot() {
@@ -57,8 +58,8 @@ abstract class YearlyStatisticsPanel extends HorizontalLayout {
         return section;
     }
 
-    private ReadOnlyTextField buildField(Sport sport, float value, ThemedIcon icon) {
-        return new ReadOnlyTextField(sport.getName(), valueOf(value) + " km", icon);
+    private ReadOnlyTextField buildField(Sport sport, float value, ThemedIcon icon, String unit) {
+        return new ReadOnlyTextField(sport.getName(), valueOf(value) + unit, icon);
     }
 
     private void setVisuals() {

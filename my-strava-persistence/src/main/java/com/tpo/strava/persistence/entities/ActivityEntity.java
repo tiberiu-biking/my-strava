@@ -41,7 +41,7 @@ public class ActivityEntity {
     private Float elevation;
 
     @Column
-    private Integer duration;
+    private Long duration;
 
     @Column
     @Enumerated(value = EnumType.STRING)

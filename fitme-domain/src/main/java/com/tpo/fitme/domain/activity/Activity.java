@@ -17,7 +17,7 @@ public class Activity {
     private String name;
     private String externalId;
     private Float distance;
-    private Integer duration;
+    private Long duration;
     private Float elevation;
     private Sport sport;
     private LocalDateTime startDate;

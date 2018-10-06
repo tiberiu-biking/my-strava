@@ -23,7 +23,6 @@ class ThisYearStatisticsPanel extends YearlyStatisticsPanel {
     @Override
     int getYear() {
         return LocalDateTime.now().getYear();
-        //return LocalDateTime.now().minusYears(1).with(TemporalAdjusters.firstDayOfYear());
     }
 
     @Override

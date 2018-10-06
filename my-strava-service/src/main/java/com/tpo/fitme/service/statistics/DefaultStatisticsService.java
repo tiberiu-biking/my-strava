@@ -37,4 +37,12 @@ public class DefaultStatisticsService implements StatisticsService {
                 .reduce(0f, Float::sum)
                 .longValue();
     }
+
+    @Override
+    public long getTotalDuration(Sport sport, int year) {
+        return activityService.findAllBySportAndYear(sport, year)
+                .stream()
+                .map(Activity::getDuration)
+                .reduce(0L, Long::sum);
+    }
 }

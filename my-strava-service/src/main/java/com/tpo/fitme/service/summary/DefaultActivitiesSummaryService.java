@@ -55,6 +55,7 @@ public class DefaultActivitiesSummaryService implements ActivitiesSummaryService
                             (summary.getYear() == startDate.getYear())) {
                         summary.setCalories(summary.getCalories() + activity.getCalories());
                         summary.setDistance(summary.getDistance() + activity.getDistance());
+                        summary.setElevation(summary.getElevation() + activity.getElevation());
                     }
                 }
             }
@@ -75,6 +76,11 @@ public class DefaultActivitiesSummaryService implements ActivitiesSummaryService
     @Override
     public long getBeersBurned() {
         return Math.round(divide(generateSummary().getTotalCalories(), CALORIES_PER_BEER));
+    }
+
+    @Override
+    public long getTimesClimbedEverest() {
+        return Math.round(divide(generateSummary().getTotalElevation(), HEIGHT_EVEREST));
     }
 
     @Override

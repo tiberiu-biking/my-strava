@@ -85,6 +85,9 @@ public final class DashboardView extends Panel implements View {
         SparkCard biersBurnedSparkCard = new SparkCard("beers burned", valueOf(activitiesSummaryService.getBeersBurned()));
         sparks.addComponent(biersBurnedSparkCard);
 
+        SparkCard everestClimbedSparkCard = new SparkCard("times climbed Everest", valueOf(activitiesSummaryService.getTimesClimbedEverest()));
+        sparks.addComponent(everestClimbedSparkCard);
+
         return sparks;
     }
 

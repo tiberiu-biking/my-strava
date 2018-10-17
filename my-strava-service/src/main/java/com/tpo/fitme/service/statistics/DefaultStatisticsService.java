@@ -45,4 +45,12 @@ public class DefaultStatisticsService implements StatisticsService {
                 .map(Activity::getDuration)
                 .reduce(0L, Long::sum);
     }
+
+    @Override
+    public long getTotalDuration(Sport sport) {
+        return activityService.findAllBySport(sport)
+                .stream()
+                .map(Activity::getDuration)
+                .reduce(0L, Long::sum);
+    }
 }

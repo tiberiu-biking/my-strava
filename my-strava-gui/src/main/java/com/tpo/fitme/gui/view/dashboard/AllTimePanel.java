@@ -38,10 +38,11 @@ public class AllTimePanel extends HorizontalLayout {
 
         FormLayout root = buildRoot();
         root.addComponent(buildTitleLabel());
-        root.addComponent(buildField(Sport.ROAD, statisticsService.getTotalDistance(Sport.ROAD), ThemedIcon.ROAD));
-        root.addComponent(buildField(Sport.MTB, statisticsService.getTotalDistance(Sport.MTB), ThemedIcon.MTB));
-        root.addComponent(buildField(Sport.ALPINESKI, statisticsService.getTotalDistance(Sport.ALPINESKI), ThemedIcon.SKI));
-        root.addComponent(buildField(Sport.HIKE, statisticsService.getTotalDistance(Sport.HIKE), ThemedIcon.HIKE));
+        root.addComponent(buildField(Sport.ROAD, statisticsService.getTotalDistance(Sport.ROAD), ThemedIcon.ROAD, " km"));
+        root.addComponent(buildField(Sport.MTB, statisticsService.getTotalDistance(Sport.MTB), ThemedIcon.MTB, " km"));
+        root.addComponent(buildField(Sport.ALPINESKI, statisticsService.getTotalDistance(Sport.ALPINESKI), ThemedIcon.SKI, " km"));
+        root.addComponent(buildField(Sport.HIKE, statisticsService.getTotalDistance(Sport.HIKE), ThemedIcon.HIKE, " km"));
+        root.addComponent(buildField(Sport.SOCCER, statisticsService.getTotalDuration(Sport.SOCCER), ThemedIcon.SOCCER, " minutes"));
     }
 
     private FormLayout buildRoot() {
@@ -58,8 +59,8 @@ public class AllTimePanel extends HorizontalLayout {
         return section;
     }
 
-    private ReadOnlyTextField buildField(Sport sport, float value, ThemedIcon icon) {
-        return new ReadOnlyTextField(sport.getName(), valueOf(value) + " km", icon);
+    private ReadOnlyTextField buildField(Sport sport, float value, ThemedIcon icon, String unit) {
+        return new ReadOnlyTextField(sport.getName(), valueOf(value) + unit, icon);
     }
 
     private void setVisuals() {

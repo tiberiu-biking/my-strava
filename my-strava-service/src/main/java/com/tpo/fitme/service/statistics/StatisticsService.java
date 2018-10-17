@@ -13,4 +13,6 @@ public interface StatisticsService {
     float getTotalDistance(Sport sport, int year);
 
     long getTotalDuration(Sport sport, int year);
+
+    long getTotalDuration(Sport sport);
 }

@@ -22,6 +22,7 @@ import static com.tpo.fitme.strava.client.rest.actitivity.StravaURIBuilder.*;
 @Service
 public class StravaActivityRestClient implements ActivityRestClient {
 
+    private static final int MAX_RETRIES = 10;
     private final RestTemplate restTemplate;
     private final StravaActivityMapper stravaActivityMapper;
 
@@ -32,7 +33,7 @@ public class StravaActivityRestClient implements ActivityRestClient {
     }
 
     @Override
-    @Retryable
+    @Retryable(maxAttempts = MAX_RETRIES)
     public List<Activity> findAll(Athlete athlete) {
         List<StravaActivity> activities = new ArrayList<>();
         boolean isPageLeft = true;
@@ -51,7 +52,7 @@ public class StravaActivityRestClient implements ActivityRestClient {
     }
 
     @Override
-    @Retryable
+    @Retryable(maxAttempts = MAX_RETRIES)
     public List<Activity> getAllAfter(Athlete athlete, LocalDateTime after) {
         List<StravaActivity> activities = new ArrayList<>();
 
@@ -73,7 +74,7 @@ public class StravaActivityRestClient implements ActivityRestClient {
 
 
     @Override
-    @Retryable
+    @Retryable(maxAttempts = MAX_RETRIES)
     public Activity getOne(Athlete athlete, String activityId) {
         String uriString = buildActivityDetailsURL(athlete.getAuthToken(), activityId);
         log.info("Get activity details using url {}", uriString);

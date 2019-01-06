@@ -21,11 +21,11 @@ class StravaActivityMapper {
         activity.setCalories(stravaActivity.getCalories());
 
         activity.setDistance(stravaActivity.getDistance() / 1000);
-        activity.setElevation(stravaActivity.getTotalElevationGain());
-        activity.setCalories(stravaActivity.getCalories());
-        activity.setCommute(stravaActivity.isCommute());
         activity.setDuration(stravaActivity.getMovingTime() / 60);
         activity.setSport(StravaSportTranslator.translate(stravaActivity.getType(), stravaActivity.getWorkoutType(), stravaActivity.getName()));
+        activity.setElevation(stravaActivity.getTotalElevationGain());
+        activity.setCalories(Calories.calculate(stravaActivity.getCalories(), activity.getDuration(), activity.getSport()));
+        activity.setCommute(stravaActivity.isCommute());
         return activity;
     }
 

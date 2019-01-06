@@ -9,19 +9,26 @@ import lombok.Getter;
 @Getter
 public enum Sport {
 
-    SOCCER("Soccer"),
+    SOCCER("Soccer", 10),
     HIKE("Hiking"),
     WORKOUT("Workout"),
-    ALPINESKI("Alpine Ski"),
+    ALPINESKI("Alpine Ski", 7),
     RIDE("Cycling"),
     ROAD("Road Cycling"),
-    RUN("Running"),
+    RUN("Running", 15),
     SWIM("Swimming"),
     MTB("Mountain Biking");
 
     private final String name;
+    private final int caloriesPerMinute;
+
+    Sport(String name, int caloriesPerMinute) {
+        this.name = name;
+        this.caloriesPerMinute = caloriesPerMinute;
+    }
 
     Sport(String name) {
         this.name = name;
+        this.caloriesPerMinute = 0;
     }
 }

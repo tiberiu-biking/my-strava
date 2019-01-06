@@ -13,6 +13,6 @@ public class Constants {
     public static final float CALORIES_PER_BURGER = 295;
     public static final float CALORIES_PER_BEER = 43;
     public static final float HEIGHT_EVEREST = 8848;
-    public static final Duration DEFAULT_CHART_PERIOD = Duration.ofDays(1068);
+    public static final Duration DEFAULT_CHART_PERIOD = Duration.ofDays(712);
 
 }

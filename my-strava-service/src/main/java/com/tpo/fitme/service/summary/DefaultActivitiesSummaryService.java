@@ -100,12 +100,15 @@ public class DefaultActivitiesSummaryService implements ActivitiesSummaryService
         int currentMonth = LocalDateTime.now().getMonthValue();
 
         for (int year = startYear; year <= currentYear; year++)
-            for (int month = 1; month <= currentMonth; month++) {
+            for (int month = 1; month <= 12; month++) {
                 ActivitiesSummary newSummary = new ActivitiesSummary();
                 newSummary.setMonth(month);
                 newSummary.setYear(year);
                 newSummary.setDateTime(LocalDateTime.of(year, month, 1, 0, 0, 0));
                 resultList.add(newSummary);
+                if (year == currentYear && month == currentMonth) {
+                    break;
+                }
             }
         return resultList;
     }

@@ -1,9 +1,6 @@
-${AnsiColor.BRIGHT_WHITE}
-${application.title}
-${application.formatted-version}
-${spring-boot.formatted-version}
-
 ${AnsiColor.RED}
       __o        ,__o        __o           __o
      -\<,      _-\_<,       _`\<,_       _ \<_
 .....O/ O.....(*)/'(*).....(*)/ (*).....(_)/(_)
+${application.title} - ${application.version}
+  powered by Spring Boot ${spring-boot.formatted-version}

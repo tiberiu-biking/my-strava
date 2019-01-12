@@ -1,6 +1,7 @@
 package com.tpo.fitme.gui.view.dashboard;
 
 import com.tpo.fitme.gui.component.card.SparkCard;
+import com.tpo.fitme.gui.domain.UserSession;
 import com.tpo.fitme.service.summary.ActivitiesSummaryService;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -35,6 +36,10 @@ public final class DashboardView extends Panel implements View {
 
     @Autowired
     private ActivitiesSummaryService activitiesSummaryService;
+
+    @Autowired
+    private UserSession userSession;
+    private Long athleteId;
 
     public DashboardView() {
         addStyleName(ValoTheme.PANEL_BORDERLESS);
@@ -73,19 +78,20 @@ public final class DashboardView extends Panel implements View {
         sparks.setWidth("100%");
         Responsive.makeResponsive(sparks);
 
-        SparkCard worldTripsSparkCard = new SparkCard("trips around the world", valueOf(activitiesSummaryService.getTripsAroundTheWorld()));
+        athleteId = userSession.getUser().getId();
+        SparkCard worldTripsSparkCard = new SparkCard("trips around the world", valueOf(activitiesSummaryService.getTripsAroundTheWorld(athleteId)));
         sparks.addComponent(worldTripsSparkCard);
 
-        SparkCard moonTripsSparkCard = new SparkCard("trips to the moon", valueOf(activitiesSummaryService.getTripsToTheMoon()));
+        SparkCard moonTripsSparkCard = new SparkCard("trips to the moon", valueOf(activitiesSummaryService.getTripsToTheMoon(athleteId)));
         sparks.addComponent(moonTripsSparkCard);
 
-        SparkCard burgersBurnedSparkCard = new SparkCard("burgers burned", valueOf(activitiesSummaryService.getBurgerBurned()));
+        SparkCard burgersBurnedSparkCard = new SparkCard("burgers burned", valueOf(activitiesSummaryService.getBurgerBurned(athleteId)));
         sparks.addComponent(burgersBurnedSparkCard);
 
-        SparkCard biersBurnedSparkCard = new SparkCard("beers burned", valueOf(activitiesSummaryService.getBeersBurned()));
+        SparkCard biersBurnedSparkCard = new SparkCard("beers burned", valueOf(activitiesSummaryService.getBeersBurned(athleteId)));
         sparks.addComponent(biersBurnedSparkCard);
 
-        SparkCard everestClimbedSparkCard = new SparkCard("times climbed Everest", valueOf(activitiesSummaryService.getTimesClimbedEverest()));
+        SparkCard everestClimbedSparkCard = new SparkCard("times climbed Everest", valueOf(activitiesSummaryService.getTimesClimbedEverest(athleteId)));
         sparks.addComponent(everestClimbedSparkCard);
 
         return sparks;

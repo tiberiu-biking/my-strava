@@ -1,6 +1,5 @@
 package com.tpo.strava.persistence.service;
 
-import com.tpo.fitme.domain.Athlete;
 import com.tpo.fitme.domain.Sport;
 import com.tpo.fitme.domain.activity.Activity;
 
@@ -17,19 +16,19 @@ public interface ActivityService {
 
     Activity save(Activity activity);
 
-    List<Activity> findAll();
+    List<Activity> findAll(Long athleteId);
 
-    List<Activity> findAllBySport(Sport sport);
+    List<Activity> findAllBySport(Long athleteId, Sport sport);
 
-    List<Activity> findAllBySportAndYear(Sport sport, int year);
+    List<Activity> findAllBySportAndYear(Long athleteId, Sport sport, int year);
 
-    Optional<Activity> findByExternalId(String externalId);
+    Optional<Activity> findByExternalId(Long athleteId, String externalId);
 
-    List<Activity> findAllForTheLast(Duration duration);
+    List<Activity> findAllForTheLast(Long athleteId, Duration duration);
 
-    List<Activity> findAllInChronologicalOrder();
+    List<Activity> findAllInChronologicalOrder(Long athleteId);
 
-    Activity findFirstByOrderByInsertDateDesc(Athlete athleteId);
+    Activity findFirstByOrderByInsertDateDesc(Long athleteId);
 
-    LocalDateTime getLastStartDateByAthlete(Athlete athleteId);
+    LocalDateTime getLastStartDateByAthlete(Long athleteId);
 }

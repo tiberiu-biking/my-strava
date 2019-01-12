@@ -1,6 +1,5 @@
 package com.tpo.strava.persistence.service;
 
-import com.tpo.fitme.domain.Athlete;
 import com.tpo.fitme.domain.Sport;
 import com.tpo.fitme.domain.activity.Activity;
 import com.tpo.strava.persistence.entities.ActivityEntity;
@@ -45,34 +44,34 @@ class DatabaseActivityService implements ActivityService {
     }
 
     @Override
-    public List<Activity> findAll() {
-        List<ActivityEntity> activityEntities = activityRepository.findAll();
+    public List<Activity> findAll(Long athleteId) {
+        List<ActivityEntity> activityEntities = activityRepository.findAllByAthleteId(athleteId);
         return activityEntities.parallelStream()
                 .map(activityEntityMapper::to)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Activity> findAllBySport(Sport sport) {
-        List<ActivityEntity> activityEntities = activityRepository.findBySport(sport);
+    public List<Activity> findAllBySport(Long athleteId, Sport sport) {
+        List<ActivityEntity> activityEntities = activityRepository.findByAthleteIdAndSport(athleteId, sport);
         return activityEntities.parallelStream()
                 .map(activityEntityMapper::to)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Activity> findAllBySportAndYear(Sport sport, int year) {
+    public List<Activity> findAllBySportAndYear(Long athleteId, Sport sport, int year) {
         LocalDateTime startOfTheYear = LocalDateTime.of(year, 1, 1, 0, 0, 0);
         LocalDateTime endOfTheYear = LocalDateTime.of(year, 12, 31, 23, 59, 59);
-        List<ActivityEntity> activityEntities = activityRepository.findBySportAndStartDateBetween(sport, startOfTheYear, endOfTheYear);
+        List<ActivityEntity> activityEntities = activityRepository.findByAthleteIdAndSportAndStartDateBetween(athleteId, sport, startOfTheYear, endOfTheYear);
         return activityEntities.parallelStream()
                 .map(activityEntityMapper::to)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Optional<Activity> findByExternalId(String id) {
-        ActivityEntity activityEntity = activityRepository.findByExternalId(id);
+    public Optional<Activity> findByExternalId(Long athleteId, String id) {
+        ActivityEntity activityEntity = activityRepository.findByAthleteIdAndExternalId(athleteId, id);
         if (activityEntity != null) {
             return Optional.of(activityEntityMapper.to(activityEntity));
         } else {
@@ -81,30 +80,30 @@ class DatabaseActivityService implements ActivityService {
     }
 
     @Override
-    public List<Activity> findAllForTheLast(Duration duration) {
+    public List<Activity> findAllForTheLast(Long athleteId, Duration duration) {
         LocalDateTime after = LocalDateTime.now().minusNanos(duration.toNanos());
-        List<ActivityEntity> activityEntities = activityRepository.findAllByStartDateAfter(after);
+        List<ActivityEntity> activityEntities = activityRepository.findAllByAthleteIdAndStartDateAfter(athleteId, after);
         return activityEntities.parallelStream()
                 .map(activityEntityMapper::to)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Activity> findAllInChronologicalOrder() {
-        return activityRepository.findAllByOrderByStartDateDesc()
+    public List<Activity> findAllInChronologicalOrder(Long athleteId) {
+        return activityRepository.findAllByAthleteIdOrderByStartDateDesc(athleteId)
                 .stream()
                 .map(activityEntityMapper::to)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Activity findFirstByOrderByInsertDateDesc(Athlete athlete) {
-        return activityEntityMapper.to(activityRepository.findFirstByAthleteIdOrderByStartDateDesc(athlete.getId()));
+    public Activity findFirstByOrderByInsertDateDesc(Long athleteId) {
+        return activityEntityMapper.to(activityRepository.findFirstByAthleteIdOrderByStartDateDesc(athleteId));
     }
 
     @Override
-    public LocalDateTime getLastStartDateByAthlete(Athlete athlete) {
-        ActivityEntity lastActivity = activityRepository.findFirstByAthleteIdOrderByStartDateDesc(athlete.getId());
+    public LocalDateTime getLastStartDateByAthlete(Long athleteId) {
+        ActivityEntity lastActivity = activityRepository.findFirstByAthleteIdOrderByStartDateDesc(athleteId);
         if (lastActivity != null) {
             return lastActivity.getStartDate();
         } else {

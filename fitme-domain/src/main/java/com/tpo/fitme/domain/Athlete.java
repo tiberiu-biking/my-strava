@@ -14,7 +14,6 @@ import java.util.List;
 public class Athlete {
 
     private Long id;
-    private String externalId;
     private String firstName;
     private String lastName;
     private String profileMediumPicture;

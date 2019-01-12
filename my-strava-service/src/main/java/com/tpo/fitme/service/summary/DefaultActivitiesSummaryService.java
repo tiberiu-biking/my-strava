@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static com.tpo.fitme.service.constants.Constants.*;
+import static com.tpo.fitme.service.utils.StupidMath.divide;
 
 /**
  * @author Tiberiu
@@ -30,18 +31,18 @@ public class DefaultActivitiesSummaryService implements ActivitiesSummaryService
     }
 
     @Override
-    public Summary generateSummary() {
-        return generateSummarySince(Duration.ZERO);
+    public Summary generateSummary(Long athleteId) {
+        return generateSummarySince(athleteId, Duration.ZERO);
     }
 
     @Override
-    public Summary generateSummarySince(Duration duration) {
+    public Summary generateSummarySince(Long athleteId, Duration duration) {
         List<ActivitiesSummary> activitiesSummaries = Collections.emptyList();
         List<Activity> activities;
         if (duration.equals(Duration.ZERO)) {
-            activities = activityService.findAll();
+            activities = activityService.findAll(athleteId);
         } else {
-            activities = activityService.findAllForTheLast(duration);
+            activities = activityService.findAllForTheLast(athleteId, duration);
         }
         if (!activities.isEmpty()) {
             LocalDateTime firstStartDate = activities.get(0).getStartDate();
@@ -64,34 +65,30 @@ public class DefaultActivitiesSummaryService implements ActivitiesSummaryService
     }
 
     @Override
-    public float getTripsAroundTheWorld() {
-        return divide(generateSummary().getTotalKm(), ECUATOR_LENGTH_KM);
+    public float getTripsAroundTheWorld(Long athleteId) {
+        return divide(generateSummary(athleteId).getTotalKm(), ECUATOR_LENGTH_KM);
     }
 
     @Override
-    public float getTripsToTheMoon() {
-        return divide(generateSummary().getTotalKm(), DISTANCE_TO_THE_MOON_KM);
+    public float getTripsToTheMoon(Long athleteId) {
+        return divide(generateSummary(athleteId).getTotalKm(), DISTANCE_TO_THE_MOON_KM);
     }
 
     @Override
-    public long getBeersBurned() {
-        return Math.round(divide(generateSummary().getTotalCalories(), CALORIES_PER_BEER));
+    public long getBeersBurned(Long athleteId) {
+        return Math.round(divide(generateSummary(athleteId).getTotalCalories(), CALORIES_PER_BEER));
     }
 
     @Override
-    public long getTimesClimbedEverest() {
-        return Math.round(divide(generateSummary().getTotalElevation(), HEIGHT_EVEREST));
+    public long getTimesClimbedEverest(Long athleteId) {
+        return Math.round(divide(generateSummary(athleteId).getTotalElevation(), HEIGHT_EVEREST));
     }
 
     @Override
-    public long getBurgerBurned() {
-        return Math.round(divide(generateSummary().getTotalCalories(), CALORIES_PER_BURGER));
+    public long getBurgerBurned(Long athleteId) {
+        return Math.round(divide(generateSummary(athleteId).getTotalCalories(), CALORIES_PER_BURGER));
     }
 
-    private float divide(float number, float by) {
-        float i = number / by;
-        return (float) Math.round(i * 100000) / 100000;
-    }
 
     private List<ActivitiesSummary> generateEmptySummaries(int startYear) {
         ArrayList<ActivitiesSummary> resultList = new ArrayList<>();

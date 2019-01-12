@@ -29,23 +29,20 @@ public class DatabaseAthleteService implements AthleteService {
     }
 
     @Override
-    public Athlete findByExternalId(String id) {
-        return athleteRepository.findByExternalId(id)
-                .map(athleteEntityMapper::to)
-                .orElse(null);
+    public Athlete findOne(Long id) {
+        AthleteEntity athleteEntity = athleteRepository.findOne(id);
+        if (athleteEntity != null)
+            return athleteEntityMapper.to(athleteEntity);
+        else {
+            return null;
+        }
     }
 
-    @Override
-    public Athlete fineOne(Long id) {
-        return athleteEntityMapper.to(athleteRepository.findOne(id));
-    }
 
     @Override
     public void updateAuthToken(Athlete athlete) {
-        athleteRepository.findByExternalId(athlete.getExternalId())
-                .ifPresent(athleteEntity -> {
-                    athleteEntity.setAuthToken(athlete.getAuthToken());
-                    athleteRepository.saveAndFlush(athleteEntity);
-                });
+        AthleteEntity athleteEntity = athleteRepository.findOne(athlete.getId());
+        athleteEntity.setAuthToken(athlete.getAuthToken());
+        athleteRepository.saveAndFlush(athleteEntity);
     }
 }

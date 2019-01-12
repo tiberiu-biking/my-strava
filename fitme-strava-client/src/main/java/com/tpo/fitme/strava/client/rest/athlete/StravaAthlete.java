@@ -17,7 +17,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 class StravaAthlete {
 
-    private String id;
+    private Long id;
 
     @JsonProperty("resource_state")
     private String resourceState;

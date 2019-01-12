@@ -3,6 +3,7 @@ package com.tpo.fitme.gui.view.dashboard;
 import com.tpo.fitme.domain.Sport;
 import com.tpo.fitme.gui.component.textfield.ReadOnlyTextField;
 import com.tpo.fitme.gui.constants.ThemedIcon;
+import com.tpo.fitme.gui.domain.UserSession;
 import com.tpo.fitme.service.statistics.StatisticsService;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
@@ -25,11 +26,13 @@ import static java.lang.String.valueOf;
 public class AllTimePanel extends HorizontalLayout {
 
     private final StatisticsService statisticsService;
+    private final Long athleteId;
 
     @Autowired
-    public AllTimePanel(StatisticsService statisticsService) {
+    public AllTimePanel(UserSession userSession, StatisticsService statisticsService) {
         super();
         this.statisticsService = statisticsService;
+        this.athleteId = userSession.getUser().getId();
     }
 
     @PostConstruct
@@ -38,11 +41,11 @@ public class AllTimePanel extends HorizontalLayout {
 
         FormLayout root = buildRoot();
         root.addComponent(buildTitleLabel());
-        root.addComponent(buildField(Sport.ROAD, statisticsService.getTotalDistance(Sport.ROAD), ThemedIcon.ROAD, " km"));
-        root.addComponent(buildField(Sport.MTB, statisticsService.getTotalDistance(Sport.MTB), ThemedIcon.MTB, " km"));
-        root.addComponent(buildField(Sport.ALPINESKI, statisticsService.getTotalDistance(Sport.ALPINESKI), ThemedIcon.SKI, " km"));
-        root.addComponent(buildField(Sport.HIKE, statisticsService.getTotalDistance(Sport.HIKE), ThemedIcon.HIKE, " km"));
-        root.addComponent(buildField(Sport.SOCCER, statisticsService.getTotalDuration(Sport.SOCCER), ThemedIcon.SOCCER, " minutes"));
+        root.addComponent(buildField(Sport.ROAD, statisticsService.getTotalDistance(athleteId, Sport.ROAD), ThemedIcon.ROAD, " km"));
+        root.addComponent(buildField(Sport.MTB, statisticsService.getTotalDistance(athleteId, Sport.MTB), ThemedIcon.MTB, " km"));
+        root.addComponent(buildField(Sport.ALPINESKI, statisticsService.getTotalDistance(athleteId, Sport.ALPINESKI), ThemedIcon.SKI, " km"));
+        root.addComponent(buildField(Sport.HIKE, statisticsService.getTotalDistance(athleteId, Sport.HIKE), ThemedIcon.HIKE, " km"));
+        root.addComponent(buildField(Sport.SOCCER, statisticsService.getTotalDuration(athleteId, Sport.SOCCER), ThemedIcon.SOCCER, " minutes"));
     }
 
     private FormLayout buildRoot() {

@@ -1,5 +1,6 @@
 package com.tpo.fitme.gui.view.chart;
 
+import com.tpo.fitme.gui.domain.UserSession;
 import com.tpo.fitme.gui.view.grid.AbstractGridView;
 import com.tpo.strava.persistence.service.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,11 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
  */
 public abstract class AbstractActivitiesView extends AbstractGridView {
 
-    protected ActivityService activityService;
+    protected final ActivityService activityService;
+    protected final Long athleteId;
 
     @Autowired
-    public AbstractActivitiesView(ActivityService activityService) {
+    public AbstractActivitiesView(UserSession userSession, ActivityService activityService) {
         this.activityService = activityService;
+        this.athleteId = userSession.getUser().getId();
     }
 
 }

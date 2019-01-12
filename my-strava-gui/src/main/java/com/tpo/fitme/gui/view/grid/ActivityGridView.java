@@ -1,6 +1,7 @@
 package com.tpo.fitme.gui.view.grid;
 
 import com.tpo.fitme.domain.activity.Activity;
+import com.tpo.fitme.gui.domain.UserSession;
 import com.tpo.fitme.gui.view.chart.AbstractActivitiesView;
 import com.tpo.strava.persistence.service.ActivityService;
 import com.vaadin.spring.annotation.SpringView;
@@ -20,15 +21,15 @@ public class ActivityGridView extends AbstractActivitiesView {
 
     public static final String VIEW_NAME = "activities";
 
-    public ActivityGridView(ActivityService activityService) {
-        super(activityService);
+    public ActivityGridView(UserSession userSession, ActivityService activityService) {
+        super(userSession, activityService);
         Grid<Activity> grid = buildGrid();
         addComponent(grid);
     }
 
     private Grid<Activity> buildGrid() {
         Grid<Activity> grid = createGrid();
-        grid.setItems(activityService.findAllInChronologicalOrder());
+        grid.setItems(activityService.findAllInChronologicalOrder(athleteId));
         grid.addColumn(Activity::getName).setCaption("Name").setHidable(false);
         grid.addColumn(Activity::getSport).setCaption("Type").setHidable(false);
 

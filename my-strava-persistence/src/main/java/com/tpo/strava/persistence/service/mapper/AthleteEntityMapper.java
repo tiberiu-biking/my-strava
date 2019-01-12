@@ -27,7 +27,7 @@ public class AthleteEntityMapper implements Mapper<AthleteEntity, Athlete> {
     @Override
     public AthleteEntity from(Athlete from) {
         AthleteEntity athleteEntity = new AthleteEntity();
-        athleteEntity.setExternalId(from.getExternalId());
+        athleteEntity.setId(from.getId());
         athleteEntity.setAuthToken(from.getAuthToken());
         athleteEntity.getGears().addAll(mapGears(from.getGears()));
         return athleteEntity;
@@ -37,7 +37,6 @@ public class AthleteEntityMapper implements Mapper<AthleteEntity, Athlete> {
     public Athlete to(AthleteEntity to) {
         Athlete athlete = new Athlete();
         athlete.setId(to.getId());
-        athlete.setExternalId(to.getExternalId());
         athlete.setAuthToken(to.getAuthToken());
         athlete.getGears().addAll(mapGearsEntities(to.getGears()));
         return athlete;

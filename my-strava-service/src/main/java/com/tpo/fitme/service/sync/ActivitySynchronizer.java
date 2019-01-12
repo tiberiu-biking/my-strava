@@ -39,14 +39,14 @@ public class ActivitySynchronizer implements Synchronizer {
             try {
                 isInProgress.set(true);
                 log.info("Starting sync athlete {} activities...", athlete.getId());
-                LocalDateTime lastStartDate = activityService.getLastStartDateByAthlete(athlete);
+                LocalDateTime lastStartDate = activityService.getLastStartDateByAthlete(athlete.getId());
 
                 List<Activity> activities = activityRestClient.getAllAfter(athlete, lastStartDate);
 
                 log.info("Found {} new activities", activities.size());
 
                 activities.stream()
-                        .filter(activity -> !activityService.findByExternalId(activity.getExternalId()).isPresent())
+                        .filter(activity -> !activityService.findByExternalId(athlete.getId(), activity.getExternalId()).isPresent())
                         .map(activity -> activityRestClient.getOne(athlete, activity.getExternalId()))
                         .forEach(this::persistActivity);
 

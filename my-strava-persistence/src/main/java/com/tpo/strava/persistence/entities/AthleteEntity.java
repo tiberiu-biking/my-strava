@@ -17,11 +17,8 @@ import java.util.List;
 public class AthleteEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
     @Column
-    private String externalId;
+    private Long id;
 
     @Column
     private String authToken;

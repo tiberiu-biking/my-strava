@@ -24,7 +24,7 @@ class StravaAthleteMapper {
 
     Athlete map(StravaAthlete stravaAthlete) {
         Athlete athlete = new Athlete();
-        athlete.setExternalId(stravaAthlete.getId());
+        athlete.setId(stravaAthlete.getId());
         athlete.setFirstName(stravaAthlete.getFirstName());
         athlete.setLastName(stravaAthlete.getLastName());
         athlete.setProfileMediumPicture(stravaAthlete.getProfileMedium());

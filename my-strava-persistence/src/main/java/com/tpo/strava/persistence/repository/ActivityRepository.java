@@ -12,15 +12,17 @@ import java.util.List;
  */
 public interface ActivityRepository extends JpaRepository<ActivityEntity, Long> {
 
+    List<ActivityEntity> findAllByAthleteId(Long athleteId);
+
     ActivityEntity findFirstByAthleteIdOrderByStartDateDesc(Long athleteId);
 
-    List<ActivityEntity> findAllByOrderByStartDateDesc();
+    List<ActivityEntity> findAllByAthleteIdOrderByStartDateDesc(Long athleteId);
 
-    List<ActivityEntity> findAllByStartDateAfter(LocalDateTime after);
+    List<ActivityEntity> findAllByAthleteIdAndStartDateAfter(Long athleteId, LocalDateTime after);
 
-    ActivityEntity findByExternalId(String externalId);
+    ActivityEntity findByAthleteIdAndExternalId(Long athleteId, String externalId);
 
-    List<ActivityEntity> findBySport(Sport sport);
+    List<ActivityEntity> findByAthleteIdAndSport(Long athleteId, Sport sport);
 
-    List<ActivityEntity> findBySportAndStartDateBetween(Sport sport, LocalDateTime from, LocalDateTime to);
+    List<ActivityEntity> findByAthleteIdAndSportAndStartDateBetween(Long athleteId, Sport sport, LocalDateTime from, LocalDateTime to);
 }

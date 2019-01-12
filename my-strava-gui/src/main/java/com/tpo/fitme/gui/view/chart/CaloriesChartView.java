@@ -5,6 +5,7 @@ import at.downdrown.vaadinaddons.highchartsapi.model.data.base.StringDoubleData;
 import com.tpo.fitme.domain.summary.ActivitiesSummary;
 import com.tpo.fitme.domain.summary.Summary;
 import com.tpo.fitme.gui.component.chart.StravaChart;
+import com.tpo.fitme.gui.domain.UserSession;
 import com.tpo.fitme.service.summary.ActivitiesSummaryService;
 import com.vaadin.spring.annotation.SpringView;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,13 @@ public class CaloriesChartView extends AbstractActivitiesSummaryView {
     public static final String VIEW_NAME = "calories";
 
     @Autowired
-    public CaloriesChartView(ActivitiesSummaryService activitiesSummaryService) {
-        super(activitiesSummaryService);
+    public CaloriesChartView(UserSession userSession, ActivitiesSummaryService activitiesSummaryService) {
+        super(userSession, activitiesSummaryService);
     }
 
     @PostConstruct
     public void init() {
-        addComponent(buildChart(activitiesSummaryService.generateSummarySince(DEFAULT_CHART_PERIOD)));
+        addComponent(buildChart(activitiesSummaryService.generateSummarySince(athleteId, DEFAULT_CHART_PERIOD)));
     }
 
     private StravaChart buildChart(Summary summary) {

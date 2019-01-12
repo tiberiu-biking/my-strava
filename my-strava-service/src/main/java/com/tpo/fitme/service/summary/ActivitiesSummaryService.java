@@ -10,17 +10,17 @@ import java.time.Duration;
  */
 public interface ActivitiesSummaryService {
 
-    Summary generateSummary();
+    Summary generateSummary(Long athleteId);
 
-    Summary generateSummarySince(Duration duration);
+    Summary generateSummarySince(Long athleteId, Duration duration);
 
-    float getTripsAroundTheWorld();
+    float getTripsAroundTheWorld(Long athleteId);
 
-    float getTripsToTheMoon();
+    float getTripsToTheMoon(Long athleteId);
 
-    long getBeersBurned();
+    long getBeersBurned(Long athleteId);
 
-    long getTimesClimbedEverest();
+    long getTimesClimbedEverest(Long athleteId);
 
-    long getBurgerBurned();
+    long getBurgerBurned(Long athleteId);
 }

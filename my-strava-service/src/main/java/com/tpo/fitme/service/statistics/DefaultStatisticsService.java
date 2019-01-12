@@ -21,8 +21,8 @@ public class DefaultStatisticsService implements StatisticsService {
     }
 
     @Override
-    public float getTotalDistance(Sport sport) {
-        return activityService.findAllBySport(sport)
+    public float getTotalDistance(Long athleteId, Sport sport) {
+        return activityService.findAllBySport(athleteId, sport)
                 .stream()
                 .map(Activity::getDistance)
                 .reduce(0f, Float::sum)
@@ -30,8 +30,8 @@ public class DefaultStatisticsService implements StatisticsService {
     }
 
     @Override
-    public float getTotalDistance(Sport sport, int year) {
-        return activityService.findAllBySportAndYear(sport, year)
+    public float getTotalDistance(Long athleteId, Sport sport, int year) {
+        return activityService.findAllBySportAndYear(athleteId, sport, year)
                 .stream()
                 .map(Activity::getDistance)
                 .reduce(0f, Float::sum)
@@ -39,16 +39,16 @@ public class DefaultStatisticsService implements StatisticsService {
     }
 
     @Override
-    public long getTotalDuration(Sport sport, int year) {
-        return activityService.findAllBySportAndYear(sport, year)
+    public long getTotalDuration(Long athleteId, Sport sport, int year) {
+        return activityService.findAllBySportAndYear(athleteId, sport, year)
                 .stream()
                 .map(Activity::getDuration)
                 .reduce(0L, Long::sum);
     }
 
     @Override
-    public long getTotalDuration(Sport sport) {
-        return activityService.findAllBySport(sport)
+    public long getTotalDuration(Long athleteId, Sport sport) {
+        return activityService.findAllBySport(athleteId, sport)
                 .stream()
                 .map(Activity::getDuration)
                 .reduce(0L, Long::sum);

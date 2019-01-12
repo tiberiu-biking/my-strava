@@ -26,7 +26,7 @@ public class DefaultLoginService implements LoginService {
     @Override
     public Athlete login(String authCode) {
         Athlete athlete = stravaAthleteRestClient.getAthlete(authCode);
-        if (athleteService.findByExternalId(athlete.getExternalId()) != null) {
+        if (athleteService.findOne(athlete.getId()) != null) {
             athleteService.updateAuthToken(athlete);
         } else {
             athleteService.save(athlete);

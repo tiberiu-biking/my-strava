@@ -16,6 +16,10 @@ public enum ThemedIcon {
     SKI("img/ski.png"),
     MTB("img/mtb.png"),
     RUN("img/run.png"),
+    YOGA("img/yoga.png"),
+    TRX("img/trx.png"),
+    HIIT("img/hiit.png"),
+    SYNC("img/sync.png"),
     STRAVA("img/strava-black.png");
 
     private final ThemeResource resource;

@@ -13,26 +13,31 @@ import static com.tpo.fitme.domain.Sport.*;
 @UtilityClass
 class StravaSportTranslator {
 
-    static Sport translate(String sport, Integer workoutType, String name) {
+    static Sport translate(String sport, Integer workoutType, String activityName) {
         Sport result = Sport.valueOf(sport.toUpperCase());
 
         if (RIDE.equals(result)) {
             return translateRide(workoutType);
         } else if (WORKOUT.equals(result)) {
-            return translateWorkout(result, name);
+            return translateWorkout(result, activityName);
         } else {
             return result;
         }
     }
 
-    private static Sport translateWorkout(Sport result, String name) {
-        if (name != null &&
-                (name.contains("Soccer") || name.contains("soccer") ||
-                        name.contains("football") || name.contains("Football"))) {
-            return SOCCER;
-        } else {
-            return result;
+    private static Sport translateWorkout(Sport sport, String activityName) {
+        Sport result = sport;
+        if (activityName != null) {
+            activityName = activityName.toUpperCase();
+            if ((activityName.contains("SOCCER") || activityName.contains("FOOTBALL"))) {
+                result = SOCCER;
+            } else if ((activityName.contains("TRX"))) {
+                result = TRX;
+            } else if ((activityName.contains("HIIT"))) {
+                result = HIIT;
+            }
         }
+        return result;
     }
 
     private static Sport translateRide(Integer workoutType) {

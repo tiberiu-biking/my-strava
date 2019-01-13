@@ -46,7 +46,10 @@ abstract class YearlyStatisticsPanel extends HorizontalLayout {
         details.addComponent(buildField(Sport.ALPINESKI, statisticsService.getTotalDistance(athleteId, Sport.ALPINESKI, getYear()), ThemedIcon.SKI, " km"));
         details.addComponent(buildField(Sport.HIKE, statisticsService.getTotalDistance(athleteId, Sport.HIKE, getYear()), ThemedIcon.HIKE, " km"));
         details.addComponent(buildField(Sport.SOCCER, statisticsService.getTotalDuration(athleteId, Sport.SOCCER, getYear()), ThemedIcon.SOCCER, " minutes"));
-        details.addComponent(buildField(Sport.RUN, statisticsService.getTotalDistance(athleteId, Sport.RUN, getYear()), ThemedIcon.SOCCER, " km"));
+        details.addComponent(buildField(Sport.RUN, statisticsService.getTotalDistance(athleteId, Sport.RUN, getYear()), ThemedIcon.RUN, " km"));
+        details.addComponent(buildField(Sport.TRX, statisticsService.getTotalDuration(athleteId, Sport.TRX, getYear()), ThemedIcon.TRX, " minutes"));
+        details.addComponent(buildField(Sport.HIIT, statisticsService.getTotalDuration(athleteId, Sport.HIIT, getYear()), ThemedIcon.HIIT, " minutes"));
+        details.addComponent(buildField(Sport.YOGA, statisticsService.getTotalDuration(athleteId, Sport.YOGA, getYear()), ThemedIcon.YOGA, " minutes"));
     }
 
     private FormLayout buildRoot() {

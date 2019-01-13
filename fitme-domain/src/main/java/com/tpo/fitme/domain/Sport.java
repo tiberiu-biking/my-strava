@@ -18,6 +18,10 @@ public enum Sport {
     RUN("Running", 15),
     SWIM("Swimming"),
     WALK("Walking"),
+    CROSSFIT("Crossfit"),
+    YOGA("Yoga"),
+    TRX("TRX"),
+    HIIT("HIIT"),
     MTB("Mountain Biking");
 
     private final String name;

@@ -46,6 +46,7 @@ public class AllTimePanel extends HorizontalLayout {
         root.addComponent(buildField(Sport.ALPINESKI, statisticsService.getTotalDistance(athleteId, Sport.ALPINESKI), ThemedIcon.SKI, " km"));
         root.addComponent(buildField(Sport.HIKE, statisticsService.getTotalDistance(athleteId, Sport.HIKE), ThemedIcon.HIKE, " km"));
         root.addComponent(buildField(Sport.SOCCER, statisticsService.getTotalDuration(athleteId, Sport.SOCCER), ThemedIcon.SOCCER, " minutes"));
+        root.addComponent(buildField(Sport.RUN, statisticsService.getTotalDistance(athleteId, Sport.RUN), ThemedIcon.RUN, " km"));
     }
 
     private FormLayout buildRoot() {

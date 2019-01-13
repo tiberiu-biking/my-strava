@@ -15,6 +15,7 @@ public enum ThemedIcon {
     SOCCER("img/soccer.png"),
     SKI("img/ski.png"),
     MTB("img/mtb.png"),
+    RUN("img/run.png"),
     STRAVA("img/strava-black.png");
 
     private final ThemeResource resource;

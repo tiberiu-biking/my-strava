@@ -29,6 +29,8 @@ public class AthleteEntityMapper implements Mapper<AthleteEntity, Athlete> {
         AthleteEntity athleteEntity = new AthleteEntity();
         athleteEntity.setId(from.getId());
         athleteEntity.setAuthToken(from.getAuthToken());
+        athleteEntity.setUsername(from.getUsername());
+        athleteEntity.setName(from.getName());
         athleteEntity.getGears().addAll(mapGears(from.getGears()));
         return athleteEntity;
     }
@@ -38,6 +40,8 @@ public class AthleteEntityMapper implements Mapper<AthleteEntity, Athlete> {
         Athlete athlete = new Athlete();
         athlete.setId(to.getId());
         athlete.setAuthToken(to.getAuthToken());
+        athlete.setUsername(to.getUsername());
+        athlete.setName(to.getName());
         athlete.getGears().addAll(mapGearsEntities(to.getGears()));
         return athlete;
     }

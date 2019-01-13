@@ -25,8 +25,8 @@ class StravaAthleteMapper {
     Athlete map(StravaAthlete stravaAthlete) {
         Athlete athlete = new Athlete();
         athlete.setId(stravaAthlete.getId());
-        athlete.setFirstName(stravaAthlete.getFirstName());
-        athlete.setLastName(stravaAthlete.getLastName());
+        athlete.setName(stravaAthlete.getFirstName() + " " + stravaAthlete.getLastName());
+        athlete.setUsername(stravaAthlete.getUsername());
         athlete.setProfileMediumPicture(stravaAthlete.getProfileMedium());
         athlete.getGears().addAll(mapToGear(stravaAthlete.getBikes()));
         athlete.getGears().addAll(mapToGear(stravaAthlete.getShoes()));

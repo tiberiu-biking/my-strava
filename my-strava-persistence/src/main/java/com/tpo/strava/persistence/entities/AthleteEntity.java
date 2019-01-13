@@ -21,6 +21,12 @@ public class AthleteEntity {
     private Long id;
 
     @Column
+    private String username;
+
+    @Column
+    private String name;
+
+    @Column
     private String authToken;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)

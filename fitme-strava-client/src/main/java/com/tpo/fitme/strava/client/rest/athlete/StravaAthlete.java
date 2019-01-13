@@ -22,6 +22,8 @@ class StravaAthlete {
     @JsonProperty("resource_state")
     private String resourceState;
 
+    private String username;
+
     private String firstName;
 
     private String lastName;

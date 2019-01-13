@@ -17,6 +17,7 @@ public enum Sport {
     ROAD("Road Cycling"),
     RUN("Running", 15),
     SWIM("Swimming"),
+    WALK("Walking"),
     MTB("Mountain Biking");
 
     private final String name;

@@ -1,5 +1,6 @@
 package com.tpo.fitme.gui.constants;
 
+import com.tpo.fitme.domain.Sport;
 import com.vaadin.server.ThemeResource;
 import lombok.Getter;
 
@@ -8,13 +9,18 @@ import lombok.Getter;
  * @since 19.06.18
  */
 @Getter
-public enum ThemedIcon {
+public enum SportIcon {
 
-    ROAD("img/road.png"),
-    HIKE("img/hike.png"),
     SOCCER("img/soccer.png"),
-    SKI("img/ski.png"),
+    WALK("img/walk.png"),
+    CROSSFIT("img/crossfit.png"),
+    SWIM("img/swim.png"),
+    WORKOUT("img/workout.png"),
+    HIKE("img/hike.png"),
+    ALPINESKI("img/ski.png"),
     MTB("img/mtb.png"),
+    RIDE("img/ride.png"),
+    ROAD("img/road.png"),
     RUN("img/run.png"),
     YOGA("img/yoga.png"),
     TRX("img/trx.png"),
@@ -24,7 +30,11 @@ public enum ThemedIcon {
 
     private final ThemeResource resource;
 
-    ThemedIcon(String themedResourceId) {
+    SportIcon(String themedResourceId) {
         resource = new ThemeResource(themedResourceId);
+    }
+
+    public static SportIcon forSport(Sport sport) {
+        return SportIcon.valueOf(sport.name());
     }
 }

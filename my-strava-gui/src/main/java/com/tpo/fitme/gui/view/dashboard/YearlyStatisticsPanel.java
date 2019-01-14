@@ -2,7 +2,7 @@ package com.tpo.fitme.gui.view.dashboard;
 
 import com.tpo.fitme.domain.Sport;
 import com.tpo.fitme.gui.component.textfield.ReadOnlyTextField;
-import com.tpo.fitme.gui.constants.ThemedIcon;
+import com.tpo.fitme.gui.constants.SportIcon;
 import com.tpo.fitme.gui.domain.UserSession;
 import com.tpo.fitme.service.statistics.StatisticsService;
 import com.vaadin.ui.FormLayout;
@@ -11,6 +11,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.themes.ValoTheme;
 
 import javax.annotation.PostConstruct;
+import java.util.Arrays;
 
 import static java.lang.String.valueOf;
 
@@ -37,19 +38,25 @@ abstract class YearlyStatisticsPanel extends HorizontalLayout {
         setVisuals();
 
         FormLayout details = buildRoot();
-        addComponentsAndExpand(details);
-
         details.addComponent(buildTitleLabel());
+        addStatisticsPanels(details);
+        addComponentsAndExpand(details);
+    }
 
-        details.addComponent(buildField(Sport.ROAD, statisticsService.getTotalDistance(athleteId, Sport.ROAD, getYear()), ThemedIcon.ROAD, " km"));
-        details.addComponent(buildField(Sport.MTB, statisticsService.getTotalDistance(athleteId, Sport.MTB, getYear()), ThemedIcon.MTB, " km"));
-        details.addComponent(buildField(Sport.ALPINESKI, statisticsService.getTotalDistance(athleteId, Sport.ALPINESKI, getYear()), ThemedIcon.SKI, " km"));
-        details.addComponent(buildField(Sport.HIKE, statisticsService.getTotalDistance(athleteId, Sport.HIKE, getYear()), ThemedIcon.HIKE, " km"));
-        details.addComponent(buildField(Sport.SOCCER, statisticsService.getTotalDuration(athleteId, Sport.SOCCER, getYear()), ThemedIcon.SOCCER, " minutes"));
-        details.addComponent(buildField(Sport.RUN, statisticsService.getTotalDistance(athleteId, Sport.RUN, getYear()), ThemedIcon.RUN, " km"));
-        details.addComponent(buildField(Sport.TRX, statisticsService.getTotalDuration(athleteId, Sport.TRX, getYear()), ThemedIcon.TRX, " minutes"));
-        details.addComponent(buildField(Sport.HIIT, statisticsService.getTotalDuration(athleteId, Sport.HIIT, getYear()), ThemedIcon.HIIT, " minutes"));
-        details.addComponent(buildField(Sport.YOGA, statisticsService.getTotalDuration(athleteId, Sport.YOGA, getYear()), ThemedIcon.YOGA, " minutes"));
+    private void addStatisticsPanels(FormLayout details) {
+        Arrays.stream(Sport.values()).forEach(sport -> {
+
+            float value;
+            if (Sport.Unit.KM.equals(sport.getUnit())) {
+                value = statisticsService.getTotalDistance(athleteId, sport, getYear());
+            } else {
+                value = statisticsService.getTotalDuration(athleteId, sport, getYear());
+            }
+            if (value > 0) {
+                details.addComponent(buildField(sport, value, SportIcon.forSport(sport), sport.getUnit().getUnit()));
+
+            }
+        });
     }
 
     private FormLayout buildRoot() {
@@ -65,8 +72,8 @@ abstract class YearlyStatisticsPanel extends HorizontalLayout {
         return section;
     }
 
-    private ReadOnlyTextField buildField(Sport sport, float value, ThemedIcon icon, String unit) {
-        return new ReadOnlyTextField(sport.getName(), valueOf(value) + unit, icon);
+    private ReadOnlyTextField buildField(Sport sport, float value, SportIcon icon, String unit) {
+        return new ReadOnlyTextField(sport.getCaption(), valueOf(value) + " " + unit, icon);
     }
 
     private void setVisuals() {

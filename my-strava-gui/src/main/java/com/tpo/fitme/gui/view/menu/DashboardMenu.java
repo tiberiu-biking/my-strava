@@ -1,7 +1,7 @@
 package com.tpo.fitme.gui.view.menu;
 
 import com.tpo.fitme.domain.Athlete;
-import com.tpo.fitme.gui.constants.ThemedIcon;
+import com.tpo.fitme.gui.constants.SportIcon;
 import com.tpo.fitme.gui.navigator.DashboardViewType;
 import com.tpo.fitme.service.sync.Synchronizer;
 import com.vaadin.icons.VaadinIcons;
@@ -69,7 +69,7 @@ public final class DashboardMenu extends CustomComponent {
         settings.addStyleName("user-menu");
         settingsItem = settings.addItem("", new ExternalResource(athlete.getProfileMediumPicture()), null);
 
-        settingsItem.addItem("Sync", ThemedIcon.SYNC.getResource(), (MenuBar.Command) selectedItem -> {
+        settingsItem.addItem("Sync", SportIcon.SYNC.getResource(), (MenuBar.Command) selectedItem -> {
             Notification.show("Synchronization started!");
             synchronizer.sync(athlete);
         });

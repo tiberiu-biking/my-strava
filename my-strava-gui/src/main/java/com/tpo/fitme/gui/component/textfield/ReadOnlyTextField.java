@@ -1,6 +1,6 @@
 package com.tpo.fitme.gui.component.textfield;
 
-import com.tpo.fitme.gui.constants.ThemedIcon;
+import com.tpo.fitme.gui.constants.SportIcon;
 import com.vaadin.ui.TextField;
 
 /**
@@ -9,9 +9,9 @@ import com.vaadin.ui.TextField;
  */
 public class ReadOnlyTextField extends TextField {
 
-    public ReadOnlyTextField(String caption, String value, ThemedIcon themedIcon) {
+    public ReadOnlyTextField(String caption, String value, SportIcon sportIcon) {
         super(caption, value);
         setReadOnly(true);
-        setIcon(themedIcon.getResource());
+        setIcon(sportIcon.getResource());
     }
 }

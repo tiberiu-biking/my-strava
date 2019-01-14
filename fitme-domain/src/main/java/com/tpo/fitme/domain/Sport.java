@@ -1,6 +1,7 @@
 package com.tpo.fitme.domain;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 /**
  * @author Tiberiu
@@ -9,31 +10,43 @@ import lombok.Getter;
 @Getter
 public enum Sport {
 
-    SOCCER("Soccer", 10),
-    HIKE("Hiking"),
-    WORKOUT("Workout"),
-    ALPINESKI("Alpine Ski", 7),
-    RIDE("Cycling"),
-    ROAD("Road Cycling"),
-    RUN("Running", 15),
-    SWIM("Swimming"),
-    WALK("Walking"),
-    CROSSFIT("Crossfit"),
-    YOGA("Yoga"),
-    TRX("TRX"),
-    HIIT("HIIT"),
-    MTB("Mountain Biking");
+    SOCCER("Soccer", Unit.MIN, 10),
+    HIKE("Hiking", Unit.KM),
+    ALPINESKI("Alpine Ski", Unit.KM, 7),
+    ROAD("Road Cycling", Unit.KM),
+    MTB("Mountain Biking", Unit.KM),
+    WORKOUT("Workout", Unit.MIN),
+    RIDE("Cycling", Unit.KM),
+    RUN("Running", Unit.KM, 15),
+    SWIM("Swimming", Unit.KM),
+    WALK("Walking", Unit.KM),
+    CROSSFIT("Crossfit", Unit.MIN),
+    YOGA("Yoga", Unit.MIN),
+    TRX("TRX", Unit.MIN),
+    HIIT("HIIT", Unit.MIN);
 
-    private final String name;
+    private final String caption;
     private final int caloriesPerMinute;
+    private final Unit unit;
 
-    Sport(String name, int caloriesPerMinute) {
-        this.name = name;
+    Sport(String caption, Unit unit, int caloriesPerMinute) {
+        this.caption = caption;
+        this.unit = unit;
         this.caloriesPerMinute = caloriesPerMinute;
     }
 
-    Sport(String name) {
-        this.name = name;
+    Sport(String caption, Unit unit) {
+        this.caption = caption;
+        this.unit = unit;
         this.caloriesPerMinute = 0;
+    }
+
+    @Getter
+    @RequiredArgsConstructor
+    public enum Unit {
+        MIN("minutes"),
+        KM("km");
+        private final String unit;
+
     }
 }

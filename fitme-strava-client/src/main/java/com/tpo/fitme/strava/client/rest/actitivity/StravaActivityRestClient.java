@@ -22,7 +22,7 @@ import static com.tpo.fitme.strava.client.rest.actitivity.StravaURIBuilder.*;
 @Service
 public class StravaActivityRestClient implements ActivityRestClient {
 
-    private static final int MAX_RETRIES = 10;
+    private static final int MAX_RETRIES = 30;
     private final RestTemplate restTemplate;
     private final StravaActivityMapper stravaActivityMapper;
 

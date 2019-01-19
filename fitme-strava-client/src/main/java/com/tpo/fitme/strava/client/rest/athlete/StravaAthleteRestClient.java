@@ -5,6 +5,7 @@ import com.tpo.fitme.strava.client.rest.AthleteRestClient;
 import com.tpo.fitme.strava.client.rest.constants.StravaRestConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -27,6 +28,7 @@ public class StravaAthleteRestClient implements AthleteRestClient {
     }
 
     @Override
+    @Retryable(maxAttempts = 10)
     public Athlete getAthlete(String authToken) {
         String uriString = UriComponentsBuilder
                 .fromUriString(StravaRestConstants.ATHLETE_URL)

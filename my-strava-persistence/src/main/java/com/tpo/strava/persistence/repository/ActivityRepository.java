@@ -25,4 +25,6 @@ public interface ActivityRepository extends JpaRepository<ActivityEntity, Long> 
     List<ActivityEntity> findByAthleteIdAndSport(Long athleteId, Sport sport);
 
     List<ActivityEntity> findByAthleteIdAndSportAndStartDateBetween(Long athleteId, Sport sport, LocalDateTime from, LocalDateTime to);
+
+    List<ActivityEntity> findByAthleteIdAndStartDateBetween(Long athleteId, LocalDateTime from, LocalDateTime to);
 }

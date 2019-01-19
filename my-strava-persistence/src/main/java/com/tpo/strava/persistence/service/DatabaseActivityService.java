@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static com.tpo.strava.persistence.service.utils.Calendar.endOfTheYear;
+import static com.tpo.strava.persistence.service.utils.Calendar.startOfTheYear;
+
 /**
  * @author Tiberiu
  * @since 06.10.17
@@ -61,12 +64,23 @@ class DatabaseActivityService implements ActivityService {
 
     @Override
     public List<Activity> findAllBySportAndYear(Long athleteId, Sport sport, int year) {
-        LocalDateTime startOfTheYear = LocalDateTime.of(year, 1, 1, 0, 0, 0);
-        LocalDateTime endOfTheYear = LocalDateTime.of(year, 12, 31, 23, 59, 59);
+        LocalDateTime startOfTheYear = startOfTheYear(year);
+        LocalDateTime endOfTheYear = endOfTheYear(year);
         List<ActivityEntity> activityEntities = activityRepository.findByAthleteIdAndSportAndStartDateBetween(athleteId, sport, startOfTheYear, endOfTheYear);
         return activityEntities.parallelStream()
                 .map(activityEntityMapper::to)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Activity> findAllByYear(Long athleteId, int year) {
+        LocalDateTime startOfTheYear = startOfTheYear(year);
+        LocalDateTime endOfTheYear = endOfTheYear(year);
+        List<ActivityEntity> activityEntities = activityRepository.findByAthleteIdAndStartDateBetween(athleteId, startOfTheYear, endOfTheYear);
+        return activityEntities.parallelStream()
+                .map(activityEntityMapper::to)
+                .collect(Collectors.toList());
+
     }
 
     @Override

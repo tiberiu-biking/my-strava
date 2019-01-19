@@ -22,6 +22,8 @@ public interface ActivityService {
 
     List<Activity> findAllBySportAndYear(Long athleteId, Sport sport, int year);
 
+    List<Activity> findAllByYear(Long athleteId, int year);
+
     Optional<Activity> findByExternalId(Long athleteId, String externalId);
 
     List<Activity> findAllForTheLast(Long athleteId, Duration duration);

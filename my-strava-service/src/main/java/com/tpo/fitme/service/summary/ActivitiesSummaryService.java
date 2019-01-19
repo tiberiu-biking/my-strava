@@ -23,4 +23,6 @@ public interface ActivitiesSummaryService {
     long getTimesClimbedEverest(Long athleteId);
 
     long getBurgerBurned(Long athleteId);
+
+    int getActiveDays(Long athleteId, int year);
 }

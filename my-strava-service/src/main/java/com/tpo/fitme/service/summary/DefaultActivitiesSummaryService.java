@@ -89,6 +89,20 @@ public class DefaultActivitiesSummaryService implements ActivitiesSummaryService
         return Math.round(divide(generateSummary(athleteId).getTotalCalories(), CALORIES_PER_BURGER));
     }
 
+    @Override
+    public int getActiveDays(Long athleteId, int year) {
+        List<Activity> activities = activityService.findAllByYear(athleteId, year);
+        int result = 0;
+        int day = 0;
+        for (Activity activity : activities) {
+            if (activity.getStartDate().getDayOfMonth() != day) {
+                result++;
+                day = activity.getStartDate().getDayOfMonth();
+            }
+        }
+        return result;
+    }
+
 
     private List<ActivitiesSummary> generateEmptySummaries(int startYear) {
         ArrayList<ActivitiesSummary> resultList = new ArrayList<>();

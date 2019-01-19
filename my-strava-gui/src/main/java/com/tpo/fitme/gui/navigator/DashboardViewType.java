@@ -1,5 +1,6 @@
 package com.tpo.fitme.gui.navigator;
 
+import com.tpo.fitme.gui.view.chart.ActiveView;
 import com.tpo.fitme.gui.view.chart.CaloriesChartView;
 import com.tpo.fitme.gui.view.chart.DistanceChartView;
 import com.tpo.fitme.gui.view.dashboard.DashboardView;
@@ -14,6 +15,7 @@ public enum DashboardViewType {
     DASHBOARD(DashboardView.VIEW_NAME, DashboardView.class, VaadinIcons.HOME, "Dashboard"),
     CALORIES(CaloriesChartView.VIEW_NAME, CaloriesChartView.class, VaadinIcons.FIRE, "Calories"),
     DISTANCES(DistanceChartView.VIEW_NAME, DistanceChartView.class, VaadinIcons.BAR_CHART, "Distances"),
+    ACTIVE(ActiveView.VIEW_NAME, ActiveView.class, VaadinIcons.BOLT, "Active"),
     GEAR(GearsGridView.VIEW_NAME, GearsGridView.class, VaadinIcons.GAMEPAD, "Gear"),
     TROPHY_ROOM(DistanceChartView.VIEW_NAME, DistanceChartView.class, VaadinIcons.MEDAL, "Trophy Room"),
     WORKOUTS(ActivityGridView.VIEW_NAME, ActivityGridView.class, VaadinIcons.GRID, "Workouts");

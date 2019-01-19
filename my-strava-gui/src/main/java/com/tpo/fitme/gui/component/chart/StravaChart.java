@@ -10,7 +10,7 @@ import at.downdrown.vaadinaddons.highchartsapi.model.data.HighChartsData;
 import at.downdrown.vaadinaddons.highchartsapi.model.plotoptions.ColumnChartPlotOptions;
 import at.downdrown.vaadinaddons.highchartsapi.model.series.ColumnChartSeries;
 import com.tpo.fitme.domain.summary.ActivitiesSummary;
-import com.vaadin.shared.ui.colorpicker.Color;
+import com.tpo.fitme.gui.constants.CustomColors;
 import com.vaadin.ui.VerticalLayout;
 
 import java.time.LocalDateTime;
@@ -18,6 +18,8 @@ import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import static java.util.Collections.singletonList;
 
 /**
  * Created by Tiberiu on 29/10/15.
@@ -63,10 +65,7 @@ public abstract class StravaChart extends VerticalLayout {
         ColumnChartSeries column = new ColumnChartSeries(this.columnName, buildColumnValues());
         columnConfiguration.getSeriesList().add(column);
 
-        List<Color> colors = new ArrayList<>();
-        colors.add(new Color(0, 127, 182));
-//        colors.add(new Color(253, 112, 53));
-        columnConfiguration.setColors(colors);
+        columnConfiguration.setColors(singletonList(CustomColors.ORANGE));
 
         HighChart columnChart = null;
         try {

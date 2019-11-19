@@ -16,7 +16,7 @@ public class StravaOAuth2Api extends DefaultApi20 {
 
     @Override
     protected String getAuthorizationBaseUrl() {
-        return "https://www.strava.com/oauth/authorize?approval_prompt=auto&scope=read_all";
+        return "https://www.strava.com/oauth/authorize?approval_prompt=auto";
     }
 
     @Override

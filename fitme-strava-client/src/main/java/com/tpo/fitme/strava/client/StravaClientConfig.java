@@ -20,7 +20,7 @@ import org.springframework.web.client.RestTemplate;
 @ComponentScan
 public class StravaClientConfig {
 
-    private static final String OAUTH_PUBLIC_SCOPE = "read_all";
+    private static final String OAUTH_PUBLIC_SCOPE = "read_all,activity:read_all";
 
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {

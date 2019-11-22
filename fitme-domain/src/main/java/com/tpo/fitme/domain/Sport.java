@@ -23,6 +23,7 @@ public enum Sport {
     CROSSFIT("Crossfit", Unit.MIN),
     YOGA("Yoga", Unit.MIN),
     TRX("TRX", Unit.MIN),
+    WEIGHTTRAINING("Weight Training", Unit.MIN),
     HIIT("HIIT", Unit.MIN);
 
     private final String caption;
@@ -40,6 +41,7 @@ public enum Sport {
         this.unit = unit;
         this.caloriesPerMinute = 0;
     }
+
 
     @Getter
     @RequiredArgsConstructor

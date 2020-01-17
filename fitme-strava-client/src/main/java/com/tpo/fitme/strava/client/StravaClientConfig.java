@@ -25,8 +25,8 @@ public class StravaClientConfig {
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder restTemplateBuilder) {
         return restTemplateBuilder
-                .setConnectTimeout(3000)
-                .setReadTimeout(3000)
+                .setConnectTimeout(30000)
+                .setReadTimeout(30000)
                 .build();
     }
 

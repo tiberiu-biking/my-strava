@@ -31,8 +31,10 @@ class StravaSportTranslator {
             activityName = activityName.toUpperCase();
             if ((activityName.contains("SOCCER") || activityName.contains("FOOTBALL"))) {
                 result = SOCCER;
-            } else if ((activityName.contains("TRX"))) {
+            } else if (activityName.contains("TRX")) {
                 result = TRX;
+            } else if (activityName.contains("TT") || activityName.contains("Table Tennis") || activityName.contains("Tischtennis")) {
+                result = TABLETENNIS;
             } else if ((activityName.contains("HIIT"))) {
                 result = HIIT;
             }

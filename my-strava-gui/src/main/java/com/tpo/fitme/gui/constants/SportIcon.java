@@ -26,6 +26,7 @@ public enum SportIcon {
     YOGA("img/yoga.png"),
     WEIGHTTRAINING("img/weightlifting.png"),
     TRX("img/trx.png"),
+    TABLETENNIS("img/table-tennis.png"),
     HIIT("img/hiit.png"),
     SYNC("img/sync.png"),
     STRAVA("img/strava-black.png");

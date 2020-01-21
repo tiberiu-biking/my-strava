@@ -24,6 +24,7 @@ public enum Sport {
     ICESKATE("Ice Skate", Unit.MIN),
     YOGA("Yoga", Unit.MIN),
     TRX("TRX", Unit.MIN),
+    TABLETENNIS("Table Tennis", Unit.MIN),
     WEIGHTTRAINING("Weight Training", Unit.MIN),
     HIIT("HIIT", Unit.MIN);
 

@@ -3,6 +3,7 @@ package com.tpo.fitme.strava.client.rest.actitivity;
 import com.tpo.fitme.domain.Sport;
 import com.tpo.fitme.domain.WorkoutType;
 import lombok.experimental.UtilityClass;
+import lombok.val;
 
 import static com.tpo.fitme.domain.Sport.*;
 
@@ -13,13 +14,13 @@ import static com.tpo.fitme.domain.Sport.*;
 @UtilityClass
 class StravaSportTranslator {
 
-    static Sport translate(String sport, Integer workoutType, String activityName) {
-        Sport result = Sport.valueOf(sport.toUpperCase());
+    static Sport translate(StravaActivity stravaActivity) {
+        Sport result = Sport.valueOf(stravaActivity.getType().toUpperCase());
 
         if (RIDE.equals(result)) {
-            return translateRide(workoutType);
+            return translateRide(stravaActivity);
         } else if (WORKOUT.equals(result)) {
-            return translateWorkout(result, activityName);
+            return translateWorkout(result, stravaActivity.getName());
         } else {
             return result;
         }
@@ -42,7 +43,11 @@ class StravaSportTranslator {
         return result;
     }
 
-    private static Sport translateRide(Integer workoutType) {
+    private static Sport translateRide(StravaActivity stravaActivity) {
+        if (stravaActivity.isCommute())
+            return COMMUTE;
+
+        val workoutType = stravaActivity.getWorkoutType();
         if (workoutType != null && WorkoutType.RACE.getValue() == workoutType) {
             return ROAD;
         } else {

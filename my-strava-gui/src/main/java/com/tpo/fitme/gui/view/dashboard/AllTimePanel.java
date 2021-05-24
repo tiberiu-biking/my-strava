@@ -16,8 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
 
-import static java.lang.String.valueOf;
-
 /**
  * @author Tiberiu
  * @since 13.06.18
@@ -75,7 +73,7 @@ public class AllTimePanel extends HorizontalLayout {
     }
 
     private ReadOnlyTextField buildField(Sport sport, float value, SportIcon icon, String unit) {
-        return new ReadOnlyTextField(sport.getCaption(), valueOf(value) + unit, icon);
+        return new ReadOnlyTextField(sport.getCaption(), value + " " + unit, icon);
     }
 
     private void setVisuals() {

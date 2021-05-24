@@ -17,6 +17,7 @@ public enum Sport {
     MTB("Mountain Biking", Unit.KM),
     WORKOUT("Workout", Unit.MIN),
     RIDE("Cycling", Unit.KM),
+    COMMUTE("Commute", Unit.KM),
     RUN("Running", Unit.KM, 15),
     SWIM("Swimming", Unit.KM),
     WALK("Walking", Unit.KM),

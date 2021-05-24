@@ -22,6 +22,7 @@ public enum SportIcon {
     MTB("img/mtb.png"),
     RIDE("img/ride.png"),
     ROAD("img/road.png"),
+    COMMUTE("img/commute.png"),
     RUN("img/run.png"),
     YOGA("img/yoga.png"),
     WEIGHTTRAINING("img/weightlifting.png"),
